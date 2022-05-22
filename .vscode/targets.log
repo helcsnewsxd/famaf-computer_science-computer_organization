@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May 22 16:36:59 2022
+# Make data base, printed on Sun May 22 16:40:04 2022
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 SNAP_INSTANCE_KEY = 
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2dc10c9e-88a8-4d02-830a-2ded75aef9c0.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2b06f553-5867-4a34-9e97-343fabded54c.sock
 # environment
 VSCODE_CWD = /home/helcsnewsxd
 # environment
@@ -279,14 +279,14 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 2049, inode 16778822): 15 files, no impossibilities.
+# . (device 2049, inode 16778822): 9 files, no impossibilities.
 
-# 15 files, no impossibilities in 1 directories.
+ 
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 %.o: %.s
- 
 #  recipe to execute (from 'Makefile', line 10):
 	$(ARMGNU)-as $(AOPS) $< -o $@
 
@@ -303,7 +303,7 @@ runGDB:
 # Not a target:
 app.s:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 16:36:53.430675798
+#  Last modified 2022-05-22 16:38:24.250680194
 #  File has been updated.
 #  Successfully updated.
 
@@ -365,7 +365,7 @@ start.o:
 
 kernel8.img: memmap app.o start.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-22 16:32:18.339968308
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -378,7 +378,7 @@ kernel8.img: memmap app.o start.o
 app.o: app.s
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'app'
-#  Last modified 2022-05-22 16:32:17.395968262
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -410,12 +410,12 @@ app.o: app.s
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 27 / storage = 216 B / avg = 8 B
-# current buf: size = 8162 B / used = 216 B / count = 27 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 24 / storage = 176 B / avg = 7 B
+# current buf: size = 8162 B / used = 176 B / count = 24 / avg = 7 B
 
-# strcache performance: lookups = 47 / hit rate = 42%
+# strcache performance: lookups = 41 / hit rate = 41%
 # hash-table stats:
-# Load=27/8192=0%, Rehash=0, Collisions=0/47=0%
-# Finished Make data base on Sun May 22 16:36:59 2022
+# Load=24/8192=0%, Rehash=0, Collisions=0/41=0%
+# Finished Make data base on Sun May 22 16:40:04 2022
 
  

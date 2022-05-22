@@ -36,6 +36,8 @@
 
 	// Saved
 		// X20 --> Dirección base del framebuffer
+		// X21 --> SCREEN_WIDTH
+		// X22 --> SCREEN_HEIGHT
 
 	// Return Adress
 		// X30 --> Marca la instrucción para volver después de una función
@@ -59,6 +61,8 @@
 	// Inicialización de registros
 	IniRegistros:
 		mov x20,x0
+		mov x21,SCREEN_WIDTH
+		mov x22,SCREEN_HEIGHT
 		ret
 
 	// Pinta fondo --> Toma x10 como parametro para el color
@@ -66,31 +70,100 @@
 		sub sp,sp,16
 		str x30,[sp]					   // Guardo x30
 
-		mov x0,x20						   // Seteo en X0 la direccion base del framebuffer
-		mov x1,SCREEN_WIDTH			   	   // Ancho
-		mov x2,SCREEN_HEIGHT		  	   // Altura
-		bl PintaRectangulo
+		mov x0,0
+		mov x1,0
+		mov x2,x21		   	   // Ancho
+		mov x3,x22		  	   // Altura
+		mov x4,0
+		bl PintaParalelogramo
 
 		ldr x30,[sp]					   // Restauro x30
 		add sp,sp,16
 		ret
 
-	// Pinta rectangulo --> Argumentos
-							// x0 --> Posición arriba a la izquierda
-							// x1 --> Ancho
-							// x2 --> Alto
+	// Pinta paralelogramo --> Argumentos
+							// x0 --> Nro de fila inicial
+							// x1 --> Nro de columna inicial
+							// x2 --> Ancho 
+							// x3 --> Largo
+							// x4 --> Cambio de inicio de la siguiente columna
 							// x10 --> Color
-	PintaRectangulo:
-		PintaRectangulo_filas:
-			mov x3,x1
-		PintaRectangulo_columnas:
-			stur w10,[x0]						// Coloreo el pixel
-			add x0,x0,4	   				  	    // Me voy al siguiente pixel
-			sub x3,x3,1  				    	// Completé la columna de esta fila
-			cbnz x3,PintaRectangulo_columnas    // Si no es la última columna, paso a la siguiente
-			sub x2,x2,1    					    // Completé la fila
-			cbnz x2,PintaRectangulo_filas
+							// Se debe cumplir que 640 * x3 + x2 <= 76800
+	PintaParalelogramo:
+		// x11 --> Pos inicial de cada fila
+		// x12 --> Iterador en cada fila
+		// x13 --> Ancho
+		// x14 --> Largo
+		// x15 --> x3 * (x4 * 640) + x2 <= 76800 --> Cambio de x11 para pasar a la siguiente fila
+		mov x16,1
+		madd x15,x16,x21,x4
+		lsl x15,x15,2
+
+		// x11 = x20 + 4 * (x0 * SCREEN_WIDTH + x1)
+		madd x11,x0,x21,x1
+		lsl x11,x11,2
+		add x11,x11,x20
+
+		mov x14,x3
+
+		PintaParalelogramo_fila:
+			mov x12,x11
+			mov x13,x2
+		PintaParalelogramo_columna:
+			stur w10,[x12]
+			add x12,x12,4
+			sub x13,x13,1
+			cbnz x13,PintaParalelogramo_columna 	// Termino la fila actual
+			sub x14,x14,1
+			
+			// x11 = x20 + 4 [ (x0+1)*SCR + (x1+x4) ]
+			add x11,x11,x15
+			cbnz x14,PintaParalelogramo_fila		// Termino todas las filas
 		ret
+
+	// Pinta circulo --> Argumentos
+							// x0 --> Nro de fila del centro
+							// x1 --> Nro de columna del centro
+							// x2 --> Radio
+							// x10 --> Color
+							// Se pintan las posiciones (x,y) tales que
+										// (x-x1)^2 + (y-x0)^2 =r^2
+							// Se debe cumplir que (x1,x0) esté a distancia al menos r de los bordes
+	PintaCirculo:
+		// x9 --> Itero por los x
+		// x18 --> Itero por los y
+		// x11 --> Radio cuadrado
+		// x12 --> Nodo a pintar
+		mul x11,x2,x2	// r^2
+		mov x9,-1		// Cant de filas vistas
+		PintaCirculo_x:
+			add x9,x9,1		// Termine de ver la fila
+			mov x18,0		// Reset al iterador de los y
+			cmp x9,x22
+			b.eq end		// Si ya termine de ver todos los casos
+		PintaCirculo_y:
+			// x15 = (x-x1)^2 + (y-x0)^2
+			sub x16,x9,x1
+			mul x16,x16,x16
+			sub x17,x18,x0
+			mul x17,x17,x17
+			add x15,x16,x17
+
+			cmp x11,x15
+			b.lt siguiente_par			// No me cumple la ecuacion?
+			// x12 = x20 + 4 * (x18 * SCREEN_WIDTH + x9)
+			madd x12,x18,x21,x9
+			lsl x12,x12,2
+			add x12,x12,x20
+			stur w10,[x12]
+			
+			siguiente_par:
+				cmp x18,x21
+				b.eq PintaCirculo_x		// Termine la fila actual
+				add x18,x18,1
+				b PintaCirculo_y		// Me voy a la siguiente columna
+		end:
+	ret
 
 	// Loop Infinito
 	InfLoop:
@@ -105,12 +178,5 @@ main:
 	// Fondo en blanco
 	ldr x10,=BLANCO
 	bl PintaFondo
-
-	// Rectángulo rojo de coords (0,0) , (300,400)
-	ldr x10,=ROJO
-	mov x0,x20
-	mov x1,300
-	mov x2,400
-	bl PintaRectangulo
 
 	b InfLoop
