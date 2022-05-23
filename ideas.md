@@ -32,6 +32,8 @@ VIOLETA = 0xB300C0
 ## Uso de los Registros
 
 * `x0` -> **Color**
+* `x19` -> **ANCHO_FRAMEBUFFER**
+* `x20` -> **LARGO_FRAMEBUFFER**
 * `x28` -> **SP -> Stack Pointer**
 * `x29` -> **FP -> Frame Pointer. Se pone la dirección base del framebuffer**
 * `x30` -> **Direcciones para los return de las funciones**
