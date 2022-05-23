@@ -179,4 +179,16 @@ main:
 	ldr x10,=BLANCO
 	bl PintaFondo
 
+	// Testing de pinta_linea_vertical
+	ldr x0,=ROJO
+	mov x29,x20
+	mov x19,SCREEN_WIDTH
+	mov x20,SCREEN_HEIGHT
+	mov x1,100
+	mov x3,100
+	mov x2,100
+	mov x4,300
+	bl pinta_linea
+	
+
 	b InfLoop

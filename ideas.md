@@ -46,7 +46,7 @@ La idea sería que estas estén todas juntas en un **archivo aparte**, como por 
 
 Dándole `x0` y `(x9,x10)` como argumentos, pinta el pixel correspondiente a
 ```
-x12 = x29 + 4 * (x10 * LARGO_PANTALLA + x9)
+x12 = x29 + 4 * (x10 * ANCHO_FRAMBUFFER + x9)
 ```
 del color dado por `x0`
 
