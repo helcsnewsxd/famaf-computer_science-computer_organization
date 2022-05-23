@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May 22 16:40:04 2022
+# Make data base, printed on Mon May 23 20:01:53 2022
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 SNAP_INSTANCE_KEY = 
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2b06f553-5867-4a34-9e97-343fabded54c.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-49d8850e-b56a-498b-9f6a-872485245666.sock
 # environment
 VSCODE_CWD = /home/helcsnewsxd
 # environment
@@ -89,7 +89,7 @@ LESS_TERMCAP_ue = [0m
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-XXXXXXkKfbS3/agent.980
+SSH_AUTH_SOCK = /tmp/ssh-XXXXXX7KcyDQ/agent.1079
 # default
 .SHELLFLAGS := -c
 # environment
@@ -107,13 +107,13 @@ SNAP_REEXEC =
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2215
+VSCODE_PID = 2372
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/helcsnewsxd:@/tmp/.ICE-unix/980,unix/helcsnewsxd:/tmp/.ICE-unix/980
+SESSION_MANAGER = local/helcsnewsxd:@/tmp/.ICE-unix/1079,unix/helcsnewsxd:/tmp/.ICE-unix/1079
 # automatic
 *F = $(notdir $*)
 # environment
@@ -211,7 +211,7 @@ SNAP_DATA = /var/snap/code/97
 # environment
 SNAP_CONTEXT = NkivlkD_yLG38H7AQ9KDWECrDnxokKqW0lvprXp391jSN360eAHG
 # environment
-SSH_AGENT_PID = 1032
+SSH_AGENT_PID = 1131
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -239,7 +239,9 @@ SNAP_NAME = code
 # environment
 GSETTINGS_SCHEMA_DIR = /snap/code/97/usr/share/glib-2.0/schemas
 # environment
-XDG_SESSION_ID = 2
+XDG_SESSION_ID = 3
+# environment
+PANEL_GDK_CORE_DEVICE_EVENTS = 0
 # environment
 DOTNET_CLI_TELEMETRY_OPTOUT = 1
 # default
@@ -271,7 +273,7 @@ GDMSESSION = lightdm-xsession
 # environment
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # variable set hash-table stats:
-# Load=130/1024=13%, Rehash=0, Collisions=12/168=7%
+# Load=131/1024=13%, Rehash=0, Collisions=12/169=7%
 
 # Pattern-specific Variable Values
 
@@ -279,10 +281,9 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 2049, inode 16778822): 9 files, no impossibilities.
+# . (device 2049, inode 16778822): 11 files, no impossibilities.
 
- 
-# 9 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -291,6 +292,7 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 	$(ARMGNU)-as $(AOPS) $< -o $@
 
 # 1 implicit rules, 0 (0.0%) terminal.
+ 
 # Files
 
 runGDB:
@@ -303,14 +305,14 @@ runGDB:
 # Not a target:
 app.s:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 16:38:24.250680194
+#  Last modified 2022-05-22 23:47:10.511387093
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 16:29:57.159961475
+#  Last modified 2022-05-22 23:34:36.967350624
 #  File has been updated.
 #  Successfully updated.
 
@@ -363,7 +365,13 @@ start.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-kernel8.img: memmap app.o start.o
+# Not a target:
+formas_geometricas.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+kernel8.img: memmap app.o formas_geometricas.o start.o
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
@@ -403,19 +411,19 @@ app.o: app.s
 	$(ARMGNU)-as $(AOPS) $< -o $@
 
 # files hash-table stats:
-# Load=13/1024=1%, Rehash=0, Collisions=0/34=0%
+# Load=14/1024=1%, Rehash=0, Collisions=0/36=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 24 / storage = 176 B / avg = 7 B
-# current buf: size = 8162 B / used = 176 B / count = 24 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 27 / storage = 227 B / avg = 8 B
+# current buf: size = 8162 B / used = 227 B / count = 27 / avg = 8 B
 
-# strcache performance: lookups = 41 / hit rate = 41%
+# strcache performance: lookups = 44 / hit rate = 38%
 # hash-table stats:
-# Load=24/8192=0%, Rehash=0, Collisions=0/41=0%
-# Finished Make data base on Sun May 22 16:40:04 2022
+# Load=27/8192=0%, Rehash=0, Collisions=0/44=0%
+# Finished Make data base on Mon May 23 20:01:53 2022
 
  

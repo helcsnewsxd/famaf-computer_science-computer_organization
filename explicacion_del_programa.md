@@ -62,7 +62,15 @@ donde
 a = (x4-x2)/(x3-x1)
 b = x2 - a * x1 = x2 - (x4-x2)/(x3-x1) * x1
 ```
-de modo que se pinta `(x,y)` si y solo si `f(x) - y < 1`
+de modo que se pinta `(x,y)` si y solo si `f(x) - y < 1`. Sin embargo, resulta trabajoso y tedioso meternos con float numbers. Por ello mismo, notemos que si planteamos `g(x) = f(x)(x3-x1)`, nos queda:
+```
+g(x) = (x4-x2)(x-x1) + x2(x3-x1)
+```
+Y se debe cumplir que:
+```
+g(x) - y(x3-x1) < x3-x1
+```
+Lo cual es más lindo de ver ya que son todos enteros.
 
 ### Dibujar un paralelogramo
 
