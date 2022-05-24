@@ -1,4 +1,4 @@
-# Ideas a plantear para mejorar el código
+# Explicación detallada del código hecho y por implementar
 
 ## Defines o *variables globales*
 

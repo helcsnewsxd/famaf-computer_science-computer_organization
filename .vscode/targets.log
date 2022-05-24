@@ -6,7 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May 23 20:01:53 2022
+ 
+# Make data base, printed on Tue May 24 00:19:37 2022
 
 # Variables
 
@@ -17,7 +18,7 @@ LC_ALL = C
 # environment
 SNAP_INSTANCE_KEY = 
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-49d8850e-b56a-498b-9f6a-872485245666.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-04ba9698-964f-44b3-8eb3-57dd9dc11690.sock
 # environment
 VSCODE_CWD = /home/helcsnewsxd
 # environment
@@ -107,7 +108,7 @@ SNAP_REEXEC =
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2372
+VSCODE_PID = 82007
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -292,7 +293,6 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 	$(ARMGNU)-as $(AOPS) $< -o $@
 
 # 1 implicit rules, 0 (0.0%) terminal.
- 
 # Files
 
 runGDB:
@@ -302,14 +302,16 @@ runGDB:
 #  recipe to execute (from 'Makefile', line 27):
 	gdb-multiarch -ex "set architecture aarch64" -ex "target remote localhost:1234" --ex "dashboard registers -style list 'x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16 x17 x18 x19 x20 x21 x22 x23 x24 x25 x26 x27 x28 x29 x30 sp pc cpsr'"
 
+ 
 # Not a target:
 app.s:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 23:47:10.511387093
+#  Last modified 2022-05-24 00:16:24.390208573
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
+ 
 Makefile:
 #  Implicit rule search has been done.
 #  Last modified 2022-05-22 23:34:36.967350624
@@ -418,12 +420,13 @@ app.o: app.s
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 27 / storage = 227 B / avg = 8 B
-# current buf: size = 8162 B / used = 227 B / count = 27 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 27 / storage = 246 B / avg = 9 B
+# current buf: size = 8162 B / used = 246 B / count = 27 / avg = 9 B
 
 # strcache performance: lookups = 44 / hit rate = 38%
 # hash-table stats:
 # Load=27/8192=0%, Rehash=0, Collisions=0/44=0%
-# Finished Make data base on Mon May 23 20:01:53 2022
+ 
+# Finished Make data base on Tue May 24 00:19:37 2022
 
  
