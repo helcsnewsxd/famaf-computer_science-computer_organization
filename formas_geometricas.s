@@ -19,16 +19,38 @@ pinta_punto:
 .globl pinta_linea
 pinta_linea:
     // x0 --> color
-    // (x1,x2) - (x3,x4) extremos (distintos) de la linea de modo que x2 <= x4
-    sub sp,sp,8
+    // (x1,x2) - (x3,x4) extremos (distintos) de la linea
+    sub sp,sp,48
     str x30,[sp]
+    str x1,[sp,8]
+    str x2,[sp,16]
+    str x3,[sp,24]
+    str x4,[sp,32]
+    str x5,[sp,40]
+
+    // nos aseguramos que x2 <= x4 por simplicidad
+    cmp x2,x4
+    b.le pinta_linea_no_swapeo_puntos
+    mov x5,x1
+    mov x1,x3
+    mov x3,x5
+
+    mov x5,x2
+    mov x2,x4
+    mov x4,x5
+    pinta_linea_no_swapeo_puntos:
 
     cmp x1,x3
     b.eq pinta_linea_vertical
     b pinta_linea_general
     pinta_linea_end:
         ldr x30,[sp]
-        add sp,sp,8
+        ldr x1,[sp,8]
+        ldr x2,[sp,16]
+        ldr x3,[sp,24]
+        ldr x4,[sp,32]
+        ldr x5,[sp,40]
+        add sp,sp,48
         ret
 
 pinta_linea_vertical:

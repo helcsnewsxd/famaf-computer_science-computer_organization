@@ -52,7 +52,7 @@ del color dado por `x0`
 
 ### Dibujar una línea
 
-Dándole `x0` y `(x1,x2)`, `(x3,x4)` posiciones distintas de modo que x2 <= x4, pinta la línea con extremos `(x1,x2)` y `(x3,x4)` del color `x0`.
+Dándole `x0` y `(x1,x2)`, `(x3,x4)`, pinta la línea con extremos `(x1,x2)` y `(x3,x4)` del color `x0`.
 La idea es plantear que si `x1 = x3` entonces tiene que ser una vertical (trivial). Caso contrario, sigue la fórmula:
 ```
 f(x) = a * x + b

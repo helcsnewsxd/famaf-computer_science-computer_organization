@@ -190,10 +190,10 @@ main:
 	mov x4,200
 	bl pinta_linea
 	ldr x0,=VERDE_OSCURO
-	mov x1,200
-	mov x2,100
-	mov x3,50
-	mov x4,200
+	mov x1,50
+	mov x2,200
+	mov x3,200
+	mov x4,100
 	bl pinta_linea
 	
 
