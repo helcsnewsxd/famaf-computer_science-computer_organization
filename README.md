@@ -48,7 +48,12 @@ Dándole `x0` y `(x9,x10)` como argumentos, pinta el pixel correspondiente a
 ```
 x12 = x29 + 4 * (x10 * ANCHO_FRAMBUFFER + x9)
 ```
-del color dado por `x0`
+del color dado por `x0`.
+Notar que si `(x9,10)` es un punto que no pertenece al FRAMEBUFFER, entonces no se pinta. Es decir, se verifica que cumpla:
+```
+0 <= x9 <= ANCHO_FRAMEBUFFER = x12
+0 <= x10 <= LARGO_FRAMEBUFFER = x20
+```
 
 ### Dibujar una línea
 
