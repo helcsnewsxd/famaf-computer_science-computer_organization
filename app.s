@@ -179,15 +179,21 @@ main:
 	ldr x10,=BLANCO
 	bl PintaFondo
 
-	// Testing de pinta_linea_vertical
+	// Testing de pinta_linea
 	ldr x0,=ROJO
 	mov x29,x20
 	mov x19,SCREEN_WIDTH
 	mov x20,SCREEN_HEIGHT
-	mov x1,100
-	mov x3,100
+	mov x1,200
 	mov x2,100
-	mov x4,300
+	mov x3,300
+	mov x4,200
+	bl pinta_linea
+	ldr x0,=VERDE_OSCURO
+	mov x1,200
+	mov x2,100
+	mov x3,50
+	mov x4,200
 	bl pinta_linea
 	
 
