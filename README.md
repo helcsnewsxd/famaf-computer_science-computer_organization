@@ -57,6 +57,8 @@ Si el punto pertenece al Frame Buffer, se pinta el pixel correspondiente a la di
 x12 = x29 + 4 * (x10 * ANCHO_FRAMBUFFER + x9)
 ```
 
+Notar que es una función nativa de [formas_geometricas.s](formas_geometricas.s)
+
 ### Dibujar una línea
 
 Dándole `x0` y `(x1,x2)`, `(x3,x4)`, pinta la línea con extremos `(x1,x2)` y `(x3,x4)` del color `x0`.
