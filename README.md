@@ -51,7 +51,7 @@ VIOLETA = 0xB300C0
 
 Estas funciones están implementadas en **`formas_geometricas.s`**
 
-### Dibujar pixel
+### - Dibujar pixel
 
 #### Argumentos
 
@@ -74,7 +74,7 @@ bl pinta_punto
 **Notar que es una función nativa.**
 
 
-### Iterar los puntos en un segmento
+### - Iterar los puntos en un segmento
 
 #### Argumentos
 
@@ -130,7 +130,7 @@ ejemplo_iteracion_end:
 **Notar que es una función nativa.**
 
 
-### Dibujar una línea
+### - Dibujar una línea
 
 #### Argumentos
 
