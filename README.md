@@ -7,6 +7,9 @@
 LARGO_FRAMEBUFFER = 480
 ANCHO_FRAMEBUFFER = 640
 ```
+
+
+
 ### Colores
 ```
 AMARILLO = 0xFFF000
@@ -29,6 +32,9 @@ VERDE_CLARO = 0x66FF66
 VERDE_OSCURO = 0x006600
 VIOLETA = 0xB300C0
 ```
+
+
+
 ## Uso de los Registros
 
 * `x0` -> **Color**
@@ -39,9 +45,11 @@ VIOLETA = 0xB300C0
 * `x29` -> **FP -> Frame Pointer. Se pone la dirección base del framebuffer**
 * `x30` -> **Direcciones para los return de las funciones**
 
+
+
 ## Funciones para creación de figuras
 
-La idea sería que estas estén todas juntas en un **archivo aparte**, como por ejemplo **`formas_geometricas.s`**
+Estas funciones están implementadas en **`formas_geometricas.s`**
 
 ### Dibujar pixel
 
@@ -57,12 +65,24 @@ Si el punto pertenece al Frame Buffer, se pinta el pixel correspondiente a la di
 x12 = x29 + 4 * (x10 * ANCHO_FRAMBUFFER + x9)
 ```
 
-Notar que es una función nativa de [formas_geometricas.s](formas_geometricas.s)
+#### Llamada
 
-### Dibujar una línea
+Se llama simplemente escribiendo
+```
+bl pinta_punto
+```
+**Notar que es una función nativa.**
 
-Dándole `x0` y `(x1,x2)`, `(x3,x4)`, pinta la línea con extremos `(x1,x2)` y `(x3,x4)` del color `x0`.
-La idea es plantear que si `x1 = x3` entonces tiene que ser una vertical (trivial). Caso contrario, sigue la fórmula:
+
+### Iterar los puntos en un segmento
+
+#### Argumentos
+
+* `(x1,x2)` y `(x3,x4)` -> extremos del segmento
+
+#### Funcionamiento
+
+Esta función devuelve todos los puntos que están lo suficientemente cerca al segmento de extremos (x1,x2) y (x3,x4). La idea es plantear que si `x1 = x3` entonces tiene que ser una vertical (trivial). Caso contrario, sigue la fórmula:
 ```
 f(x) = a * x + b
 ```
@@ -71,7 +91,7 @@ donde
 a = (x4-x2)/(x3-x1)
 b = x2 - a * x1 = x2 - (x4-x2)/(x3-x1) * x1
 ```
-de modo que se pinta `(x,y)` si y solo si `|f(x) - y| < 1`. Sin embargo, resulta trabajoso y tedioso meternos con float numbers. Por ello mismo, notemos que si planteamos `g(x) = f(x)(x3-x1)`, nos queda:
+de modo que se devuelve `(x,y)` si y solo si `|f(x) - y| < 1`. Sin embargo, resulta trabajoso y tedioso meternos con float numbers. Por ello mismo, notemos que si planteamos `g(x) = f(x)(x3-x1)`, nos queda:
 ```
 g(x) = (x4-x2)(x-x1) + x2(x3-x1)
 ```
@@ -80,6 +100,39 @@ Y se debe cumplir que:
 |g(x) - y(x3-x1)| < |x3-x1|
 ```
 Lo cual es más lindo de ver ya que son todos enteros.
+
+#### Llamada
+
+Para poder usar esta función, se debe generar un ciclo ya que queremos que nos devuelva todos los puntos. El ciclo debe ser el siguiente:
+```
+// (x1,x2) y (x3,x4) extremos
+sub sp,sp,8
+str x30,[sp]
+
+bl itera_linea // comienza a iterar en el segmento y guardo en x30 la dir de la siguiente linea
+sub sp,sp,8
+str x30,[sp]
+
+cmp x9,TERMINAR_ITERACION
+b.eq ejemplo_iteracion_end
+
+// Acá va lo que queremos hacer con ese punto perteneciente a la recta
+
+ldr x30,[sp]
+add sp,sp,8
+ret
+ejemplo_iteracion_end:
+    ldr x30,[sp,8]
+    add sp,sp,16
+    ret // o bien sigue
+```
+
+**Notar que es una función nativa.**
+
+### Dibujar una línea
+
+Dándole `x0` y `(x1,x2)`, `(x3,x4)`, pinta la línea con extremos `(x1,x2)` y `(x3,x4)` del color `x0`.
+
 
 ### Dibujar un paralelogramo
 
