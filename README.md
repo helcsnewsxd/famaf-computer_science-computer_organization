@@ -34,6 +34,7 @@ VIOLETA = 0xB300C0
 * `x0` -> **Color**
 * `x19` -> **ANCHO_FRAMEBUFFER**
 * `x20` -> **LARGO_FRAMEBUFFER**
+* `x27` -> **Adress para saltos de branch -> Tener cuidado con su uso**
 * `x28` -> **SP -> Stack Pointer**
 * `x29` -> **FP -> Frame Pointer. Se pone la dirección base del framebuffer**
 * `x30` -> **Direcciones para los return de las funciones**
@@ -44,15 +45,16 @@ La idea sería que estas estén todas juntas en un **archivo aparte**, como por 
 
 ### Dibujar pixel
 
-Dándole `x0` y `(x9,x10)` como argumentos, pinta el pixel correspondiente a
+#### Argumentos
+
+* `x0` -> color
+* `(x9,x10)` -> punto en el plano cartesiano
+
+#### Funcionamiento
+
+Si el punto pertenece al Frame Buffer, se pinta el pixel correspondiente a la dirección de memoria
 ```
 x12 = x29 + 4 * (x10 * ANCHO_FRAMBUFFER + x9)
-```
-del color dado por `x0`.
-Notar que si `(x9,10)` es un punto que no pertenece al FRAMEBUFFER, entonces no se pinta. Es decir, se verifica que cumpla:
-```
-0 <= x9 <= ANCHO_FRAMEBUFFER = x19
-0 <= x10 <= LARGO_FRAMEBUFFER = x20
 ```
 
 ### Dibujar una línea
