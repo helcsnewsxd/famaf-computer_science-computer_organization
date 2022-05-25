@@ -129,31 +129,23 @@ ejemplo_iteracion_end:
 
 **Notar que es una función nativa.**
 
+
 ### Dibujar una línea
 
-Dándole `x0` y `(x1,x2)`, `(x3,x4)`, pinta la línea con extremos `(x1,x2)` y `(x3,x4)` del color `x0`.
+#### Argumentos
 
+* `x0` -> color
+* `(x1,x2)` y `(x3,x4)` -> extremos de la línea
 
-### Dibujar un paralelogramo
+#### Funcionamiento
 
-Dados `x0` y los tres puntos `(x1,x2)`, `(x3,x4)`, `(x5,x6)` se pinta el paralelogramo formado por estos del color `x0`. Para ello se va a usar la función *linea*, de modo que vaya iterando por todas las
-líneas paralelas al segmento `(x3,x4) - (x5,x6)` por sus extremos en `(x1,x2) - (x3,x4)`
+Pinta la línea de extremos (x1,x2) y (x3,x4) del color x0. Se realiza usando la función de iteración de la línea.
 
-### Dibujar un cuadrado
+#### Llamada
 
-Dados `x0` color y `(x1,x2)` , `(x3,x4)` extremos, se plantea su versión como paralelogramo y se usa la función *paralelogramo*. Por ello, se tiene en cuenta que el tercer punto es:
+Se llama simplemente escribiendo
 ```
-(x,y) = (x3,x2)
+bl pinta_linea
 ```
 
-### Dibujar un triángulo
-
-Dados `x0` color y `(x1,x2)`, `(x3,x4)`, `(x5,x6)` extremos, se plantea el pintado de todas las lineas formadas por `(x1,x2)` y `(x,y)` como extremos usando la función *linea*. Para ello, notar que cada `(x,y)` se obtiene de la iteración de los puntos del segmento `(x3,x4) - (x5,x6)`
-
-### Dibujar un círculo
-
-Dados `x0` el color, `(x1,x2)` el centro y `x3` el radio, se plantea el pintado de todos los puntos `(x,y)` que cumplan
-```
-r^2 >= (x-x1)^2 + (y - x2)^2
-```
-Se itera por todos los `(x,y)` posibles de la grilla del Frame Buffer
+**Notar que es una función global**
