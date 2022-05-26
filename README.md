@@ -67,7 +67,24 @@ ldr x2,[sp],8
 ldr x1,[sp],8
 ```
 
-Igual, puede hacerse pesado tener que poner todo esto si son muchos los registros a guardar. Para ello está el ejecutable `fast` (un .cpp compilado). Si le pasamos los nros de los registros que queremos guardar separados por un espacio y al final la palabra *fin*, devuelve todas las instrucciones en el orden correcto que se deben colocar. Solo recordar que str va al principio del código mientras que los ldr al último para recuperar los valores.
+Igual, puede hacerse pesado tener que poner todo esto si son muchos los registros a guardar. Para ello está el ejecutable [**fast**](/Etapa%20de%20producci%C3%B3n/fast) (un .cpp compilado). Si le pasamos los nros de los registros que queremos guardar separados por un espacio y al final la palabra *fin*, devuelve todas las instrucciones en el orden correcto que se deben colocar. Solo recordar que str va al principio del código mientras que los ldr al último para recuperar los valores.
+Un ejemplo de llamada puede ser:
+```
+┌──(helcsnewsxd㉿helcsnewsxd)-[~/Documentos/FaMAF/Segundo/Primer cuatri/ODC/lab/ODC-2022-LAB/Pruebas]
+└─$ ./fast          // Ejecutamos fast
+1 2 3 4 5 fin       // Esto sería lo que se pondría como input, el resto nos lo da el ejecutable
+str x1,[sp,-8]!
+str x2,[sp,-8]!
+str x3,[sp,-8]!
+str x4,[sp,-8]!
+str x5,[sp,-8]!
+
+ldr x5,[sp],8
+ldr x4,[sp],8
+ldr x3,[sp],8
+ldr x2,[sp],8
+ldr x1,[sp],8
+```
 
 ### **- Me da vagancia y me pierdo escribiendo los nombres de los registros, ¿no se pueden crear variables?**
 
