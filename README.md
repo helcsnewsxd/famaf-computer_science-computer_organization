@@ -6,6 +6,7 @@
 ```
 LARGO_FRAMEBUFFER = 480
 ANCHO_FRAMEBUFFER = 640
+BITS_PER_PIXEL = 32
 ```
 
 
@@ -40,18 +41,63 @@ VIOLETA = 0xB300C0
 * `x0` -> **Color**
 * `x19` -> **ANCHO_FRAMEBUFFER**
 * `x20` -> **LARGO_FRAMEBUFFER**
-* `x27` -> **Adress para saltos de branch -> Tener cuidado con su uso**
 * `x28` -> **SP -> Stack Pointer**
 * `x29` -> **FP -> Frame Pointer. Se pone la dirección base del framebuffer**
 * `x30` -> **Direcciones para los return de las funciones**
 
+
+## Datos piolas a tener en cuenta
+
+### **- ¿Cómo guardo las variables si no quiero perder el valor pero debo modificarlas en la función?**
+
+Sencillo, usando el stack. Para ello, sean x1,x2,x3 los registros que queremos guardar, debemos poner
+```
+// Para guardar los valores
+str x1,[sp,-8]!
+str x2,[sp,-8]!
+str x3,[sp,-8]!
+
+    //
+    // Resto del código ...
+    //
+
+// Para recuperar los valores
+ldr x3,[sp],8
+ldr x2,[sp],8
+ldr x1,[sp],8
+```
+
+Igual, puede hacerse pesado tener que poner todo esto si son muchos los registros a guardar. Para ello está el ejecutable `fast` (un .cpp compilado). Si le pasamos los nros de los registros que queremos guardar separados por un espacio y al final la palabra *fin*, devuelve todas las instrucciones en el orden correcto que se deben colocar. Solo recordar que str va al principio del código mientras que los ldr al último para recuperar los valores.
+
+### **- Me da vagancia y me pierdo escribiendo los nombres de los registros, ¿no se pueden crear variables?**
+
+No, no se pueden crear variables pero si se pueden usar *apodos* para los registros. Para ello, se debe tener en cuenta que para "habilitar" un apodo dentro de una función, debe utilizarse la siguiente instrucción:
+```
+Estructura ->
+    apodo   .req    registro
+
+Ejemplo ->
+    color .req w10
+    xpixel .req x9
+    ypixel .req
+```
+Luego, recordar de "deshabilitar" estos apodos antes de terminar la función. Para ello, se hace lo siguiente:
+```
+Estructura ->
+    .unreq  apodo
+
+Ejemplo ->
+    .unreq color
+    .unreq xpixel
+    .unreq ypixel
+```
 
 
 ## Funciones para creación de figuras
 
 Estas funciones están implementadas en **`formas_geometricas.s`**
 
-### - Dibujar pixel
+### **- Dibujar pixel**
 
 #### Argumentos
 
@@ -62,75 +108,21 @@ Estas funciones están implementadas en **`formas_geometricas.s`**
 
 Si el punto pertenece al Frame Buffer, se pinta el pixel correspondiente a la dirección de memoria
 ```
-x12 = x29 + 4 * (x10 * ANCHO_FRAMBUFFER + x9)
+x12 = x29 + 4 * ((LARGO_FRAMEBUFFER - x10) * ANCHO_FRAMBUFFER + x9)
 ```
+Puede resultar diferente a la dada por los profesores, pero esto se debe a una cuestión de comodidad ya que se prefiere trabajar con el eje de coordenadas cartesianas al que estamos acostumbrados.
 
 #### Llamada
 
 Se llama simplemente escribiendo
 ```
-bl pinta_punto
+bl Pinta_punto
 ```
 **Notar que es una función nativa.**
 
 
-### - Iterar los puntos en un segmento
 
-#### Argumentos
-
-* `(x1,x2)` y `(x3,x4)` -> extremos del segmento
-
-#### Funcionamiento
-
-Esta función devuelve todos los puntos que están lo suficientemente cerca al segmento de extremos (x1,x2) y (x3,x4). La idea es plantear que si `x1 = x3` entonces tiene que ser una vertical (trivial). Caso contrario, sigue la fórmula:
-```
-f(x) = a * x + b
-```
-donde
-```
-a = (x4-x2)/(x3-x1)
-b = x2 - a * x1 = x2 - (x4-x2)/(x3-x1) * x1
-```
-de modo que se devuelve `(x,y)` si y solo si `|f(x) - y| < 1`. Sin embargo, resulta trabajoso y tedioso meternos con float numbers. Por ello mismo, notemos que si planteamos `g(x) = f(x)(x3-x1)`, nos queda:
-```
-g(x) = (x4-x2)(x-x1) + x2(x3-x1)
-```
-Y se debe cumplir que:
-```
-|g(x) - y(x3-x1)| < |x3-x1|
-```
-Lo cual es más lindo de ver ya que son todos enteros.
-
-#### Llamada
-
-Para poder usar esta función, se debe generar un ciclo ya que queremos que nos devuelva todos los puntos. El ciclo debe ser el siguiente:
-```
-// (x1,x2) y (x3,x4) extremos
-sub sp,sp,8
-str x30,[sp]
-
-bl itera_linea // comienza a iterar en el segmento y guardo en x30 la dir de la siguiente linea
-sub sp,sp,8
-str x30,[sp]
-
-cmp x9,TERMINAR_ITERACION
-b.eq ejemplo_iteracion_end
-
-// Acá va lo que queremos hacer con ese punto perteneciente a la recta
-
-ldr x30,[sp]
-add sp,sp,8
-ret
-ejemplo_iteracion_end:
-    ldr x30,[sp,8]
-    add sp,sp,16
-    ret // o bien sigue
-```
-
-**Notar que es una función nativa.**
-
-
-### - Dibujar una línea
+### **- Dibujar una línea**
 
 #### Argumentos
 
@@ -139,13 +131,13 @@ ejemplo_iteracion_end:
 
 #### Funcionamiento
 
-Pinta la línea de extremos (x1,x2) y (x3,x4) del color x0. Se realiza usando la función de iteración de la línea.
+Pinta la línea de extremos (x1,x2) y (x3,x4) del color x0. Se realiza utilizando el [**Algoritmo de Bresenham para líneas**](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm).
 
 #### Llamada
 
 Se llama simplemente escribiendo
 ```
-bl pinta_linea
+bl Pinta_linea
 ```
 
-**Notar que es una función global**
+**Notar que es una función global.**
