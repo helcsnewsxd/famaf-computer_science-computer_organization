@@ -45,17 +45,33 @@ main:
 	bl IniRegistros
 
 	// testing de Pinta_linea
-		ldr x0,=ROJO
+		ldr x0,=BLANCO
 		mov x1,100
-		mov x2,0
-		mov x3,1002
-		mov x4,200
-		bl Pinta_linea
-		ldr x0,=VERDE
-		mov x1,0
-		mov x2,0
+		mov x2,400
 		mov x3,200
 		mov x4,100
-		bl Pinta_linea
+		mov x5,0
+		mov x6,0
+		mov x7,400
+		mov x8,400
+		bl Pinta_cuadrilatero
+
+		ldr x0,=VIOLETA
+		mov x1,200
+		mov x2,200
+		mov x3,100
+		mov x4,100
+		bl Dibuja_circulo
+
+		ldr x0,=AZUL
+		mov x1,400
+		mov x2,600
+		mov x3,500
+		mov x4,300
+		mov x5,200
+		mov x6,500
+		mov x7,200
+		mov x8,200
+		bl Pinta_cuadrilatero
 
 	b InfLoop
