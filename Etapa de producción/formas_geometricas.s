@@ -561,3 +561,24 @@ Dibuja_circulo:              // Algoritmo de Bresenham
     ldr x1,[sp],8
 
     ret
+
+// ------------------------------------------- PINTA CIRCULO ------------------------------------------
+
+.globl Pinta_circulo
+Pinta_circulo:
+    // x0 -> color
+    // (x1,x2) -> centro
+    // x3 -> radio
+
+    str x3,[sp,-8]!
+    str x30,[sp,-8]!
+
+        Pinta_circulo_while:
+            bl Dibuja_circulo
+            sub x3,x3,1
+            cbnz x3,Pinta_circulo_while
+
+    ldr x30,[sp],8
+    ldr x3,[sp],8
+
+    ret
