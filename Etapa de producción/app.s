@@ -44,23 +44,61 @@
 main:
 	bl IniRegistros
 
-		// testing circulo
-		ldr x0,=GRIS
-		mov x1,250
-		mov x2,250
-		mov x3,200
+		ldr x0,=CELESTE
+		mov x1,0
+		mov x2,0
+		mov x3,SCREEN_WIDTH
+		mov x4,0
+		mov x5,0
+		mov x6,SCREEN_HEIGHT
+		mov x7,SCREEN_WIDTH
+		mov x8,SCREEN_HEIGHT
+		bl Pinta_cuadrilatero
+		
+		ldr x0,=AMARILLO
+		mov x1,400
+		mov x2,400
+		mov x3,50
 		bl Pinta_circulo
 
-		// testing cuadrilatero
-		ldr x0,=VERDE
-		mov x1,600
-		mov x2,400
-		mov x3,500
-		mov x4,300
-		mov x5,100
-		mov x6,100
-		mov x7,0
-		mov x8,600
+		ldr x0,=BLANCO
+		mov x1,350
+		mov x2,350
+		mov x3,20
+		bl Pinta_circulo
+		mov x1,370
+		bl Pinta_circulo
+		mov x1,360
+		mov x2,370
+		mov x3,15
+		bl Pinta_circulo
+		mov x2,340
+		bl Pinta_circulo
+		
+		ldr x0,=MARRON
+		mov x1,180
+		mov x2,0
+		mov x3,180
+		mov x4,200
+		mov x5,120
+		mov x6,0
+		mov x7,120
+		mov x8,200
 		bl Pinta_cuadrilatero
+		ldr x0,=VERDE_OSCURO
+		mov x1,80
+		mov x2,100
+		mov x3,220
+		mov x4,100
+		mov x5,150
+		mov x6,300
+		bl Pinta_triangulo
+		mov x1,100
+		mov x2,200
+		mov x3,200
+		mov x4,200
+		mov x5,150
+		mov x6,400
+		bl Pinta_triangulo
 
 	b InfLoop
