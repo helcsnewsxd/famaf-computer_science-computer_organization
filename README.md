@@ -41,6 +41,7 @@ VIOLETA = 0xB300C0
 * `x0` -> **Color**
 * `x19` -> **ANCHO_FRAMEBUFFER**
 * `x20` -> **LARGO_FRAMEBUFFER**
+* `x27` -> **Address para return de itera línea**
 * `x28` -> **SP -> Stack Pointer**
 * `x29` -> **FP -> Frame Pointer. Se pone la dirección base del framebuffer**
 * `x30` -> **Direcciones para los return de las funciones**
@@ -116,20 +117,19 @@ Estas funciones están implementadas en **`formas_geometricas.s`**
 
 ### **- Dibujar pixel**
 
-#### Argumentos
+#### *Argumentos*
 
 * `x0` -> color
-* `(x9,x10)` -> punto en el plano cartesiano
+* `(x9,x10)` -> punto en el plano cartesiano con (0,0) arriba a la izquierda (nos queda mejor para el PixelArt)
 
-#### Funcionamiento
+#### *Funcionamiento*
 
 Si el punto pertenece al Frame Buffer, se pinta el pixel correspondiente a la dirección de memoria
 ```
-x12 = x29 + 4 * ((LARGO_FRAMEBUFFER - x10) * ANCHO_FRAMBUFFER + x9)
+x12 = x29 + 4 * (x10 * ANCHO_FRAMBUFFER + x9)
 ```
-Puede resultar diferente a la dada por los profesores, pero esto se debe a una cuestión de comodidad ya que se prefiere trabajar con el eje de coordenadas cartesianas al que estamos acostumbrados.
 
-#### Llamada
+#### *Llamada*
 
 Se llama simplemente escribiendo
 ```
@@ -138,23 +138,195 @@ bl Pinta_punto
 **Notar que es una función nativa.**
 
 
+### **- Itera línea**
+
+#### *Argumentos*
+
+* `(x1,x2) y (x3,x4)` extremos de la línea
+
+#### *Funcionamiento*
+
+Usando el **algoritmo de bresenham**, esta función devuelve todos los puntos que cumplen pertenecer a este segmento.
+
+#### *Llamada*
+
+Es un poco más rara la llamada debido a que se corta la función a mitad del proceso y luego se retoma. Hay que tener mucho cuidado con el guardado de los registros para no modificar algo que no queremos.
+
+Un ejemplo de llamada es:
+
+```
+// (x1,x2) y (x3,x4) extremos
+    str x26,[sp,-8]!
+    str x30,[sp,-8]!
+    
+    bl Itera_linea
+
+    // if x26 == FIN_ITERACION
+    cmp x26,FIN_ITERACION
+    b.eq Pinta_linea_fin_iteracion
+        // else
+        str x30,[sp,-8]!
+        
+        // Acá va lo que se hace con el punto que pertenece a esa recta.
+        // Tener en cuenta que si se modifican registros, hay que guardalos en el stack
+
+        ldr x30,[sp],8
+
+        ret     // para que me itere al siguiente punto
+
+    Pinta_linea_fin_iteracion:
+
+    ldr x30,[sp],8
+    ldr x26,[sp],8
+
+    ret
+```
+
+**Notar que es una función global.**
+
 
 ### **- Dibujar una línea**
 
-#### Argumentos
+#### *Argumentos*
 
 * `x0` -> color
 * `(x1,x2)` y `(x3,x4)` -> extremos de la línea
 
-#### Funcionamiento
+#### *Funcionamiento*
 
-Pinta la línea de extremos (x1,x2) y (x3,x4) del color x0. Se realiza utilizando el [**Algoritmo de Bresenham para líneas**](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm).
+Pinta la línea de extremos (x1,x2) y (x3,x4) del color x0. Se realiza utilizando el **Algoritmo de Bresenham para líneas**. Para ello, se llama directamente a la función de itera línea.
 
-#### Llamada
+#### *Llamada*
 
 Se llama simplemente escribiendo
 ```
 bl Pinta_linea
+```
+
+**Notar que es una función global.**
+
+
+### **- Pinta triángulo**
+
+#### *Argumentos*
+
+* `x0` -> color
+* `(x1,x2)`, `(x3,x4)` y `(x5,x6)` -> extremos
+
+#### *Funcionamiento*
+
+Utilizando la función de itera línea, la idea es iterar por todos los puntos del segmento de extremos (x1,x2) y (x3,x4), y dado (x,y) perteneciente a este, se pinta la línea de extremos (x,y) y (x5,x6).
+
+#### *Llamada*
+
+Se llama simplemente poniendo
+```
+bl Pinta_triangulo
+```
+
+**Notar que es una función global.**
+
+
+### **- Pinta rectángulo básico**
+
+#### *Argumentos*
+
+* `x0` -> color
+* `(x1,x2) y (x3,x4)` -> extremos opuestos
+
+#### *Funcionamiento*
+
+Se itera por todos los puntos del rectángulo y se los pinta. La idea es usar fuertemente que los puntos que se dan son extremos opuestos y que el rectángulo es de lados *paralelos a los bordes*.
+
+#### *Llamada*
+
+Se llama simplemente poniendo
+```
+bl Pinta_rectangulo
+```
+
+**Notar que es una función global.**
+
+
+### **- Pinta cuadrilátero**
+
+#### *Argumentos*
+
+* `x0` -> color
+* `(x1,x2)`, `(x3,x4)`, `(x5,x6)` y `(x7,x8)` -> extremos del cuadrilátero
+
+#### *Funcionamiento*
+
+Pinta el cuadrilátero formado por esos cuatro puntos distintos. Se utiliza la función de Pinta triángulo teniendo en cuenta que hay que pintar tres para asegurarnos cubrir toda la zona.
+
+#### *Llamada*
+
+Se llama simplemente escribiendo:
+```
+bl Pinta_cuadrilatero
+```
+
+**Notar que es una función global.**
+
+
+### **- Dibuja círculo**
+
+#### *Argumentos*
+
+* `x0` -> color
+* `(x1,x2)` -> centro
+* `x3` -> radio
+
+#### *Funcionamiento*
+
+Utilizando el algoritmo de bresenham para circunferencias, esta función dibuja la circunferencia (sin relleno) de centro (x1,x2) y radio x3.
+
+#### *Llamada*
+
+```
+bl Dibuja_circulo
+```
+
+**Es una función global.**
+
+
+### **- Pinta círculo texturado**
+
+#### *Argumentos*
+
+* `x0` -> color
+* `(x1,x2)` -> centro
+* `x3` -> radio
+
+#### *Funcionamiento*
+
+La idea es que quede un círculo con "textura" al que le falten algunos píxeles. Para ello, se usa la función Dibuja círculo (que usa bresenham) para hacer todos los círculos de radio entero menor o igual a `x3`
+
+#### *Llamada*
+
+```
+bl Pinta_circulo_texturado
+```
+
+**Notar que es una función global.**
+
+
+### **- Pinta circulo**
+
+#### *Argumentos*
+
+* `x0` -> color
+* `(x1,x2)` -> centro
+* `x3` -> radio
+
+#### *Funcionamiento*
+
+La idea es tener un círculo de color sólido sin "texturas". Es decir que todos los píxeles estén pintados. Para ello, se itera por todos los puntos pertenecientes al cuadrado que tiene el círculo inscripto a él y a los que cumplan que ``r^2 >= x^2 + y^2`` se los pinta.
+
+#### *Llamada*
+
+```
+bl Pinta_circulo
 ```
 
 **Notar que es una función global.**

@@ -48,7 +48,6 @@ Pinta_punto:
 
 .globl Itera_linea  // Algoritmo de Bresenham
 Itera_linea:
-    // x0 -> color
     // (x1,x2) y (x3,x4) extremos de la línea
         // (x1,x2) = (xa,ya)
         // (x3,x4) = (xb,yb)
@@ -330,7 +329,7 @@ Pinta_triangulo:
 .globl Pinta_rectangulo
 Pinta_rectangulo:
     // x0 -> color
-    // (x1,x2) y (x3,x4) extremos
+    // (x1,x2) y (x3,x4) extremos opuestos
 
     str x5,[sp,-8]!
     str x6,[sp,-8]!
