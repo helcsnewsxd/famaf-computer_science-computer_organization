@@ -24,8 +24,6 @@ Pinta_punto:
 
     str pixel,[sp,-8]!
 
-    sub y,largo_framebuffer,y   // Porque nos gusta trabajar con el eje cartesiano de siempre
-
     madd pixel,y,ancho_framebuffer,x
     lsl pixel,pixel,2
     add pixel,pixel,inicio_framebuffer
@@ -327,6 +325,80 @@ Pinta_triangulo:
     ret
 
 
+// ------------------------------------------- PINTA RECTANGULO BASICO ------------------------------------------
+
+.globl Pinta_rectangulo
+Pinta_rectangulo:
+    // x0 -> color
+    // (x1,x2) y (x3,x4) extremos
+
+    str x5,[sp,-8]!
+    str x6,[sp,-8]!
+    str x7,[sp,-8]!
+    str x8,[sp,-8]!
+    str x9,[sp,-8]!
+    str x10,[sp,-8]!
+    str x30,[sp,-8]!
+
+    minix .req x5
+    miniy .req x6
+    maxix .req x7
+    maxiy .req x8
+    xx .req x9
+    yy .req x10
+
+        mov minix,x1
+        mov miniy,x2
+        mov maxix,x3
+        mov maxiy,x4
+
+        // if minix > maxix
+        cmp minix,maxix
+        b.le Pinta_rectangulo_no_swap_x
+            mov minix,x3
+            mov maxix,x1
+        Pinta_rectangulo_no_swap_x:
+
+        // if miniy > maxiy
+        cmp miniy,maxiy
+        b.le Pinta_rectangulo_no_swap_y
+            mov miniy,x4
+            mov maxiy,x2
+        Pinta_rectangulo_no_swap_y:
+
+
+        // Itero por los (x,y) en el rectangulo
+        sub yy,miniy,1
+        Pinta_rectangulo_while:
+            add yy,yy,1
+            cmp yy,maxiy
+            b.gt Pinta_rectangulo_while_end
+            mov xx,minix
+            Pinta_rectangulo_while_absisas:
+                bl Pinta_punto
+                add xx,xx,1
+                cmp xx,maxix
+                b.gt Pinta_rectangulo_while
+                b Pinta_rectangulo_while_absisas
+        Pinta_rectangulo_while_end:
+
+    .unreq minix
+    .unreq miniy
+    .unreq maxix
+    .unreq maxiy
+    .unreq xx
+    .unreq yy
+
+    ldr x30,[sp],8
+    ldr x10,[sp],8
+    ldr x9,[sp],8
+    ldr x8,[sp],8
+    ldr x7,[sp],8
+    ldr x6,[sp],8
+    ldr x5,[sp],8
+
+    ret
+
 // ------------------------------------------- PINTA CUADRILATERO ------------------------------------------
 
 .globl Pinta_cuadrilatero
@@ -562,10 +634,10 @@ Dibuja_circulo:              // Algoritmo de Bresenham
 
     ret
 
-// ------------------------------------------- PINTA CIRCULO ------------------------------------------
+// ------------------------------------------- PINTA CIRCULO TEXTURADO ------------------------------------------
 
-.globl Pinta_circulo
-Pinta_circulo:
+.globl Pinta_circulo_texturado
+Pinta_circulo_texturado:
     // x0 -> color
     // (x1,x2) -> centro
     // x3 -> radio
@@ -573,12 +645,16 @@ Pinta_circulo:
     str x3,[sp,-8]!
     str x30,[sp,-8]!
 
-        Pinta_circulo_while:
+        Pinta_circulo_texturado_while:
             bl Dibuja_circulo
             sub x3,x3,1
-            cbnz x3,Pinta_circulo_while
+            cbnz x3,Pinta_circulo_texturado_while
 
     ldr x30,[sp],8
     ldr x3,[sp],8
 
     ret
+
+
+// ------------------------------------------- PINTA CIRCULO ------------------------------------------
+

@@ -48,32 +48,28 @@ main:
 		mov x1,0
 		mov x2,0
 		mov x3,SCREEN_WIDTH
-		mov x4,0
-		mov x5,0
-		mov x6,SCREEN_HEIGHT
-		mov x7,SCREEN_WIDTH
-		mov x8,SCREEN_HEIGHT
-		bl Pinta_cuadrilatero
+		mov x4,SCREEN_HEIGHT
+		bl Pinta_rectangulo
 		
 		ldr x0,=AMARILLO
 		mov x1,400
 		mov x2,400
 		mov x3,50
-		bl Pinta_circulo
+		bl Pinta_circulo_texturado
 
 		ldr x0,=BLANCO
 		mov x1,350
 		mov x2,350
 		mov x3,20
-		bl Pinta_circulo
+		bl Pinta_circulo_texturado
 		mov x1,370
-		bl Pinta_circulo
+		bl Pinta_circulo_texturado
 		mov x1,360
 		mov x2,370
 		mov x3,15
-		bl Pinta_circulo
+		bl Pinta_circulo_texturado
 		mov x2,340
-		bl Pinta_circulo
+		bl Pinta_circulo_texturado
 		
 		ldr x0,=MARRON
 		mov x1,180
