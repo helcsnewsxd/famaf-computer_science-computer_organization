@@ -658,3 +658,89 @@ Pinta_circulo_texturado:
 
 // ------------------------------------------- PINTA CIRCULO ------------------------------------------
 
+.globl Pinta_circulo
+Pinta_circulo:
+    // x0 -> color
+    // (x1,x2) -> centro
+    // x3 -> radio
+
+    str x4,[sp,-8]!
+    str x5,[sp,-8]!
+    str x6,[sp,-8]!
+    str x7,[sp,-8]!
+    str x8,[sp,-8]!
+    str x9,[sp,-8]!
+    str x10,[sp,-8]!
+    str x11,[sp,-8]!
+    str x12,[sp,-8]!
+    str x30,[sp,-8]!
+
+    radio .req x3
+    minix .req x4
+    miniy .req x5
+    maxix .req x6
+    maxiy .req x7
+    radioCuadrado .req x8
+    xx .req x9
+    yy .req x10
+    aux1 .req x11
+    aux2 .req x12
+
+        // Lugar de busqueda
+
+        sub minix,x1,radio
+        add maxix,x1,radio
+        sub miniy,x2,radio
+        add maxiy,x2,radio
+
+        mul radioCuadrado,radio,radio
+
+        // Itero
+        sub yy,miniy,1
+        Pinta_circulo_while:
+            add yy,yy,1
+            cmp yy,maxiy
+            b.gt Pinta_circulo_while_end
+            mov xx,minix
+            Pinta_circulo_while_absisas:
+                // r^2 >= (x-xcentro)^2 + (y-ycentro)^2
+                sub aux1,xx,x1
+                sub aux2,yy,x2
+                mul aux1,aux1,aux1
+                mul aux2,aux2,aux2
+                add aux1,aux1,aux2
+
+                cmp radioCuadrado,aux1
+                b.lt Pinta_circulo_punto_no_valido
+                    bl Pinta_punto
+                Pinta_circulo_punto_no_valido:
+
+                add xx,xx,1
+                cmp xx,maxix
+                b.gt Pinta_circulo_while
+                b Pinta_circulo_while_absisas
+        Pinta_circulo_while_end:
+
+    .unreq minix
+    .unreq miniy
+    .unreq maxix
+    .unreq maxiy
+    .unreq xx
+    .unreq yy
+    .unreq radio
+    .unreq radioCuadrado
+    .unreq aux1
+    .unreq aux2
+
+    ldr x30,[sp],8
+    ldr x12,[sp],8
+    ldr x11,[sp],8
+    ldr x10,[sp],8
+    ldr x9,[sp],8
+    ldr x8,[sp],8
+    ldr x7,[sp],8
+    ldr x6,[sp],8
+    ldr x5,[sp],8
+    ldr x4,[sp],8
+
+    ret

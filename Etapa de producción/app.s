@@ -44,57 +44,45 @@
 main:
 	bl IniRegistros
 
-		ldr x0,=CELESTE
+		ldr x0,=BLANCO
 		mov x1,0
 		mov x2,0
 		mov x3,SCREEN_WIDTH
 		mov x4,SCREEN_HEIGHT
 		bl Pinta_rectangulo
-		
-		ldr x0,=AMARILLO
-		mov x1,400
-		mov x2,400
-		mov x3,50
-		bl Pinta_circulo_texturado
 
-		ldr x0,=BLANCO
-		mov x1,350
-		mov x2,350
-		mov x3,20
-		bl Pinta_circulo_texturado
-		mov x1,370
-		bl Pinta_circulo_texturado
-		mov x1,360
-		mov x2,370
-		mov x3,15
-		bl Pinta_circulo_texturado
-		mov x2,340
-		bl Pinta_circulo_texturado
-		
-		ldr x0,=MARRON
-		mov x1,180
-		mov x2,0
-		mov x3,180
-		mov x4,200
-		mov x5,120
-		mov x6,0
-		mov x7,120
-		mov x8,200
-		bl Pinta_cuadrilatero
 		ldr x0,=VERDE_OSCURO
-		mov x1,80
-		mov x2,100
-		mov x3,220
-		mov x4,100
-		mov x5,150
-		mov x6,300
-		bl Pinta_triangulo
-		mov x1,100
+		mov x1,200
 		mov x2,200
-		mov x3,200
+		mov x3,300
 		mov x4,200
-		mov x5,150
-		mov x6,400
-		bl Pinta_triangulo
+		mov x5,200
+		mov x6,300
+		mov x7,300
+		mov x8,300
+		bl Pinta_cuadrilatero
+		ldr x0,=VERDE
+		mov x5,230
+		mov x6,150
+		mov x7,330
+		mov x8,150
+		bl Pinta_cuadrilatero
+		ldr x0,=VERDE_CLARO
+		mov x1,300
+		mov x2,300
+		mov x5,330
+		mov x6,250
+		bl Pinta_cuadrilatero
+
+		ldr x0,=AMARILLO
+		mov x1,450
+		mov x2,100
+		mov x3,100
+		bl Pinta_circulo
+		ldr x0,=ROJO
+		mov x1,600
+		mov x2,600
+		mov x3,300
+		bl Pinta_circulo
 
 	b InfLoop
