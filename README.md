@@ -330,3 +330,21 @@ bl Pinta_circulo
 ```
 
 **Notar que es una función global.**
+
+### **- Crea Edificios**
+
+#### *Argumentos*
+* `(x1,x2)` -> Extremo superior izquierdo
+* `(x3,x4)` -> Extremo inferior derecho
+
+#### *Funcionamiento*
+
+A partir de dos puntos extremos, la función genera un edificio de tamaño variable constituído por un rectángulo frontal y dos paralelogramos adyacentes, uno en la parte superior y otro en el lateral derecho. Además de generar los respectivos cuadriláteros, también genera un conjunto de ventanas de tamaño fijo que se distribuyen a lo largo del rectángulo frontal siempre y cuando haya espacio necesario para una nueva columna y/o fila de ventanas. Por último, genera una puerta en el medio del edificio para darle más detalle. La generación de los paralelogramos y ventanas se hace partiendo de los dos puntos recibidos como argumentos, modificándolos operaciones aritméticas siempre relativas a los límites del rectángulo frontal.
+
+#### *Llamada*
+
+```
+bl Crea_edificio
+```
+
+**Notar que es una función global.**
