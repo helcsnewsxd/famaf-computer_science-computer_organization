@@ -1,24 +1,90 @@
+// Algunos colores
+.equ AMARILLO, 0xFFF000
+.equ AZUL, 0xFF
+.equ AZUL_CLARO, 0x3333FF
+.equ AZUL_OSCURO, 0x000066
+.equ BLANCO, 0xFFFFFF
+.equ CELESTE, 0x00FFEF
+.equ GRIS, 0x808080
+.equ MARRON, 0x663300
+.equ NARANJA, 0xFF8000
+.equ NEGRO, 0x0
+.equ ROJO, 0xFF0000
+.equ ROJO_CLARO, 0xFF3333
+.equ ROJO_OSCURO, 0xCC0000
+.equ ROSA, 0xFF66FF
+.equ TURQUESA, 0x33FF99
+.equ VERDE, 0xFF00
+.equ VERDE_CLARO, 0x66FF66
+.equ VERDE_OSCURO, 0x006600
+.equ VIOLETA, 0xB300C0
+
+
 .section .text
+
+// ------------------------------------------- AMANECER PIOLA ------------------------------------------
+
+// FONDO
+
+.globl Dibuja_fondo_amanecer
+Dibuja_fondo_amanecer:
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x26,[sp,-8]!
+    str x30,[sp,-8]!
+
+        ldr x0,=NARANJA
+        mov x1,0
+        mov x2,0
+        mov x3,700
+        mov x4,250
+        mov x26,-1
+        bl Pinta_rectangulo
+
+    ldr x30,[sp],8
+    ldr x26,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
+
+// SOLCITO DE AMANECER
+
+.globl Dibuja_sol_amanecer
+Dibuja_sol_amanecer:
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x26,[sp,-8]!
+    str x30,[sp,-8]!
+
+        ldr x0,=AMARILLO
+		mov x1,500
+		mov x2,100
+		mov x3,50
+		mov x26,-3
+		bl Pinta_circulo
+
+    ldr x30,[sp],8
+    ldr x26,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
+
+
 // ------------------------------------------- CONSTRUYE EDIFICIO ------------------------------------------
-	.equ AMARILLO, 0xFFF000
-	.equ AZUL, 0xFF
-	.equ AZUL_CLARO, 0x3333FF
-	.equ AZUL_OSCURO, 0x000066
-	.equ BLANCO, 0xFFFFFF
-	.equ CELESTE, 0x00FFEF
-	.equ GRIS, 0x808080
-	.equ MARRON, 0x663300
-	.equ NARANJA, 0xFF8000
-	.equ NEGRO, 0x0
-	.equ ROJO, 0xFF0000
-	.equ ROJO_CLARO, 0xFF3333
-	.equ ROJO_OSCURO, 0xCC0000
-	.equ ROSA, 0xFF66FF
-	.equ TURQUESA, 0x33FF99
-	.equ VERDE, 0xFF00
-	.equ VERDE_CLARO, 0x66FF66
-	.equ VERDE_OSCURO, 0x006600
-	.equ VIOLETA, 0xB300C0
 // Argumentos:
     // x0 -> color
     // (x1,x2), (x3,x4)

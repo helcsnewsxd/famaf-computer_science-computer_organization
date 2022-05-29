@@ -96,22 +96,9 @@ main:
 		bl Crea_edificio
 		**/
 
-		//FONDO DE AMANECER
-		ldr x0,=NARANJA
-		mov x1,0
-		mov x2,0
-		mov x3,700
-		mov x4,250
-		mov x26,-1
-		bl Pinta_rectangulo
-
-		//SOLCITO PIOLA
-		ldr x0,=AMARILLO
-		mov x1,500
-		mov x2,100
-		mov x3,50
-		mov x26,-3
-		bl Pinta_circulo
+		// AMANECER
+		bl Dibuja_fondo_amanecer
+		bl Dibuja_sol_amanecer
 
 	b InfLoop
 
