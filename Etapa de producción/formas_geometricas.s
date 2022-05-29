@@ -1,6 +1,6 @@
 .section .text
 // ------------------------------------------- PINTA PUNTO ------------------------------------------
-
+.globl Pinta_punto
 Pinta_punto:
     // x0 --> color
     // (x9,10) --> punto a pintar
