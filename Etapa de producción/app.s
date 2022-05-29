@@ -42,47 +42,72 @@
 
 .globl main
 main:
+	IniRegistros:
+		mov x29,x0
+		mov x19,SCREEN_WIDTH
+		mov x20,SCREEN_HEIGHT
+		ret
+
+// Loop infinito para poder ver el trabajo
+
+	InfLoop:
+		b InfLoop
+
+
+.globl main
+main:
 	bl IniRegistros
 
+
 		ldr x0,=BLANCO
-		mov x1,0
-		mov x2,0
-		mov x3,SCREEN_WIDTH
-		mov x4,SCREEN_HEIGHT
+			mov x1,0
+			mov x2,0
+			mov x3,SCREEN_WIDTH
+			mov x4,SCREEN_HEIGHT
 		bl Pinta_rectangulo
 
-		ldr x0,=VERDE_OSCURO
-		mov x1,200
-		mov x2,200
-		mov x3,300
-		mov x4,200
-		mov x5,200
-		mov x6,300
-		mov x7,300
-		mov x8,300
-		bl Pinta_cuadrilatero
-		ldr x0,=VERDE
-		mov x5,230
-		mov x6,150
-		mov x7,330
-		mov x8,150
-		bl Pinta_cuadrilatero
-		ldr x0,=VERDE_CLARO
-		mov x1,300
-		mov x2,300
-		mov x5,330
-		mov x6,250
-		bl Pinta_cuadrilatero
+			mov x1,40
+			mov x2,232
+			mov x3,85
+			mov x4,325
+		bl Crea_edificio
 
-		ldr x0,=AMARILLO
-		mov x1,450
-		mov x2,100
-		mov x3,100
-		bl Pinta_circulo
-		ldr x0,=ROJO
-		mov x1,600
-		mov x2,600
-		mov x3,300
-		bl Pinta_circulo
+			mov x1,106
+			mov x2,144
+			mov x3,130
+			mov x4,325
+		bl Crea_edificio
+
+			mov x1,160
+			mov x2,190
+			mov x3,245
+			mov x4,325
+		bl Crea_edificio
+
+			mov x1,302
+			mov x2,100
+			mov x3,345
+			mov x4,325
+		bl Crea_edificio
+
+			mov x1,375
+			mov x2,230
+			mov x3,460
+			mov x4,325
+		bl Crea_edificio
+
+			mov x1,509
+			mov x2,250
+			mov x3,530
+			mov x4,325
+		bl Crea_edificio
+
+			mov x1,561
+			mov x2,74
+			mov x3,600
+			mov x4,325
+		bl Crea_edificio
+
 
 	b InfLoop
+
