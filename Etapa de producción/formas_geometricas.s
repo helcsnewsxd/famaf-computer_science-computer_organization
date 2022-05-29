@@ -274,7 +274,9 @@ Pinta_triangulo:
     // x0 -> color
     // (x1,x2), (x3,x4) y (x5,x6) extremos
         // x17 y x18 para aux
+    // x26 -> sumo al color
     
+    str x0,[sp,-8]!
     str x17,[sp,-8]!
     str x18,[sp,-8]!
     str x26,[sp,-8]!
@@ -282,6 +284,7 @@ Pinta_triangulo:
 
     xx5 .req x17
     xx6 .req x18
+    sumo .req x26
 
     mov xx5,x5
     mov xx6,x6
@@ -305,6 +308,8 @@ Pinta_triangulo:
 
             bl Pinta_linea
 
+            add x0,x0,1
+
         ldr x4,[sp],8
         ldr x3,[sp],8
         ldr x2,[sp],8
@@ -318,9 +323,11 @@ Pinta_triangulo:
     ldr x26,[sp],8
     ldr x18,[sp],8
     ldr x17,[sp],8
+    ldr x0,[sp],8
 
     .unreq xx5
     .unreq xx6
+    .unreq sumo
     ret
 
 
@@ -330,7 +337,9 @@ Pinta_triangulo:
 Pinta_rectangulo:
     // x0 -> color
     // (x1,x2) y (x3,x4) extremos opuestos
+    // x26 -> sumo al color
 
+    str x0,[sp,-8]!
     str x5,[sp,-8]!
     str x6,[sp,-8]!
     str x7,[sp,-8]!
@@ -345,6 +354,7 @@ Pinta_rectangulo:
     maxiy .req x8
     xx .req x9
     yy .req x10
+    sumo .req x26
 
         mov minix,x1
         mov miniy,x2
@@ -369,6 +379,8 @@ Pinta_rectangulo:
         // Itero por los (x,y) en el rectangulo
         sub yy,miniy,1
         Pinta_rectangulo_while:
+            add x0,x0,sumo
+
             add yy,yy,1
             cmp yy,maxiy
             b.gt Pinta_rectangulo_while_end
@@ -387,6 +399,7 @@ Pinta_rectangulo:
     .unreq maxiy
     .unreq xx
     .unreq yy
+    .unreq sumo
 
     ldr x30,[sp],8
     ldr x10,[sp],8
@@ -395,6 +408,7 @@ Pinta_rectangulo:
     ldr x7,[sp],8
     ldr x6,[sp],8
     ldr x5,[sp],8
+    ldr x0,[sp],8
 
     ret
 
@@ -640,17 +654,25 @@ Pinta_circulo_texturado:
     // x0 -> color
     // (x1,x2) -> centro
     // x3 -> radio
+    // x26 -> sumo x26 al color
 
+    sumo .req x26
+
+    str x0,[sp,-8]!
     str x3,[sp,-8]!
     str x30,[sp,-8]!
 
         Pinta_circulo_texturado_while:
             bl Dibuja_circulo
+            add x0,x0,sumo
             sub x3,x3,1
             cbnz x3,Pinta_circulo_texturado_while
 
     ldr x30,[sp],8
     ldr x3,[sp],8
+    ldr x0,[sp],8
+
+    .unreq sumo
 
     ret
 
@@ -662,7 +684,9 @@ Pinta_circulo:
     // x0 -> color
     // (x1,x2) -> centro
     // x3 -> radio
+    // x26 -> sumo al color
 
+    str x0,[sp,-8]!
     str x4,[sp,-8]!
     str x5,[sp,-8]!
     str x6,[sp,-8]!
@@ -684,6 +708,7 @@ Pinta_circulo:
     yy .req x10
     aux1 .req x11
     aux2 .req x12
+    sumo .req x26
 
         // Lugar de busqueda
 
@@ -712,6 +737,7 @@ Pinta_circulo:
                 cmp radioCuadrado,aux1
                 b.lt Pinta_circulo_punto_no_valido
                     bl Pinta_punto
+                    add x0,x0,sumo
                 Pinta_circulo_punto_no_valido:
 
                 add xx,xx,1
@@ -730,6 +756,7 @@ Pinta_circulo:
     .unreq radioCuadrado
     .unreq aux1
     .unreq aux2
+    .unreq sumo
 
     ldr x30,[sp],8
     ldr x12,[sp],8
@@ -741,5 +768,6 @@ Pinta_circulo:
     ldr x6,[sp],8
     ldr x5,[sp],8
     ldr x4,[sp],8
+    ldr x0,[sp],8
 
     ret

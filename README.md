@@ -331,6 +331,9 @@ bl Pinta_circulo
 
 **Notar que es una función global.**
 
+
+## **Dibujos**
+
 ### **- Crea Edificios**
 
 #### *Argumentos*

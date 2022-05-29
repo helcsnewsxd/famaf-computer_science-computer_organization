@@ -42,20 +42,6 @@
 
 .globl main
 main:
-	IniRegistros:
-		mov x29,x0
-		mov x19,SCREEN_WIDTH
-		mov x20,SCREEN_HEIGHT
-		ret
-
-// Loop infinito para poder ver el trabajo
-
-	InfLoop:
-		b InfLoop
-
-
-.globl main
-main:
 	bl IniRegistros
 
 
@@ -66,6 +52,7 @@ main:
 			mov x4,SCREEN_HEIGHT
 		bl Pinta_rectangulo
 
+		/**
 			mov x1,40
 			mov x2,232
 			mov x3,85
@@ -107,7 +94,24 @@ main:
 			mov x3,600
 			mov x4,325
 		bl Crea_edificio
+		**/
 
+		//FONDO DE AMANECER
+		ldr x0,=NARANJA
+		mov x1,0
+		mov x2,0
+		mov x3,700
+		mov x4,250
+		mov x26,-1
+		bl Pinta_rectangulo
+
+		//SOLCITO PIOLA
+		ldr x0,=AMARILLO
+		mov x1,500
+		mov x2,100
+		mov x3,50
+		mov x26,-3
+		bl Pinta_circulo
 
 	b InfLoop
 
