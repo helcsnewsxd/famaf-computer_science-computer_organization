@@ -228,7 +228,7 @@ bl Pinta_triangulo
 **Notar que es una función global.**
 
 
-### **- Pinta rectángulo básico**
+### **- Pinta rectángulo básico **
 
 #### *Argumentos*
 
@@ -250,7 +250,7 @@ bl Pinta_rectangulo
 **Notar que es una función global.**
 
 
-### **- Pinta cuadrilátero**
+### **- Pinta cuadrilátero **
 
 #### *Argumentos*
 
@@ -272,7 +272,7 @@ bl Pinta_cuadrilatero
 **Notar que es una función global.**
 
 
-### **- Dibuja círculo**
+### **- Dibuja círculo **
 
 #### *Argumentos*
 
@@ -293,7 +293,7 @@ bl Dibuja_circulo
 **Es una función global.**
 
 
-### **- Pinta círculo texturado**
+### **- Pinta círculo texturado **
 
 #### *Argumentos*
 
@@ -315,7 +315,7 @@ bl Pinta_circulo_texturado
 **Notar que es una función global.**
 
 
-### **- Pinta circulo**
+### **- Pinta circulo **
 
 #### *Argumentos*
 
@@ -339,7 +339,7 @@ bl Pinta_circulo
 
 ## **Dibujos**
 
-### **- Fondo de amanecer**
+### **- Fondo de amanecer 🌅 **
 
 #### *Funcionamiento*
 Coloca en la mitad superior del framebuffer un fondo de amanecer copado.
@@ -352,7 +352,7 @@ bl Dibuja_fondo_amanecer
 **Notar que es una función global.**
 
 
-### **- Sol de amanecer**
+### **- Sol de amanecer ☀️ **
 
 #### *Funcionamiento*
 Coloca en la mitad superior derecha del framebuffer un sol de amanecer copado.
@@ -365,7 +365,7 @@ bl Dibuja_sol_amanecer
 **Notar que es una función global.**
 
 
-### **- Crea Edificios**
+### **- Crea Edificios 🏢 **
 
 #### *Argumentos*
 * `(x1,x2)` → Extremo superior izquierdo
@@ -383,7 +383,7 @@ bl Crea_edificio
 
 **Notar que es una función global.**
 
-### **- Pino**
+### **- Pino 🌲 **
 
 #### *Argumentos*
 * `(x1,x2)` → Origen del tronco. El pino se genera desde este punto hacia arriba.
@@ -404,7 +404,7 @@ bl Pino2
 ```
 **Notar que es una función global.**
 
-### **- Arbusto**
+### **- Arbusto 🥬 **
 
 #### *Argumentos*
 * `(x1,x2)` → Extremo superior izquierdo
