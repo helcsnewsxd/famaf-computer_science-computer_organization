@@ -382,3 +382,42 @@ bl Crea_edificio
 ```
 
 **Notar que es una función global.**
+
+### **- Pino**
+
+#### *Argumentos*
+* `(x1,x2)` -> Origen del tronco. El pino se genera desde este punto hacia arriba.
+
+#### *Funcionamiento*
+
+A partir de un punto, se genera un pino de tamaño fijo con dos posibles variaciones (grande y mediano).
+
+#### *Llamada*
+
+Pino grande ↓
+```
+bl Pino1
+```
+Pino mediano ↓
+```
+bl Pino2
+```
+**Notar que es una función global.**
+
+### **- Pino**
+
+#### *Argumentos*
+* `(x1,x2)` -> Extremo superior izquierdo
+* `(x3,x4)` -> Extremo inferior derecho
+
+#### *Funcionamiento*
+
+A partir de dos puntos extremos, se genera un arbusto de tamaño variable. Es importante que se respete que (x1,x2) es el extremo superior izquierdo y (x3,x4) el extremo inferior derecho.
+
+#### *Llamada*
+```
+bl Arbusto1
+```
+
+
+
