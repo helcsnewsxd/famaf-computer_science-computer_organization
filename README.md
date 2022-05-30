@@ -272,7 +272,7 @@ bl Pinta_cuadrilatero
 **Notar que es una función global.**
 
 
-### **- Dibuja círculo **
+### **- Dibuja círculo**
 
 #### *Argumentos*
 
