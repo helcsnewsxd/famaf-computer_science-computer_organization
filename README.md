@@ -38,13 +38,13 @@ VIOLETA = 0xB300C0
 
 ## Uso de los Registros
 
-* `x0` -> **Color**
-* `x19` -> **ANCHO_FRAMEBUFFER**
-* `x20` -> **LARGO_FRAMEBUFFER**
-* `x27` -> **Address para return de itera línea**
-* `x28` -> **SP -> Stack Pointer**
-* `x29` -> **FP -> Frame Pointer. Se pone la dirección base del framebuffer**
-* `x30` -> **Direcciones para los return de las funciones**
+* `x0` → **Color**
+* `x19` → **ANCHO_FRAMEBUFFER**
+* `x20` → **LARGO_FRAMEBUFFER**
+* `x27` → **Address para return de itera línea**
+* `x28` → **SP -> Stack Pointer**
+* `x29` → **FP -> Frame Pointer. Se pone la dirección base del framebuffer**
+* `x30` → **Direcciones para los return de las funciones**
 
 
 ## Datos piolas a tener en cuenta
@@ -119,8 +119,8 @@ Estas funciones están implementadas en **`formas_geometricas.s`**
 
 #### *Argumentos*
 
-* `x0` -> color
-* `(x9,x10)` -> punto en el plano cartesiano con (0,0) arriba a la izquierda (nos queda mejor para el PixelArt)
+* `x0` → color
+* `(x9,x10)` → punto en el plano cartesiano con (0,0) arriba a la izquierda (nos queda mejor para el PixelArt)
 
 #### *Funcionamiento*
 
@@ -189,8 +189,8 @@ Un ejemplo de llamada es:
 
 #### *Argumentos*
 
-* `x0` -> color
-* `(x1,x2)` y `(x3,x4)` -> extremos de la línea
+* `x0` → color
+* `(x1,x2)` y `(x3,x4)` → extremos de la línea
 
 #### *Funcionamiento*
 
@@ -210,9 +210,9 @@ bl Pinta_linea
 
 #### *Argumentos*
 
-* `x0` -> color
-* `(x1,x2)`, `(x3,x4)` y `(x5,x6)` -> extremos
-* `x26` -> lo que se le va sumando al color
+* `x0` → color
+* `(x1,x2)`, `(x3,x4)` y `(x5,x6)` → extremos
+* `x26` → lo que se le va sumando al color
 
 #### *Funcionamiento*
 
@@ -232,9 +232,9 @@ bl Pinta_triangulo
 
 #### *Argumentos*
 
-* `x0` -> color
-* `(x1,x2) y (x3,x4)` -> extremos opuestos
-* `x26` -> lo que se le suma al color
+* `x0` → color
+* `(x1,x2) y (x3,x4)` → extremos opuestos
+* `x26` → lo que se le suma al color
 
 #### *Funcionamiento*
 
@@ -254,9 +254,9 @@ bl Pinta_rectangulo
 
 #### *Argumentos*
 
-* `x0` -> color
-* `(x1,x2)`, `(x3,x4)`, `(x5,x6)` y `(x7,x8)` -> extremos del cuadrilátero
-* `x26` -> lo que se le suma al color
+* `x0` → color
+* `(x1,x2)`, `(x3,x4)`, `(x5,x6)` y `(x7,x8)` → extremos del cuadrilátero
+* `x26` → lo que se le suma al color
 
 #### *Funcionamiento*
 
@@ -276,9 +276,9 @@ bl Pinta_cuadrilatero
 
 #### *Argumentos*
 
-* `x0` -> color
-* `(x1,x2)` -> centro
-* `x3` -> radio
+* `x0` → color
+* `(x1,x2)` → centro
+* `x3` → radio
 
 #### *Funcionamiento*
 
@@ -297,10 +297,10 @@ bl Dibuja_circulo
 
 #### *Argumentos*
 
-* `x0` -> color
-* `(x1,x2)` -> centro
-* `x3` -> radio
-* `x26` -> lo que se le va sumando al color
+* `x0` → color
+* `(x1,x2)` → centro
+* `x3` → radio
+* `x26` → lo que se le va sumando al color
 
 #### *Funcionamiento*
 
@@ -319,10 +319,10 @@ bl Pinta_circulo_texturado
 
 #### *Argumentos*
 
-* `x0` -> color
-* `(x1,x2)` -> centro
-* `x3` -> radio
-* `x26` -> lo que se le va sumando al color
+* `x0` → color
+* `(x1,x2)` → centro
+* `x3` → radio
+* `x26` → lo que se le va sumando al color
 
 #### *Funcionamiento*
 
@@ -368,8 +368,8 @@ bl Dibuja_sol_amanecer
 ### **- Crea Edificios**
 
 #### *Argumentos*
-* `(x1,x2)` -> Extremo superior izquierdo
-* `(x3,x4)` -> Extremo inferior derecho
+* `(x1,x2)` → Extremo superior izquierdo
+* `(x3,x4)` → Extremo inferior derecho
 
 #### *Funcionamiento*
 
@@ -386,7 +386,7 @@ bl Crea_edificio
 ### **- Pino**
 
 #### *Argumentos*
-* `(x1,x2)` -> Origen del tronco. El pino se genera desde este punto hacia arriba.
+* `(x1,x2)` → Origen del tronco. El pino se genera desde este punto hacia arriba.
 
 #### *Funcionamiento*
 
@@ -404,11 +404,11 @@ bl Pino2
 ```
 **Notar que es una función global.**
 
-### **- Pino**
+### **- Arbusto**
 
 #### *Argumentos*
-* `(x1,x2)` -> Extremo superior izquierdo
-* `(x3,x4)` -> Extremo inferior derecho
+* `(x1,x2)` → Extremo superior izquierdo
+* `(x3,x4)` → Extremo inferior derecho
 
 #### *Funcionamiento*
 
@@ -418,6 +418,8 @@ A partir de dos puntos extremos, se genera un arbusto de tamaño variable. Es im
 ```
 bl Arbusto1
 ```
+
+**Notar que es una función global.**
 
 
 
