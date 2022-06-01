@@ -4,6 +4,8 @@
 Pinta_punto:
     // x0 --> color
     // (x9,10) --> punto a pintar
+    // x18 --> color a modificar. Si x18 == 0, todos
+
     inicio_framebuffer .req x29
     ancho_framebuffer .req x19
 	largo_framebuffer .req x20
@@ -11,6 +13,8 @@ Pinta_punto:
     x .req x9
     y .req x10
     pixel .req x12
+    aux .req w11
+    cambio .req w25
 
     // Verifico que esté dentro del FrameBuffer
     cmp x,0
@@ -23,13 +27,25 @@ Pinta_punto:
     b.lt pinta_punto_fuera_de_limites // y > Largo FrameBuffer
 
     str pixel,[sp,-8]!
+    str aux,[sp,-8]!
+    str cambio,[sp,-8]!
 
     madd pixel,y,ancho_framebuffer,x
     lsl pixel,pixel,2
     add pixel,pixel,inicio_framebuffer
 
-    str color,[pixel]
+    // Pinto o no?
+        ldr aux,[pixel]
+        cbz cambio,Pinta_punto_pintar
+        cmp aux,cambio
+        b.ne Pinta_punto_no_pintar
+        
+    Pinta_punto_pintar:
+        str color,[pixel]
+    Pinta_punto_no_pintar:
 
+    ldr cambio,[sp],8
+    ldr aux,[sp],8
     ldr pixel,[sp],8
     pinta_punto_fuera_de_limites:
         .unreq inicio_framebuffer
@@ -39,6 +55,8 @@ Pinta_punto:
         .unreq x
         .unreq y
         .unreq pixel
+        .unreq aux
+        .unreq cambio
         ret
 
 

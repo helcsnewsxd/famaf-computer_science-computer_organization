@@ -44,14 +44,6 @@
 main:
 	bl IniRegistros
 
-		ldr x0,=0x37783b
-			mov x1,1
-			mov x2,223
-			mov x3,SCREEN_WIDTH
-			mov x4,SCREEN_HEIGHT
-		bl Pinta_rectangulo
-
-
 		/**
 			mov x1,40
 			mov x2,232
@@ -97,8 +89,11 @@ main:
 		**/
 
 		// AMANECER
+		//bl Dibuja_fondo_noche
+		//bl Dibuja_luna
 		bl Dibuja_fondo_amanecer
 		bl Dibuja_sol_amanecer
+		bl Dibuja_pasto
 
 		// ARBOL
 		mov x1,200
@@ -126,6 +121,10 @@ main:
 		mov x3,269
 		mov x4,300
 		bl Arbusto1
+
+		bl Dibuja_fondo_noche
+		bl Dibuja_luna
+		bl Oscurecer
 
 	b InfLoop
 
