@@ -91,7 +91,7 @@ main:
 		// AMANECER
 		//bl Dibuja_fondo_noche
 		//bl Dibuja_luna
-		bl Dibuja_fondo_amanecer
+		bl Dibuja_fondo_amanecer1
 		bl Dibuja_sol_amanecer
 		bl Dibuja_pasto
 
@@ -124,7 +124,14 @@ main:
 
 		bl Dibuja_fondo_noche
 		bl Dibuja_luna
-		bl Oscurecer
+
+		mov x1,0
+		mov x2,0
+		mov x3,SCREEN_WIDTH
+		mov x4,SCREEN_WIDTH
+		//bl Oscurecer
+
+		bl Dibuja_fondo_amanecer2
 
 	b InfLoop
 

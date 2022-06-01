@@ -4,7 +4,8 @@
 Pinta_punto:
     // x0 --> color
     // (x9,10) --> punto a pintar
-    // x18 --> color a modificar. Si x18 == 0, todos
+    // w24 --> color a modificar. Si w24 == 0, todos
+    // x23 --> Si x23 es positivo, se aclara. Si es negativo, se oscurece. Si es cero, se pinta normal
 
     inicio_framebuffer .req x29
     ancho_framebuffer .req x19
@@ -14,7 +15,9 @@ Pinta_punto:
     y .req x10
     pixel .req x12
     aux .req w11
-    cambio .req w25
+    cambio .req w24
+    aclarar .req x23
+
 
     // Verifico que esté dentro del FrameBuffer
     cmp x,0
@@ -27,22 +30,42 @@ Pinta_punto:
     b.lt pinta_punto_fuera_de_limites // y > Largo FrameBuffer
 
     str pixel,[sp,-8]!
-    str aux,[sp,-8]!
+    str aux,[sp,-8]!    
     str cambio,[sp,-8]!
 
     madd pixel,y,ancho_framebuffer,x
     lsl pixel,pixel,2
     add pixel,pixel,inicio_framebuffer
 
-    // Pinto o no?
-        ldr aux,[pixel]
-        cbz cambio,Pinta_punto_pintar
-        cmp aux,cambio
-        b.ne Pinta_punto_no_pintar
-        
-    Pinta_punto_pintar:
-        str color,[pixel]
-    Pinta_punto_no_pintar:
+
+    cmp aclarar,0
+    b.gt Pinta_punto_aclarar
+    b.lt Pinta_punto_oscurecer
+        // Pinto o no?
+            ldr aux,[pixel]
+            cbz cambio,Pinta_punto_tengo_que_pintar
+            cmp aux,cambio
+            b.ne Pinta_punto_no_tengo_que_pintar
+            
+        Pinta_punto_tengo_que_pintar:
+            str color,[pixel]
+        Pinta_punto_no_tengo_que_pintar:
+        b Pinta_punto_ready
+
+    Pinta_punto_aclarar:
+        ldr cambio,[pixel]
+        ldr aux,=0xfefefe
+        and cambio,cambio,aux
+        lsl cambio,cambio,1
+        str cambio,[pixel]
+        b Pinta_punto_ready
+    Pinta_punto_oscurecer:
+        ldr cambio,[pixel]
+        ldr aux,=0xfefefe
+        and cambio,cambio,aux
+        lsr cambio,cambio,1
+        str cambio,[pixel]
+    Pinta_punto_ready:
 
     ldr cambio,[sp],8
     ldr aux,[sp],8
@@ -292,7 +315,7 @@ Pinta_triangulo:
     // x0 -> color
     // (x1,x2), (x3,x4) y (x5,x6) extremos
         // x17 y x18 para aux
-    // x26 -> sumo al color
+    // x25 -> sumo al color
     
     str x0,[sp,-8]!
     str x17,[sp,-8]!
@@ -302,7 +325,7 @@ Pinta_triangulo:
 
     xx5 .req x17
     xx6 .req x18
-    sumo .req x26
+    sumo .req x25
 
     mov xx5,x5
     mov xx6,x6
@@ -326,7 +349,7 @@ Pinta_triangulo:
 
             bl Pinta_linea
 
-            add x0,x0,1
+            add x0,x0,sumo
 
         ldr x4,[sp],8
         ldr x3,[sp],8
@@ -355,9 +378,11 @@ Pinta_triangulo:
 Pinta_rectangulo:
     // x0 -> color
     // (x1,x2) y (x3,x4) extremos opuestos
-    // x26 -> sumo al color
+    // x25 -> sumo al color
+    // x22 -> sumo al 2do color
 
     str x0,[sp,-8]!
+    str x24,[sp,-8]!
     str x5,[sp,-8]!
     str x6,[sp,-8]!
     str x7,[sp,-8]!
@@ -372,7 +397,8 @@ Pinta_rectangulo:
     maxiy .req x8
     xx .req x9
     yy .req x10
-    sumo .req x26
+    sumo .req x25
+    sumo2 .req x22
 
         mov minix,x1
         mov miniy,x2
@@ -398,6 +424,7 @@ Pinta_rectangulo:
         sub yy,miniy,1
         Pinta_rectangulo_while:
             add x0,x0,sumo
+            add x24,x24,sumo2
 
             add yy,yy,1
             cmp yy,maxiy
@@ -418,6 +445,7 @@ Pinta_rectangulo:
     .unreq xx
     .unreq yy
     .unreq sumo
+    .unreq sumo2
 
     ldr x30,[sp],8
     ldr x10,[sp],8
@@ -426,6 +454,7 @@ Pinta_rectangulo:
     ldr x7,[sp],8
     ldr x6,[sp],8
     ldr x5,[sp],8
+    ldr x24,[sp],8
     ldr x0,[sp],8
 
     ret
@@ -672,25 +701,31 @@ Pinta_circulo_texturado:
     // x0 -> color
     // (x1,x2) -> centro
     // x3 -> radio
-    // x26 -> sumo x26 al color
+    // x25 -> sumo x25 al color
+    // x22 -> sumo x22 al 2do color
 
-    sumo .req x26
+    sumo .req x25
+    sumo2 .req x22
 
     str x0,[sp,-8]!
+    str x24,[sp,-8]!
     str x3,[sp,-8]!
     str x30,[sp,-8]!
 
         Pinta_circulo_texturado_while:
             bl Dibuja_circulo
             add x0,x0,sumo
+            add x24,x24,sumo2
             sub x3,x3,1
             cbnz x3,Pinta_circulo_texturado_while
 
     ldr x30,[sp],8
     ldr x3,[sp],8
+    ldr x24,[sp],8
     ldr x0,[sp],8
 
     .unreq sumo
+    .unreq sumo2
 
     ret
 
@@ -702,9 +737,11 @@ Pinta_circulo:
     // x0 -> color
     // (x1,x2) -> centro
     // x3 -> radio
-    // x26 -> sumo al color
+    // x25 -> sumo al color
+    // x22 -> sumo al 2do color
 
     str x0,[sp,-8]!
+    str x24,[sp,-8]!
     str x4,[sp,-8]!
     str x5,[sp,-8]!
     str x6,[sp,-8]!
@@ -726,7 +763,8 @@ Pinta_circulo:
     yy .req x10
     aux1 .req x11
     aux2 .req x12
-    sumo .req x26
+    sumo .req x25
+    sumo2 .req x22
 
         // Lugar de busqueda
 
@@ -756,6 +794,7 @@ Pinta_circulo:
                 b.lt Pinta_circulo_punto_no_valido
                     bl Pinta_punto
                     add x0,x0,sumo
+                    add x24,x24,sumo2
                 Pinta_circulo_punto_no_valido:
 
                 add xx,xx,1
@@ -775,6 +814,7 @@ Pinta_circulo:
     .unreq aux1
     .unreq aux2
     .unreq sumo
+    .unreq sumo2
 
     ldr x30,[sp],8
     ldr x12,[sp],8
@@ -786,6 +826,7 @@ Pinta_circulo:
     ldr x6,[sp],8
     ldr x5,[sp],8
     ldr x4,[sp],8
+    ldr x24,[sp],8
     ldr x0,[sp],8
 
     ret

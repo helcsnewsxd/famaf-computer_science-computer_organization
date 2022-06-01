@@ -26,14 +26,16 @@
 
 // FONDO
 
-.globl Dibuja_fondo_amanecer
-Dibuja_fondo_amanecer:
+.globl Dibuja_fondo_amanecer1
+Dibuja_fondo_amanecer1:
     str x0,[sp,-8]!
     str x1,[sp,-8]!
     str x2,[sp,-8]!
     str x3,[sp,-8]!
     str x4,[sp,-8]!
-    str x26,[sp,-8]!
+    str x23,[sp,-8]!
+    str x24,[sp,-8]!
+    str x25,[sp,-8]!
     str x30,[sp,-8]!
 
         ldr x0,=NARANJA
@@ -41,11 +43,54 @@ Dibuja_fondo_amanecer:
         mov x2,0
         mov x3,700
         mov x4,250
-        mov x26,-1
+        mov x25,-1
+        mov x24,0
+        mov x23,0
         bl Pinta_rectangulo
 
     ldr x30,[sp],8
-    ldr x26,[sp],8
+    ldr x25,[sp],8
+    ldr x24,[sp],8
+    ldr x23,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
+.globl Dibuja_fondo_amanecer2
+Dibuja_fondo_amanecer2:
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x22,[sp,-8]!
+    str x23,[sp,-8]!
+    str x24,[sp,-8]!
+    str x25,[sp,-8]!
+    str x30,[sp,-8]!
+
+        ldr x0,=NARANJA
+        mov x1,0
+        mov x2,0
+        mov x3,700
+        mov x4,250
+        mov x23,0
+
+        ldr x24,=AZUL
+        mov x22,-1
+
+        mov x25,-1
+        bl Pinta_rectangulo
+
+    ldr x30,[sp],8
+    ldr x25,[sp],8
+    ldr x24,[sp],8
+    ldr x23,[sp],8
+    ldr x22,[sp],8
     ldr x4,[sp],8
     ldr x3,[sp],8
     ldr x2,[sp],8
@@ -63,18 +108,24 @@ Dibuja_sol_amanecer:
     str x1,[sp,-8]!
     str x2,[sp,-8]!
     str x3,[sp,-8]!
-    str x26,[sp,-8]!
+    str x23,[sp,-8]!
+    str x24,[sp,-8]!
+    str x25,[sp,-8]!
     str x30,[sp,-8]!
 
         ldr x0,=AMARILLO
 		mov x1,500
 		mov x2,100
 		mov x3,50
-		mov x26,-3
+		mov x25,-3
+        mov x24,0
+        mov x23,0
 		bl Pinta_circulo
 
     ldr x30,[sp],8
-    ldr x26,[sp],8
+    ldr x25,[sp],8
+    ldr x24,[sp],8
+    ldr x23,[sp],8
     ldr x3,[sp],8
     ldr x2,[sp],8
     ldr x1,[sp],8
@@ -86,32 +137,21 @@ Dibuja_sol_amanecer:
 // ACLARAR
 .globl Aclarecer
 Aclarecer:
-    str x0,[sp,-8]!
-    str x1,[sp,-8]!
-    str x2,[sp,-8]!
-    str x12,[sp,-8]!
-    madd x12,x19,x20,x19
-		lsl x12,x12,2
-		add x12,x12,x29
-		mov x1,x29
-		Aclarecer_loop:
-			cmp x1,x12
-			b.gt Aclarecer_end
-			mov x0,0
-			ldr w0,[x1]
-			ldr w2,=0xfefefe
-			and w0,w0,w2
-			//lsr w0,w0,1
-			lsl w0,w0,1
-			str w0,[x1]
-			add x1,x1,4
-			b Aclarecer_loop
-		
-		Aclarecer_end:
-    ldr x12,[sp],8
-    ldr x2,[sp],8
-    ldr x1,[sp],8
-    ldr x0,[sp],8
+    // (x1,x2) y (x3,x4) extremos
+    str x23,[sp,-8]!
+    str x24,[sp,-8]!
+    str x25,[sp,-8]!
+    str x30,[sp,-8]!
+
+        mov x23,1
+        mov x24,0
+        mov x25,0
+        bl Pinta_rectangulo
+
+    ldr x30,[sp],8
+    ldr x25,[sp],8
+    ldr x24,[sp],8
+    ldr x23,[sp],8
     ret
 
 
@@ -126,7 +166,10 @@ Dibuja_fondo_noche:
     str x2,[sp,-8]!
     str x3,[sp,-8]!
     str x4,[sp,-8]!
-    str x26,[sp,-8]!
+    str x22,[sp,-8]!
+    str x23,[sp,-8]!
+    str x24,[sp,-8]!
+    str x25,[sp,-8]!
     str x30,[sp,-8]!
 
         ldr x0,=AZUL
@@ -134,11 +177,19 @@ Dibuja_fondo_noche:
         mov x2,0
         mov x3,700
         mov x4,250
-        mov x26,-1
+        mov x23,0
+
+        ldr x24,=NARANJA
+        mov x22,-1
+
+        mov x25,-1
         bl Pinta_rectangulo
 
     ldr x30,[sp],8
-    ldr x26,[sp],8
+    ldr x25,[sp],8
+    ldr x24,[sp],8
+    ldr x23,[sp],8
+    ldr x22,[sp],8
     ldr x4,[sp],8
     ldr x3,[sp],8
     ldr x2,[sp],8
@@ -158,21 +209,23 @@ Dibuja_luna:
     str x3,[sp,-8]!
     str x4,[sp,-8]!
     str x5,[sp,-8]!
+    str x24,[sp,-8]!
     str x25,[sp,-8]!
-    str x26,[sp,-8]!
+    str x23,[sp,-8]!
     str x30,[sp,-8]!
+        mov x23,0
 
         ldr x0,=0xd0f0f0
 		mov x1,500
 		mov x2,100
 		mov x3,50
-		mov x26,0
+		mov x25,0
 		bl Pinta_circulo
 
         ldr x0,=AZUL
         mov x1,487
         mov x2,88
-        mov x26,0
+        mov x25,0
         bl Pinta_circulo
 
 
@@ -181,13 +234,14 @@ Dibuja_luna:
         mov x3,550
         mov x2,0
         mov x4,200
-        mov x26,-1
-        ldr x25,=AZUL
+        mov x25,-1
+        ldr x24,=AZUL
         bl Pinta_rectangulo
 
     ldr x30,[sp],8
-    ldr x26,[sp],8
+    ldr x23,[sp],8
     ldr x25,[sp],8
+    ldr x24,[sp],8
     ldr x5,[sp],8
     ldr x4,[sp],8
     ldr x3,[sp],8
@@ -201,32 +255,21 @@ Dibuja_luna:
 // OSCURECER
 .globl Oscurecer
 Oscurecer:
-    str x0,[sp,-8]!
-    str x1,[sp,-8]!
-    str x2,[sp,-8]!
-    str x12,[sp,-8]!
-    madd x12,x19,x20,x19
-		lsl x12,x12,2
-		add x12,x12,x29
-		mov x1,x29
-		Oscurecer_loop:
-			cmp x1,x12
-			b.gt Oscurecer_end
-			mov x0,0
-			ldr w0,[x1]
-			ldr w2,=0xfefefe
-			and w0,w0,w2
-			lsr w0,w0,1
-			//lsl w0,w0,1
-			str w0,[x1]
-			add x1,x1,4
-			b Oscurecer_loop
-		
-		Oscurecer_end:
-    ldr x12,[sp],8
-    ldr x2,[sp],8
-    ldr x1,[sp],8
-    ldr x0,[sp],8
+    // (x1,x2) y (x3,x4) extremos
+    str x23,[sp,-8]!
+    str x24,[sp,-8]!
+    str x25,[sp,-8]!
+    str x30,[sp,-8]!
+
+        mov x23,-1
+        mov x24,0
+        mov x25,0
+        bl Pinta_rectangulo
+
+    ldr x30,[sp],8
+    ldr x25,[sp],8
+    ldr x24,[sp],8
+    ldr x23,[sp],8
     ret
 
 
