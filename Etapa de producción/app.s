@@ -121,7 +121,7 @@ main:
 		mov x3,269
 		mov x4,300
 		bl Arbusto1
-
+		
 		bl Dibuja_fondo_noche
 		bl Dibuja_luna
 
@@ -129,7 +129,7 @@ main:
 		mov x2,0
 		mov x3,SCREEN_WIDTH
 		mov x4,SCREEN_WIDTH
-		//bl Oscurecer
+		//bl Oscurecer // -> SE BUGUEA CON ESTO
 
 		bl Dibuja_fondo_amanecer2
 
