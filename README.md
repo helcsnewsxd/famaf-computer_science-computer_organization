@@ -424,9 +424,9 @@ bl Arbusto1
 ### **- Fogata** 🔥
 
 #### *Argumentos*
-* `(x1,x2)` → Extremo izquierdos
+* `(x1,x2)` → Extremo izquierdo
 * `(x3,x4)` → Extremo derecho
-* DISCLAIMER: Ambos extremos deben estar sobre el mismo eje Y.
+** DISCLAIMER:** Ambos extremos deben estar sobre el mismo eje Y.
 
 #### *Funcionamiento*
 
