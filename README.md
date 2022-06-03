@@ -421,5 +421,23 @@ bl Arbusto1
 
 **Notar que es una función global.**
 
+### **- Fogata** 🔥
+
+#### *Argumentos*
+* `(x1,x2)` → Extremo izquierdos
+* `(x3,x4)` → Extremo derecho
+* DISCLAIMER: Ambos extremos deben estar sobre el mismo eje Y.
+
+#### *Funcionamiento*
+
+A partir de dos puntos extremos, se genera para arriba una fogata de tamaño variable. Para funcionamiento óptimo, elegir valores para x1 y x3 tal que la diferencia entre los dos sea no menor a ~ 20 píxeles
+
+#### *Llamada*
+```
+bl Fogata
+```
+
+**Notar que es una función global.**
+
 
 
