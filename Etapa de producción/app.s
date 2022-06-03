@@ -122,6 +122,12 @@ main:
 		mov x4,300
 		bl Arbusto1
 		
+		mov x1,280
+		mov x2,300
+		mov x3,310
+		mov x4,300
+		bl Fogata
+		
 		bl Dibuja_fondo_noche
 		bl Dibuja_luna
 
