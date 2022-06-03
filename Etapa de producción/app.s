@@ -44,7 +44,10 @@
 main:
 	bl IniRegistros
 
-		/**
+	bl Dibuja_fondo_amanecer1
+	bl Dibuja_sol_amanecer
+	bl Dibuja_pasto
+
 			mov x1,40
 			mov x2,232
 			mov x3,85
@@ -86,58 +89,43 @@ main:
 			mov x3,600
 			mov x4,325
 		bl Crea_edificio
-		**/
 
-		// AMANECER
-		//bl Dibuja_fondo_noche
-		//bl Dibuja_luna
-		bl Dibuja_fondo_amanecer1
-		bl Dibuja_sol_amanecer
-		bl Dibuja_pasto
 
 		// ARBOL
 		mov x1,200
-		mov x2,300
+		mov x2,400
 		bl Pino1
 
 		mov x1,300
-		mov x2,300
+		mov x2,400
 		bl Pino2
 
 		mov x1,159
-		mov x2,289
+		mov x2,389
 		mov x3,175
-		mov x4,300
+		mov x4,400
 		bl Arbusto1
 
 		mov x1,239
-		mov x2,282
+		mov x2,382
 		mov x3,262
-		mov x4,300
+		mov x4,400
 		bl Arbusto1
 	
 		mov x1,254
-		mov x2,289
+		mov x2,389
 		mov x3,269
-		mov x4,300
+		mov x4,400
 		bl Arbusto1
-		
-		mov x1,280
-		mov x2,300
-		mov x3,310
-		mov x4,300
+
+		mov x1,380
+		mov x2,400
+		mov x3,410
+		mov x4,400
 		bl Fogata
-		
+
 		bl Dibuja_fondo_noche
 		bl Dibuja_luna
-
-		mov x1,0
-		mov x2,0
-		mov x3,SCREEN_WIDTH
-		mov x4,SCREEN_WIDTH
-		//bl Oscurecer // -> SE BUGUEA CON ESTO
-
-		bl Dibuja_fondo_amanecer2
 
 	b InfLoop
 

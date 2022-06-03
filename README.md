@@ -41,6 +41,10 @@ VIOLETA = 0xB300C0
 * `x0` → **Color**
 * `x19` → **ANCHO_FRAMEBUFFER**
 * `x20` → **LARGO_FRAMEBUFFER**
+* `x22` → **Sumo al color en x24 en cada iteración**
+* `x23` → **Aclarar / Oscurecer**
+* `x24` → **Color a cambiar**
+* `x25` → **Sumo al color en x0 en cada iteración**
 * `x27` → **Address para return de itera línea**
 * `x28` → **SP -> Stack Pointer**
 * `x29` → **FP -> Frame Pointer. Se pone la dirección base del framebuffer**
@@ -111,9 +115,19 @@ Ejemplo ->
 ```
 
 
-## Funciones para creación de figuras
+# **Funciones para creación de figuras**
 
 Estas funciones están implementadas en **`formas_geometricas.s`**
+
+Una cosa **importantísima** para destacar en este caso es el uso de algunos registros SAVED. En este caso, vamos a tomar la siguiente convención para todas las funciones de geometría de pintado:
+
+* `x23` → Si x23 es positivo, se aclara la región. Si x23 es negativo, se oscurece. Caso contrario, si es cero, se pinta normalmente.
+
+* `x24` → x24 es el color a modificar, a cambiar. Si es cero, se cambian todos los colores. Caso contrario, solo los píxeles con color igual a x24.
+
+* `x22` → Lo que se le va sumando al color x24 del mismo modo que se le suma x25 al x0.
+
+* `x25` → Degradado. Es lo que se suma o se resta en las iteraciones para darle un efecto de cambio de color a la figura.
 
 ### **- Dibujar pixel**
 
@@ -337,7 +351,9 @@ bl Pinta_circulo
 **Notar que es una función global.**
 
 
-## **Dibujos**
+# **Fondos**
+
+Estas funciones están implementadas en **`fondos.s`**
 
 ### **- Fondo de amanecer** 🌅 
 
@@ -345,11 +361,18 @@ bl Pinta_circulo
 Coloca en la mitad superior del framebuffer un fondo de amanecer copado.
 
 #### *Llamada*
+* Para el primer llamado cuando el framebuffer está totalmente en negro:
 ```
-bl Dibuja_fondo_amanecer
+bl Dibuja_fondo_amanecer1
 ```
 
-**Notar que es una función global.**
+* Para cambiar de noche a día:
+```
+bl Dibuja_fondo_amanecer2
+```
+
+
+**Notar que son funciones globales.**
 
 
 ### **- Sol de amanecer** ☀️ 
@@ -365,23 +388,48 @@ bl Dibuja_sol_amanecer
 **Notar que es una función global.**
 
 
-### **- Crea Edificios** 🏢 
-
-#### *Argumentos*
-* `(x1,x2)` → Extremo superior izquierdo
-* `(x3,x4)` → Extremo inferior derecho
+### **- Fondo de noche**
 
 #### *Funcionamiento*
-
-A partir de dos puntos extremos, la función genera un edificio de tamaño variable constituído por un rectángulo frontal y dos paralelogramos adyacentes, uno en la parte superior y otro en el lateral derecho. Además de generar los respectivos cuadriláteros, también genera un conjunto de ventanas de tamaño fijo que se distribuyen a lo largo del rectángulo frontal siempre y cuando haya espacio necesario para una nueva columna y/o fila de ventanas. Por último, genera una puerta en el medio del edificio para darle más detalle. La generación de los paralelogramos y ventanas se hace partiendo de los dos puntos recibidos como argumentos, modificándolos a través de operaciones aritméticas siempre relativas a los límites del rectángulo frontal.
+Coloca en la mitad superior del framebuffer un fondo de noche copado, reemplazando el del día pero sin modificar nada más que el fondo.
 
 #### *Llamada*
-
 ```
-bl Crea_edificio
+bl Dibuja_fondo_noche
 ```
 
 **Notar que es una función global.**
+
+
+### **- Luna**
+
+#### *Funcionamiento*
+Coloca en la mitad superior derecha del framebuffer una luna copada.
+
+#### *Llamada*
+```
+bl Dibuja_luna
+```
+
+**Notar que es una función global.**
+
+
+### **- Pasto**
+
+#### *Funcionamiento*
+Coloca en la mitad inferior del framebuffer el pasto verde sólido y liso.
+
+#### *Llamada*
+```
+bl Dibuja_pasto
+```
+
+**Notar que es una función global.**
+
+
+# **Vegetación**
+
+Estas funciones están implementadas en **`vegetacion.s`**
 
 ### **- Pino** 🌲 
 
@@ -440,4 +488,47 @@ bl Fogata
 **Notar que es una función global.**
 
 
+# **Etapa 1**
 
+Estas funciones están implementadas en **`etapa_1.s`**
+
+### **- Fogata** 🔥
+
+#### *Argumentos*
+* `(x1,x2)` → Extremo izquierdo
+* `(x3,x4)` → Extremo derecho
+* DISCLAIMER: Ambos extremos deben estar sobre el mismo eje Y.
+
+#### *Funcionamiento*
+
+A partir de dos puntos extremos, se genera para arriba una fogata de tamaño variable. Para funcionamiento óptimo, elegir valores para x1 y x3 tal que la diferencia entre los dos sea no menor a ~ 20 píxeles
+
+#### *Llamada*
+```
+bl Fogata
+```
+
+**Notar que es una función global.**
+
+
+# **COSAS A CAMBIAR**
+
+Estas funciones están implementadas en **`borrador.s`**
+
+### **- Crea Edificios** 🏢 
+
+#### *Argumentos*
+* `(x1,x2)` → Extremo superior izquierdo
+* `(x3,x4)` → Extremo inferior derecho
+
+#### *Funcionamiento*
+
+A partir de dos puntos extremos, la función genera un edificio de tamaño variable constituído por un rectángulo frontal y dos paralelogramos adyacentes, uno en la parte superior y otro en el lateral derecho. Además de generar los respectivos cuadriláteros, también genera un conjunto de ventanas de tamaño fijo que se distribuyen a lo largo del rectángulo frontal siempre y cuando haya espacio necesario para una nueva columna y/o fila de ventanas. Por último, genera una puerta en el medio del edificio para darle más detalle. La generación de los paralelogramos y ventanas se hace partiendo de los dos puntos recibidos como argumentos, modificándolos a través de operaciones aritméticas siempre relativas a los límites del rectángulo frontal.
+
+#### *Llamada*
+
+```
+bl Crea_edificio
+```
+
+**Notar que es una función global.**
