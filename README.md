@@ -226,11 +226,11 @@ bl Pinta_linea
 
 * `x0` → color
 * `(x1,x2)`, `(x3,x4)` y `(x5,x6)` → extremos
-* `x26` → lo que se le va sumando al color
+* `x25` → lo que se le va sumando al color
 
 #### *Funcionamiento*
 
-Utilizando la función de itera línea, la idea es iterar por todos los puntos del segmento de extremos (x1,x2) y (x3,x4), y dado (x,y) perteneciente a este, se pinta la línea de extremos (x,y) y (x5,x6). Se va sumando x26 en cada pinta_linea al color.
+Utilizando la función de itera línea, la idea es iterar por todos los puntos del segmento de extremos (x1,x2) y (x3,x4), y dado (x,y) perteneciente a este, se pinta la línea de extremos (x,y) y (x5,x6). Se va sumando x25 en cada pinta_linea al color.
 
 #### *Llamada*
 
@@ -248,11 +248,11 @@ bl Pinta_triangulo
 
 * `x0` → color
 * `(x1,x2) y (x3,x4)` → extremos opuestos
-* `x26` → lo que se le suma al color
+* `x25` → lo que se le suma al color
 
 #### *Funcionamiento*
 
-Se itera por todos los puntos del rectángulo y se los pinta. La idea es usar fuertemente que los puntos que se dan son extremos opuestos y que el rectángulo es de lados *paralelos a los bordes*. Se le va sumando x26 al color en cada iteración del eje y.
+Se itera por todos los puntos del rectángulo y se los pinta. La idea es usar fuertemente que los puntos que se dan son extremos opuestos y que el rectángulo es de lados *paralelos a los bordes*. Se le va sumando x25 al color en cada iteración del eje y.
 
 #### *Llamada*
 
@@ -270,11 +270,11 @@ bl Pinta_rectangulo
 
 * `x0` → color
 * `(x1,x2)`, `(x3,x4)`, `(x5,x6)` y `(x7,x8)` → extremos del cuadrilátero
-* `x26` → lo que se le suma al color
+* `x25` → lo que se le suma al color
 
 #### *Funcionamiento*
 
-Pinta el cuadrilátero formado por esos cuatro puntos distintos. Se utiliza la función de Pinta triángulo teniendo en cuenta que hay que pintar tres para asegurarnos cubrir toda la zona. Por ende, también afecta x26 al color.
+Pinta el cuadrilátero formado por esos cuatro puntos distintos. Se utiliza la función de Pinta triángulo teniendo en cuenta que hay que pintar tres para asegurarnos cubrir toda la zona. Por ende, también afecta x25 al color.
 
 #### *Llamada*
 
@@ -314,11 +314,11 @@ bl Dibuja_circulo
 * `x0` → color
 * `(x1,x2)` → centro
 * `x3` → radio
-* `x26` → lo que se le va sumando al color
+* `x25` → lo que se le va sumando al color
 
 #### *Funcionamiento*
 
-La idea es que quede un círculo con "textura" al que le falten algunos píxeles. Para ello, se usa la función Dibuja círculo (que usa bresenham) para hacer todos los círculos de radio entero menor o igual a `x3`. Entre el dibujo de cada circunferencia, se suma x26 al color.
+La idea es que quede un círculo con "textura" al que le falten algunos píxeles. Para ello, se usa la función Dibuja círculo (que usa bresenham) para hacer todos los círculos de radio entero menor o igual a `x3`. Entre el dibujo de cada circunferencia, se suma x25 al color.
 
 #### *Llamada*
 
@@ -336,11 +336,11 @@ bl Pinta_circulo_texturado
 * `x0` → color
 * `(x1,x2)` → centro
 * `x3` → radio
-* `x26` → lo que se le va sumando al color
+* `x25` → lo que se le va sumando al color
 
 #### *Funcionamiento*
 
-La idea es tener un círculo de color sólido sin "texturas". Es decir que todos los píxeles estén pintados. Para ello, se itera por todos los puntos pertenecientes al cuadrado que tiene el círculo inscripto a él y a los que cumplan que ``r^2 >= x^2 + y^2`` se los pinta. Por cada punto pintado se suma x26 al color.
+La idea es tener un círculo de color sólido sin "texturas". Es decir que todos los píxeles estén pintados. Para ello, se itera por todos los puntos pertenecientes al cuadrado que tiene el círculo inscripto a él y a los que cumplan que ``r^2 >= x^2 + y^2`` se los pinta. Por cada punto pintado se suma x25 al color.
 
 #### *Llamada*
 
