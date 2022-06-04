@@ -24,6 +24,8 @@
 	.equ VERDE_CLARO, 0x66FF66
 	.equ VERDE_OSCURO, 0x006600
 	.equ VIOLETA, 0xB300C0
+	.equ NUBE_BLANCO, 0xF5F5F3
+	.equ NUBE_GRIS, 0xB9D9E8
 
 
 // Inicializo los registros
