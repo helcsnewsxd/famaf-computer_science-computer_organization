@@ -1,15 +1,500 @@
 .section .text
 
 // ------------------------------------------- PINOS ------------------------------------------
-.globl Pino1
-Pino1: 
+
+.globl Hojas
+Hojas: 
     str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
     str x5,[sp,-8]!
     str x6,[sp,-8]!
     str x7,[sp,-8]!
     str x8,[sp,-8]!
     str x9,[sp,-8]!
     str x10,[sp,-8]!
+    str x11,[sp,-8]!
+    str x12,[sp,-8]!
+    str x13,[sp,-8]!
+    str x14,[sp,-8]!
+    str x30,[sp,-8]!
+
+    // Guardo en (x11,x12) el punto inicial para cálculo auxiliar
+    mov x11,x1
+    mov x12,x2
+
+// ------------------------------------------- SIN TRONCO -------
+
+
+
+    // Desarrollo de tronco, primer bloque
+    mov x3,x1
+    add x3,x3,4
+
+    mov x4,x2
+    sub x2,x2,4     
+
+    // Desarrollo de tronco, segundo bloque
+    add x1,x1,4
+    
+    add x3,x3,4
+
+    // Desarrollo de tronco, tercer bloque
+    add x1,x1,4
+    
+    add x3,x3,4
+
+// ------------------------------------------- CAPA 1 -------
+
+    // Desarrollo de fila de hojas, primer fila
+    ldr x0,=0x3AB54B
+    mov x1,x11
+    mov x2,x12 // seteo de variables
+
+    sub x1,x1,15 // reacomodo punto inicial
+    sub x2,x2,5
+
+    mov x3,x1    // seteo de segundo punto
+    mov x4,x2
+
+    sub x4,x4,4 // reacomodo segundo punto
+    add x3,x3,42
+    bl Pinta_rectangulo
+
+    mov x13,x3            // Guardo en (x13,x14) para cálculo auxiliar.
+    mov x14,x4 
+
+    // Ahora tengo mis (x1,x2) y (x3,x4) para cada rectangulo de cada hoja de filas, solo tengo que restar y sumar algunos parámetros
+    // Guardo (x1,x2) en (x5,x6)
+    mov x5,x1
+    mov x6,x2
+
+    // Desarrollo de fila de hojas, segunda fila
+
+    add x1,x1,8 // reacomodo punto inicial
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,8
+    bl Pinta_rectangulo
+
+    // Desarrollo de fila de hojas, tercer fila
+
+    sub x1,x1,4 // reacomodo punto inicial
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    add x3,x3,4
+    bl Pinta_rectangulo
+
+    // Desarrollo de fila de hojas, cuarta fila
+
+    add x1,x1,4 // reacomodo punto inicial
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Desarrollo de fila de hojas, quinta fila
+
+    add x1,x1,4 // reacomodo punto inicial
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Desarrollo de fila de hojas, sexta fila
+
+    sub x1,x1,4 // reacomodo punto inicial
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    add x3,x3,4
+    bl Pinta_rectangulo
+
+    // Desarrollo de fila de hojas, septima fila
+
+    add x1,x1,4 // reacomodo punto inicial
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Desarrollo de fila de hojas, octava fila
+
+    add x1,x1,4 // reacomodo punto inicial
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Desarrollo de fila de hojas, novena fila
+
+    sub x1,x1,4 // reacomodo punto inicial
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    add x3,x3,4
+    bl Pinta_rectangulo
+
+    // Desarrollo de fila de hojas, decima fila
+
+    add x1,x1,4 // reacomodo punto inicial
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Desarrollo de fila de hojas, onceava fila
+
+    add x1,x1,4 // reacomodo punto inicial
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Desarrollo de fila de hojas, doceava fila
+
+    sub x2,x2,4 // reacomodo punto inicial
+
+    sub x4,x4,4 // reacomodo segundo punto
+    bl Pinta_rectangulo
+
+// ------------------------------------------- CAPA 2 -------
+
+    //Tengo en (x5,x6) y (x13,x14) los valores del primer rectángulo , tengo que hacer lo mismo pero con otro color.
+    ldr x0,=0x009345
+    mov x1,x5
+    mov x2,x6
+    mov x3,x13
+    mov x4,x14
+
+    // Una vez teniendo los nuevos (x1,x2) y (x3,x4) voy a querer que la primera coordenada este más a la derecha
+    // Primera fila de hojas
+    add x1,x1,19
+    bl Pinta_rectangulo
+
+    // Segunda fila de hojas
+    sub x1,x1,4
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,8
+    bl Pinta_rectangulo
+
+    // Tercera fila de hojas
+    sub x1,x1,4
+    sub x2,x2,4
+    
+    sub x4,x4,4 // reacomodo segundo punto
+    add x3,x3,4
+    bl Pinta_rectangulo
+
+    // Cuarta fila de hojas
+    add x1,x1,4
+    sub x2,x2,4
+    
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Quinta fila de hojas
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Sexta fila de hojas
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    add x3,x3,4
+    bl Pinta_rectangulo
+
+    // Septima fila de hojas
+    add x1,x1,4
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Octava fila de hojas
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Novena fila de hojas
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    add x3,x3,4
+    bl Pinta_rectangulo
+
+    // Decima fila de hojas
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+// ------------------------------------------- CAPA 3 -------
+
+    // Vuelvo a setear los x1,x2,x3,x4
+    ldr x0,=0x006837
+    mov x1,x5
+    mov x2,x6
+    mov x3,x13
+    mov x4,x14
+
+    // Primera fila de hojas
+    add x1,x1,30 // Acomodo puntos, solo cambio el x1
+    bl Pinta_rectangulo
+
+    // Segunda fila de hojas
+    sub x1,x1,4
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,8
+    bl Pinta_rectangulo
+
+    // Tercera fila de hojas
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    add x3,x3,4
+    bl Pinta_rectangulo
+
+    // Cuarta fila de hojas
+    sub x1,x1,4
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Quinta fila de hojas
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Quinta fila de hojas
+    add x1,x1,4
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    add x3,x3,4
+    bl Pinta_rectangulo
+
+    // Sexta fila de hojas
+    sub x1,x1,4
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Septima fila de hojas
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    // Octava fila de hojas
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    add x3,x3,4
+    bl Pinta_rectangulo
+
+    // Novena fila de hojas
+    sub x2,x2,4
+
+    sub x4,x4,4 // reacomodo segundo punto
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+
+
+    ldr x30,[sp],8
+    ldr x14,[sp],8
+    ldr x13,[sp],8
+    ldr x12,[sp],8
+    ldr x11,[sp],8
+    ldr x10,[sp],8
+    ldr x9,[sp],8
+    ldr x8,[sp],8
+    ldr x7,[sp],8
+    ldr x6,[sp],8
+    ldr x5,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
+// ------------------------------------------- Pino1 ------------------------------------------
+.globl Pino1
+Pino1:
+// Argumentos: un punto (x1,x2)
+
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x5,[sp,-8]!
+    str x6,[sp,-8]!
+    str x7,[sp,-8]!
+    str x8,[sp,-8]!
+    str x9,[sp,-8]!
+    str x10,[sp,-8]!
+    str x11,[sp,-8]!
+    str x12,[sp,-8]!
+    str x13,[sp,-8]!
+    str x14,[sp,-8]!
+    str x30,[sp,-8]!
+
+    // --- // 
+
+    sub x1,x1,8
+    bl Hojas
+    add x1,x1,8
+
+    // --- // 
+
+    sub x1,x1,7
+    bl Hojas
+    add x1,x1,7
+
+    // --- // 
+
+    sub x1,x1,6
+    bl Hojas
+    add x1,x1,6
+
+    // --- // 
+
+    sub x1,x1,5
+    bl Hojas
+    add x1,x1,5
+
+
+    // --- // 
+
+    sub x1,x1,3
+    bl Hojas
+    add x1,x1,3
+
+    // --- //
+
+    add x1,x1,8
+    bl Hojas
+    sub x1,x1,8
+
+    // --- //
+
+    add x1,x1,7
+    bl Hojas
+    sub x1,x1,7
+
+    // --- //
+
+    add x1,x1,6
+    bl Hojas
+    sub x1,x1,6
+
+    // --- //
+
+    add x1,x1,5
+    bl Hojas
+    sub x1,x1,5
+
+    // --- //
+
+    add x1,x1,3
+    bl Hojas
+    sub x1,x1,3
+
+    // --- //
+
+    sub x2,x2,4
+    bl Hojas
+    add x2,x2,4
+
+    // --- //
+
+    sub x2,x2,8
+    bl Hojas
+    add x2,x2,8
+
+    // --- //
+
+    bl Pino2
+
+    // --- //
+
+    sub x2,x2,22
+    bl Hojas
+    add x2,x2,22
+
+    // --- //
+
+    ldr x30,[sp],8
+    ldr x14,[sp],8
+    ldr x13,[sp],8
+    ldr x12,[sp],8
+    ldr x11,[sp],8
+    ldr x10,[sp],8
+    ldr x9,[sp],8
+    ldr x8,[sp],8
+    ldr x7,[sp],8
+    ldr x6,[sp],8
+    ldr x5,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
+// ------------------------------------------- Pino2 ------------------------------------------
+
+.globl Pino2
+Pino2: 
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x5,[sp,-8]!
+    str x6,[sp,-8]!
+    str x7,[sp,-8]!
+    str x8,[sp,-8]!
+    str x9,[sp,-8]!
+    str x10,[sp,-8]!
+    str x11,[sp,-8]!
+    str x12,[sp,-8]!
+    str x13,[sp,-8]!
+    str x14,[sp,-8]!
     str x30,[sp,-8]!
 
     // Guardo en (x11,x12) el punto inicial para cálculo auxiliar
@@ -328,25 +813,43 @@ Pino1:
 
 
     ldr x30,[sp],8
+    ldr x14,[sp],8
+    ldr x13,[sp],8
+    ldr x12,[sp],8
+    ldr x11,[sp],8
     ldr x10,[sp],8
     ldr x9,[sp],8
     ldr x8,[sp],8
     ldr x7,[sp],8
     ldr x6,[sp],8
     ldr x5,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
     ldr x0,[sp],8
 
     ret
 
-.globl Pino2
-Pino2:
+// ------------------------------------------- Pino3 ------------------------------------------
+
+.globl Pino3
+Pino3:
     str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
     str x5,[sp,-8]!
     str x6,[sp,-8]!
     str x7,[sp,-8]!
     str x8,[sp,-8]!
     str x9,[sp,-8]!
     str x10,[sp,-8]!
+    str x11,[sp,-8]!
+    str x12,[sp,-8]!
+    str x13,[sp,-8]!
+    str x14,[sp,-8]!
     str x30,[sp,-8]!
 
     // Guardo en (x11,x12) el punto inicial para cálculo auxiliar
@@ -611,16 +1114,23 @@ Pino2:
     bl Pinta_rectangulo
 
     ldr x30,[sp],8
+    ldr x14,[sp],8
+    ldr x13,[sp],8
+    ldr x12,[sp],8
+    ldr x11,[sp],8
     ldr x10,[sp],8
     ldr x9,[sp],8
     ldr x8,[sp],8
     ldr x7,[sp],8
     ldr x6,[sp],8
     ldr x5,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
     ldr x0,[sp],8
-
+    
     ret
-
 
 // ------------------------------------------- Arbusto1 ------------------------------------------
 .globl Arbusto1
