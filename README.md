@@ -360,9 +360,15 @@ Estas funciones están implementadas en **`fondos.s`**
 Genera una nube alrededor de un punto.
 
 #### *Llamada*
-```
+Nube grande ↓
+``` 
 bl Nube1
 ```
+Nube pequeña ↓
+``` 
+bl Nube2
+```
+
 **Notar que es una función global.**
 
 ### **- Fondo de amanecer** 🌅 
