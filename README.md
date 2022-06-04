@@ -355,7 +355,7 @@ bl Pinta_circulo
 
 Estas funciones están implementadas en **`fondos.s`**
 
-### **- Nube** 
+### **- Nube** ☁️
 #### *Funcionamiento*
 Genera una nube alrededor de un punto.
 
@@ -367,6 +367,10 @@ bl Nube1
 Nube pequeña ↓
 ``` 
 bl Nube2
+```
+Conjunto de nubes ↓
+``` 
+bl ConjuntoNubes
 ```
 
 **Notar que es una función global.**
