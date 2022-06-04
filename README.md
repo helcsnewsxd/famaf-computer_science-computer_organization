@@ -11,7 +11,7 @@ BITS_PER_PIXEL = 32
 
 
 
-### Colores
+### Algunos colores
 ```
 AMARILLO = 0xFFF000
 AZUL = 0xFF
