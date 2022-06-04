@@ -130,6 +130,14 @@ main:
 
 		bl Dibuja_fondo_noche
 		bl Dibuja_luna
+		
+		mov x1,200
+		mov x2,100
+		bl Nube1
+
+		mov x1,300
+		mov x2,100
+		bl Nube1
 
 	b InfLoop
 
