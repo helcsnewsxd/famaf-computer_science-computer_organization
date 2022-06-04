@@ -475,4 +475,25 @@ Nube2:
 
     ret
 
+.globl ConjuntoNubes
+ConjuntoNubes:
+// Argumentos: 1 punto (x1,x2)
+
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x30,[sp,-8]!
+
+    bl Nube1
+
+    add x2,x2,20
+    add x1,x1,80
+    bl Nube2
+
+    ldr x30,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ret
+
+
+
 
