@@ -315,14 +315,7 @@ Nube1:
     str x1,[sp,-8]!
     str x2,[sp,-8]!
     str x3,[sp,-8]!
-    str x24,[sp,-8]!
     str x4,[sp,-8]!
-    str x5,[sp,-8]!
-    str x6,[sp,-8]!
-    str x7,[sp,-8]!
-    str x8,[sp,-8]!
-    str x9,[sp,-8]!
-    str x10,[sp,-8]!
     str x11,[sp,-8]!
     str x12,[sp,-8]!
     str x30,[sp,-8]!
@@ -341,13 +334,13 @@ Nube1:
     bl Pinta_circulo
 
     mov x4, 8 // Contador para el ciclo
-    loop:
+    Nube_circulos_grises:
         // Ciclo para hacer la base
         add centrox,centrox,5
         bl Pinta_circulo
         sub x4,x4,1
         cmp x4,0
-        b.ne loop
+        b.ne Nube_circulos_grises
 
     ldr x0,=NUBE_BLANCO
     mov radio,8
@@ -393,17 +386,10 @@ Nube1:
     ldr x30,[sp],8
     ldr x12,[sp],8
     ldr x11,[sp],8
-    ldr x10,[sp],8
-    ldr x9,[sp],8
-    ldr x8,[sp],8
-    ldr x7,[sp],8
-    ldr x6,[sp],8
-    ldr x5,[sp],8
     ldr x4,[sp],8
     ldr x3,[sp],8
     ldr x2,[sp],8
     ldr x1,[sp],8
-    ldr x24,[sp],8
     ldr x0,[sp],8
 
     ret
