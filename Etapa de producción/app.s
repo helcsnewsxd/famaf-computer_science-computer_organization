@@ -92,13 +92,17 @@ main:
 
 
 		// ARBOL
-		mov x1,200
+		mov x1,300
 		mov x2,400
 		bl Pino1
 
-		mov x1,300
+		mov x1,200
 		mov x2,400
 		bl Pino2
+		
+		mov x1,100
+		mov x2,400
+		bl Pino3
 
 		mov x1,159
 		mov x2,389

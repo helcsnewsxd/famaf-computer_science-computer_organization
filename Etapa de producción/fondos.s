@@ -1,6 +1,6 @@
 // Algunos colores
 .equ AMARILLO, 0xFFF000
-.equ AZUL, 0xFF
+.equ AZUL, 0x051601
 .equ AZUL_CLARO, 0x3333FF
 .equ AZUL_OSCURO, 0x000066
 .equ BLANCO, 0xFFFFFF
@@ -80,7 +80,7 @@ Dibuja_fondo_amanecer2:
         mov x23,0
 
         ldr x24,=AZUL
-        mov x22,-1
+        mov x22,1
 
         mov x25,-1
         bl Pinta_rectangulo
@@ -181,7 +181,7 @@ Dibuja_fondo_noche:
         ldr x24,=NARANJA
         mov x22,-1
 
-        mov x25,-1
+        mov x25,1
         bl Pinta_rectangulo
 
     ldr x30,[sp],8
@@ -214,11 +214,11 @@ Dibuja_luna:
     str x30,[sp,-8]!
         mov x23,0
 
-        ldr x0,=0xd0f0f0
+        ldr x0,=0xfddfa0
 		mov x1,500
 		mov x2,100
 		mov x3,50
-		mov x25,0
+        mov x25,-1
 		bl Pinta_circulo
 
         ldr x0,=AZUL
@@ -233,7 +233,7 @@ Dibuja_luna:
         mov x3,550
         mov x2,0
         mov x4,200
-        mov x25,-1
+        mov x25,1
         ldr x24,=AZUL
         bl Pinta_rectangulo
 
@@ -283,13 +283,13 @@ Dibuja_pasto:
     str x4,[sp,-8]!
     str x30,[sp,-8]!
 
-    ldr x0,=0x37783b
-        mov x1,1
+    ldr x0,=0x2d572c
+        mov x1,0
         mov x2,223
         mov x3,x19
         mov x4,x20
     bl Pinta_rectangulo
-
+    
     ldr x30,[sp],8
     ldr x4,[sp],8
     ldr x3,[sp],8
