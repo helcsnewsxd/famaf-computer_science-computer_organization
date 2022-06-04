@@ -18,6 +18,8 @@
 .equ VERDE_CLARO, 0x66FF66
 .equ VERDE_OSCURO, 0x006600
 .equ VIOLETA, 0xB300C0
+.equ NUBE_BLANCO, 0xF5F5F3
+.equ NUBE_GRIS, 0xB9D9E8
 
 .section .text
 
@@ -298,3 +300,111 @@ Dibuja_pasto:
     ldr x0,[sp],8
 
     ret
+    
+    // ------------------------------------------- NUBES ------------------------------------------
+    
+    .globl Nube1
+Nube1:
+// Argumentos: 1 punto (x1,x2)
+
+    centrox .req x1
+    centroy .req x2
+    radio .req x3
+
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x24,[sp,-8]!
+    str x4,[sp,-8]!
+    str x5,[sp,-8]!
+    str x6,[sp,-8]!
+    str x7,[sp,-8]!
+    str x8,[sp,-8]!
+    str x9,[sp,-8]!
+    str x10,[sp,-8]!
+    str x11,[sp,-8]!
+    str x12,[sp,-8]!
+    str x30,[sp,-8]!
+
+    mov x11,centrox
+    mov x12,centroy
+
+    ldr x0,=NUBE_BLANCO
+    mov radio,8
+    bl Pinta_circulo
+
+    ldr x0,=NUBE_GRIS
+    mov radio,13
+    add centroy,centroy,15
+    sub centrox,centrox,15
+    bl Pinta_circulo
+
+    mov x4, 8 // Contador para el ciclo
+    loop:
+        // Ciclo para hacer la base
+        add centrox,centrox,5
+        bl Pinta_circulo
+        sub x4,x4,1
+        cmp x4,0
+        b.ne loop
+
+    ldr x0,=NUBE_BLANCO
+    mov radio,8
+    add centrox,centrox,5
+    bl Pinta_circulo
+
+    sub centroy,centroy,3
+    bl Pinta_circulo
+    sub centroy,centroy,2
+    sub centrox,centrox,3
+    bl Pinta_circulo
+    sub centrox,centrox,2
+    add centroy,centroy,5
+
+    mov radio,10
+    ldr x0,=NUBE_BLANCO
+
+    mov centroy,x12
+    add centroy,centroy,5
+    sub centrox,centrox,10
+    bl Pinta_circulo   
+    sub centrox,centrox,5
+    bl Pinta_circulo 
+    sub centrox,centrox,5
+    bl Pinta_circulo 
+    sub centrox,centrox,5
+    mov radio, 15
+    add centroy,centroy,3
+    bl Pinta_circulo 
+    sub centroy,centroy,3
+    sub centrox,centrox,5
+    add centroy,centroy,5
+    mov radio, 10
+    bl Pinta_circulo 
+    sub centrox,centrox,10
+    mov radio, 10
+    bl Pinta_circulo 
+
+    .unreq centrox
+    .unreq centroy
+    .unreq radio
+
+    ldr x30,[sp],8
+    ldr x12,[sp],8
+    ldr x11,[sp],8
+    ldr x10,[sp],8
+    ldr x9,[sp],8
+    ldr x8,[sp],8
+    ldr x7,[sp],8
+    ldr x6,[sp],8
+    ldr x5,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x24,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
