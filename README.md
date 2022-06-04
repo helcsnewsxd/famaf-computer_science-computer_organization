@@ -355,6 +355,16 @@ bl Pinta_circulo
 
 Estas funciones están implementadas en **`fondos.s`**
 
+### **- Nube** 
+#### *Funcionamiento*
+Genera una nube alrededor de un punto.
+
+#### *Llamada*
+```
+bl Nube1
+```
+**Notar que es una función global.**
+
 ### **- Fondo de amanecer** 🌅 
 
 #### *Funcionamiento*
