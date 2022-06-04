@@ -50,6 +50,18 @@ main:
 	bl Dibuja_sol_amanecer
 	bl Dibuja_pasto
 
+	bl Dibuja_fondo_noche
+	bl Dibuja_luna
+
+	mov x1,120
+	mov x2,50
+	bl ConjuntoNubes
+
+
+	mov x1,420
+	mov x2,50
+	bl ConjuntoNubes
+
 			mov x1,40
 			mov x2,232
 			mov x3,85
@@ -129,17 +141,6 @@ main:
 		mov x3,410
 		mov x4,400
 		bl Fogata
-
-		bl Dibuja_fondo_noche
-		bl Dibuja_luna
-		
-		mov x1,200
-		mov x2,100
-		bl Nube1
-
-		mov x1,300
-		mov x2,100
-		bl Nube1
-
+	
 	b InfLoop
 
