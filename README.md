@@ -357,7 +357,7 @@ Estas funciones están implementadas en **`fondos.s`**
 
 ### **- Nube** ☁️
 #### *Funcionamiento*
-Genera una nube alrededor de un punto.
+Genera una nube alrededor de un punto. En el caso de ```ConjuntoNubes```, se generan desde el punto que se da para la derecha →.
 
 #### *Llamada*
 Nube grande ↓
