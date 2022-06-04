@@ -401,7 +401,7 @@ bl Dibuja_fondo_noche
 **Notar que es una función global.**
 
 
-### **- Luna**
+### **- Luna** 🌙
 
 #### *Funcionamiento*
 Coloca en la mitad superior derecha del framebuffer una luna copada.
@@ -414,7 +414,7 @@ bl Dibuja_luna
 **Notar que es una función global.**
 
 
-### **- Pasto**
+### **- Pasto**  🌱
 
 #### *Funcionamiento*
 Coloca en la mitad inferior del framebuffer el pasto verde sólido y liso.
@@ -450,6 +450,13 @@ Pino mediano ↓
 ```
 bl Pino2
 ```
+Pino pequeño ↓
+```
+bl Pino3
+```
+
+Existe como utilidad auxiliar la función ```hojas``` la cual genera el árbol mediano sin tronco. Se la puede llamar usando ```bl Hojas```.
+
 **Notar que es una función global.**
 
 ### **- Arbusto** 🥬 
@@ -468,25 +475,6 @@ bl Arbusto1
 ```
 
 **Notar que es una función global.**
-
-### **- Fogata** 🔥
-
-#### *Argumentos*
-* `(x1,x2)` → Extremo izquierdo
-* `(x3,x4)` → Extremo derecho
-* DISCLAIMER: Ambos extremos deben estar sobre el mismo eje Y.
-
-#### *Funcionamiento*
-
-A partir de dos puntos extremos, se genera para arriba una fogata de tamaño variable. Para funcionamiento óptimo, elegir valores para x1 y x3 tal que la diferencia entre los dos sea no menor a ~ 20 píxeles
-
-#### *Llamada*
-```
-bl Fogata
-```
-
-**Notar que es una función global.**
-
 
 # **Etapa 1**
 
