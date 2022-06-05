@@ -378,6 +378,20 @@ bl ConjuntoNubes
 
 **Notar que es una función global.**
 
+### **- Fondo de montañas** ⛰️
+
+#### *Funcionamiento*
+Coloca al medio del framebuffer montañas.
+
+
+#### *Llamada*
+```
+bl Montanas
+```
+
+**Notar que es una función global.**
+
+
 ### **- Fondo de amanecer** 🌅 
 
 #### *Funcionamiento*
