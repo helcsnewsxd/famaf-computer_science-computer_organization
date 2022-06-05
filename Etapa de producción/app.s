@@ -62,6 +62,10 @@ main:
 	mov x2,50
 	bl ConjuntoNubes
 
+	mov x1,0
+	mov x2,50
+	bl ConjuntoNubes
+
 			mov x1,40
 			mov x2,232
 			mov x3,85

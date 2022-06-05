@@ -481,7 +481,10 @@ ConjuntoNubes:
 
     str x1,[sp,-8]!
     str x2,[sp,-8]!
+    str x21,[sp,-8]!
     str x30,[sp,-8]!
+
+    mov x21,1 //para que me lo deje dentro del framebuffer
 
     bl Nube1
 
@@ -490,6 +493,7 @@ ConjuntoNubes:
     bl Nube2
 
     ldr x30,[sp],8
+    ldr x21,[sp],8
     ldr x2,[sp],8
     ldr x1,[sp],8
     ret

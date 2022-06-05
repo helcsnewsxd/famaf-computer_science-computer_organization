@@ -6,6 +6,7 @@ Pinta_punto:
     // (x9,10) --> punto a pintar
     // w24 --> color a modificar. Si w24 == 0, todos
     // x23 --> Si x23 es positivo, se aclara. Si es negativo, se oscurece. Si es cero, se pinta normal
+    // x22 --> Si es distinto de cero, siempre va a estar dentro del framebuffer. Caso contrario, no.
 
     inicio_framebuffer .req x29
     ancho_framebuffer .req x19
@@ -17,17 +18,40 @@ Pinta_punto:
     aux .req w11
     cambio .req w24
     aclarar .req x23
+    dentro .req x21
 
+    str x9,[sp,-8]!
+    str x10,[sp,-8]!
 
-    // Verifico que esté dentro del FrameBuffer
-    cmp x,0
-    b.lt pinta_punto_fuera_de_limites // x < 0
-    cmp y,0
-    b.lt pinta_punto_fuera_de_limites // y < 0
-    cmp ancho_framebuffer,x
-    b.lt pinta_punto_fuera_de_limites // x > Ancho FrameBuffer
-    cmp largo_framebuffer,y
-    b.lt pinta_punto_fuera_de_limites // y > Largo FrameBuffer
+    cmp dentro,0
+    b.ne pinta_punto_poner_dentro
+        // Verifico que esté dentro del FrameBuffer
+        cmp x,0
+        b.lt pinta_punto_fuera_de_limites // x < 0
+        cmp y,0
+        b.lt pinta_punto_fuera_de_limites // y < 0
+        cmp ancho_framebuffer,x
+        b.lt pinta_punto_fuera_de_limites // x > Ancho FrameBuffer
+        cmp largo_framebuffer,y
+        b.lt pinta_punto_fuera_de_limites // y > Largo FrameBuffer
+        b pinta_punto_pintada
+    pinta_punto_poner_dentro:
+        cmp x,0
+        b.ge pinta_punto_sig
+             add x,x,ancho_framebuffer
+        pinta_punto_sig:
+        cmp y,0
+        b.ge pinta_punto_sig2
+            add y,y,largo_framebuffer
+        pinta_punto_sig2:
+        cmp ancho_framebuffer,x
+        b.ge pinta_punto_sig3
+            sub x,x,ancho_framebuffer
+        pinta_punto_sig3:
+        cmp largo_framebuffer,y
+        b.ge pinta_punto_pintada
+            sub y,y,largo_framebuffer
+    pinta_punto_pintada:
 
     str pixel,[sp,-8]!
     str aux,[sp,-8]!    
@@ -80,6 +104,11 @@ Pinta_punto:
         .unreq pixel
         .unreq aux
         .unreq cambio
+        .unreq dentro
+
+        ldr x10,[sp],8
+        ldr x9,[sp],8
+
         ret
 
 

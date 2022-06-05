@@ -41,6 +41,7 @@ VIOLETA = 0xB300C0
 * `x0` → **Color**
 * `x19` → **ANCHO_FRAMEBUFFER**
 * `x20` → **LARGO_FRAMEBUFFER**
+* `x21` → **Para que siempre esté dentro del FrameBuffer**
 * `x22` → **Sumo al color en x24 en cada iteración**
 * `x23` → **Aclarar / Oscurecer**
 * `x24` → **Color a cambiar**
@@ -120,6 +121,8 @@ Ejemplo ->
 Estas funciones están implementadas en **`formas_geometricas.s`**
 
 Una cosa **importantísima** para destacar en este caso es el uso de algunos registros SAVED. En este caso, vamos a tomar la siguiente convención para todas las funciones de geometría de pintado:
+
+* `x21` → Si x21 es NO nulo, entonces las coordenadas funcionan con  módulo de las longitudes para que siempre se pinte dentro del FrameBuffer. Caso contrario, se pinta normalmente
 
 * `x23` → Si x23 es positivo, se aclara la región. Si x23 es negativo, se oscurece. Caso contrario, si es cero, se pinta normalmente.
 
