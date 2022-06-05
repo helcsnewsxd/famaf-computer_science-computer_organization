@@ -50,63 +50,7 @@ main:
 	bl Dibuja_sol_amanecer
 	bl Dibuja_pasto
 
-	bl Dibuja_fondo_noche
-	bl Dibuja_luna
-
-	mov x1,120
-	mov x2,50
-	bl ConjuntoNubes
-
-
-	mov x1,420
-	mov x2,50
-	bl ConjuntoNubes
-
-	mov x1,0
-	mov x2,50
-	bl ConjuntoNubes
-
-			mov x1,40
-			mov x2,232
-			mov x3,85
-			mov x4,325
-		bl Crea_edificio
-
-			mov x1,106
-			mov x2,144
-			mov x3,130
-			mov x4,325
-		bl Crea_edificio
-
-			mov x1,160
-			mov x2,190
-			mov x3,245
-			mov x4,325
-		bl Crea_edificio
-
-			mov x1,302
-			mov x2,100
-			mov x3,345
-			mov x4,325
-		bl Crea_edificio
-
-			mov x1,375
-			mov x2,230
-			mov x3,460
-			mov x4,325
-		bl Crea_edificio
-
-			mov x1,509
-			mov x2,250
-			mov x3,530
-			mov x4,325
-		bl Crea_edificio
-
-			mov x1,561
-			mov x2,74
-			mov x3,600
-			mov x4,325
-		bl Crea_edificio
+	bl Montanas
 
 
 		// ARBOL
@@ -117,34 +61,75 @@ main:
 		mov x1,200
 		mov x2,400
 		bl Pino2
-		
-		mov x1,100
-		mov x2,400
+
+		mov x1,24
+		mov x2,241
 		bl Pino3
 
-		mov x1,159
-		mov x2,389
-		mov x3,175
-		mov x4,400
+		mov x1,62
+		mov x2,251
+		mov x3,80
+		mov x4,260
 		bl Arbusto1
 
-		mov x1,239
-		mov x2,382
-		mov x3,262
-		mov x4,400
+		mov x1,105
+		mov x2,269
+		bl Pino2
+
+		mov x1,158
+		mov x2,253
+		mov x3,181
+		mov x4,271
 		bl Arbusto1
 	
-		mov x1,254
-		mov x2,389
-		mov x3,269
-		mov x4,400
+		mov x1,147
+		mov x2,259
+		mov x3,162
+		mov x4,270
 		bl Arbusto1
+
+		mov x1,201
+		mov x2,264
+		bl Pino3
+
+		mov x1,273
+		mov x2,245
+		bl Pino3
+
+		mov x1,574
+		mov x2,250
+		bl Pino2
+
+		mov x1,471
+		mov x2,265
+		bl Pino3
+
+		mov x1,405
+		mov x2,246
+		bl Pino3
 
 		mov x1,380
 		mov x2,400
 		mov x3,410
 		mov x4,400
 		bl Fogata
+
+		mov x1,120
+		mov x2,50
+		bl ConjuntoNubes
+
+		mov x1,420
+		mov x2,50
+		bl ConjuntoNubes
+
+		mov x1,420
+		mov x2,410
+		mov x3,494
+		mov x4,410
+		mov x5,458
+		mov x6,334
+		bl Carpa
 	
+
 	b InfLoop
 
