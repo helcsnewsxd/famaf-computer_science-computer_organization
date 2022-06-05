@@ -517,6 +517,28 @@ bl Arbusto1
 
 Estas funciones están implementadas en **`etapa_1.s`**
 
+### **- Carpa** ⛺
+
+#### *Argumentos*
+* `(x1,x2)` → Extremo izquierdo
+* `(x3,x4)` → Extremo derecho
+* `(x5,x6)` → Altura de la carpa
+
+#### *Funcionamiento*
+
+A partir de 3 puntos, genera una carpa.
+
+#### *Llamada*
+Carpa con cola hacia la derecha ↓
+```
+bl CarpaDer
+```
+Carpa con cola hacia la izquierda ↓
+```
+bl CarpaIzq
+```
+**Notar que es una función global.**
+
 ### **- Fogata** 🔥
 
 #### *Argumentos*
