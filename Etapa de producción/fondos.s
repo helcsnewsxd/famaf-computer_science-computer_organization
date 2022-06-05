@@ -23,6 +23,245 @@
 
 .section .text
 
+// ------------------------------------------- MONTAÑAS ------------------------------------------
+
+.globl Montanas
+Montanas:
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x5,[sp,-8]!
+    str x6,[sp,-8]!
+    str x30,[sp,-8]!
+
+// Siluetas de fondo
+    ldr x0,=0xA35F49
+    mov x1,30
+    mov x2,175
+    mov x3,180
+    mov x4,175
+    mov x5,108
+    mov x6,47
+    bl Pinta_triangulo
+
+    ldr x0,=0xA35F49
+    mov x1,155
+    mov x2,207
+    mov x3,260
+    mov x4,207
+    mov x5,209
+    mov x6,132
+    bl Pinta_triangulo
+
+    ldr x0,=0xA35F49
+    mov x1,412
+    mov x2,215
+    mov x3,555
+    mov x4,215
+    mov x5,483
+    mov x6,106
+    bl Pinta_triangulo
+
+    ldr x0,=0xA35F49
+    mov x1,568
+    mov x2,180
+    mov x3,698
+    mov x4,181
+    mov x5,633
+    mov x6,60
+    bl Pinta_triangulo
+
+
+// 1era montaña
+
+    // 1er lado
+    ldr x0,=0x5d4037
+    mov x1,150
+    mov x2,210
+    mov x3,134
+    mov x4,223
+    mov x5,44
+    mov x6,27
+    bl Pinta_triangulo
+
+    // 2do lado
+    ldr x0,=0x523830
+    mov x1,42
+    mov x2,240
+    bl Pinta_triangulo
+
+    // 3er lado
+    ldr x0,=0x4e342e
+    mov x3,-50
+    mov x4,223
+    bl Pinta_triangulo
+
+    // 4to lado
+    ldr x0,=0x3e2723
+    mov x1,-66
+    mov x2,210
+    bl Pinta_triangulo
+
+    // Montaña detrás
+    ldr x0,=0x3e2723
+    mov x1,185
+    mov x2,223
+    mov x3,198
+    mov x4,229
+    mov x5,243
+    mov x6,128
+    bl Pinta_triangulo
+
+   ldr x0,=0x4e342e
+    mov x1,243
+    mov x2,235
+    bl Pinta_triangulo
+
+    ldr x0,=0x523830
+    mov x3,288
+    mov x4,229
+    bl Pinta_triangulo
+
+    ldr x0,=0x5d4037
+    mov x1,298
+    mov x2,223
+    bl Pinta_triangulo
+
+// 2da montaña
+    // Fondo
+    ldr x0,=0x3e2723
+    mov x1,62
+    mov x2,237
+    mov x3,226
+    mov x4,237
+    mov x5,144
+    mov x6,68
+    bl Pinta_triangulo
+
+    // Primer lado
+    ldr x0,=0x3e2723
+    mov x3,69
+    mov x4,256
+    bl Pinta_triangulo
+
+    // Segundo lado
+    ldr x0,=0x4e342e
+    mov x1,x3
+    mov x2,x4
+    mov x3,144
+    mov x4,265
+    bl Pinta_triangulo
+
+    // Tercer lado
+    ldr x0,=0x523830
+    mov x1,x3
+    mov x2,x4
+    mov x3,219
+    mov x4,255
+    bl Pinta_triangulo
+
+    // Cuarto lado
+    ldr x0,=0x5d4037
+    mov x1,x3
+    mov x2,x4
+    mov x3,226
+    mov x4,237
+    bl Pinta_triangulo
+
+// Lado derecho M1
+
+    ldr x0,=0x5d4037
+    mov x1,472
+    mov x2,222
+    mov x3,489
+    mov x4,238
+    mov x5,577
+    mov x6,38
+    bl Pinta_triangulo
+
+    ldr x0,=0x523830
+    mov x1,577
+    mov x2,246
+    bl Pinta_triangulo
+
+    ldr x0,=0x4e342e
+    mov x3,665
+    mov x4,238
+    bl Pinta_triangulo
+
+    ldr x0,=0x3e2723
+    mov x1,682
+    mov x2,222
+    bl Pinta_triangulo
+
+// M2
+
+    ldr x0,=0x5d4037
+    mov x1,382
+    mov x2,223
+    mov x3,391
+    mov x4,233
+    mov x5,430
+    mov x6,119
+    bl Pinta_triangulo
+
+    ldr x0,=0x523830
+    mov x1,430
+    mov x2,242
+    bl Pinta_triangulo
+
+    ldr x0,=0x4e342e
+    mov x3,468
+    mov x4,234
+    bl Pinta_triangulo
+
+    ldr x0,=0x3e2723
+    mov x1,477
+    mov x2,223
+    bl Pinta_triangulo
+
+
+
+// Lado derecho M3
+    ldr x0,=0x5d4037
+    mov x1,435
+    mov x2,246
+    mov x3,442
+    mov x4,254
+    mov x5,487
+    mov x6,141
+    bl Pinta_triangulo
+
+    ldr x0,=0x523830
+    mov x1,487
+    mov x2,263
+    bl Pinta_triangulo
+
+    ldr x0,=0x4e342e
+    mov x3,532
+    mov x4,254
+    bl Pinta_triangulo
+
+    ldr x0,=0x3e2723
+    mov x1,539
+    mov x2,246
+    bl Pinta_triangulo
+
+    ldr x30,[sp],8
+    ldr x8,[sp],8
+    ldr x7,[sp],8
+    ldr x6,[sp],8
+    ldr x5,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
 // ------------------------------------------- AMANECER PIOLA ------------------------------------------
 
 // FONDO
