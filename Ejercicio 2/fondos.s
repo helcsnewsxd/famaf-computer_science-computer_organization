@@ -507,6 +507,110 @@ Oscurecer:
     ret
 
 
+// ------------------------------------------- FONDOS EXTRAS --------------------------------------
+
+.globl Dibuja_fondo_tarde
+Dibuja_fondo_tarde:
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x23,[sp,-8]!
+    str x24,[sp,-8]!
+    str x25,[sp,-8]!
+    str x30,[sp,-8]!
+
+        ldr x0,=0x808fff
+        mov x1,0
+        mov x2,0
+        mov x3,700
+        mov x4,250
+        mov x25,-1
+        mov x24,0
+        mov x23,0
+        bl Pinta_rectangulo
+
+    ldr x30,[sp],8
+    ldr x25,[sp],8
+    ldr x24,[sp],8
+    ldr x23,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
+.globl Dibuja_fondo_entra_noche
+Dibuja_fondo_entra_noche:
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x23,[sp,-8]!
+    str x24,[sp,-8]!
+    str x25,[sp,-8]!
+    str x30,[sp,-8]!
+
+        ldr x0,=0x807000
+        mov x1,0
+        mov x2,0
+        mov x3,700
+        mov x4,250
+        mov x25,1
+        mov x24,0
+        mov x23,0
+        bl Pinta_rectangulo
+
+    ldr x30,[sp],8
+    ldr x25,[sp],8
+    ldr x24,[sp],8
+    ldr x23,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
+.globl Dibuja_fondo_madrugada
+Dibuja_fondo_madrugada:
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x23,[sp,-8]!
+    str x24,[sp,-8]!
+    str x25,[sp,-8]!
+    str x30,[sp,-8]!
+
+        ldr x0,=0xffffff
+        mov x1,0
+        mov x2,0
+        mov x3,700
+        mov x4,250
+        mov x25,-1
+        mov x24,0
+        mov x23,0
+        bl Pinta_rectangulo
+
+    ldr x30,[sp],8
+    ldr x25,[sp],8
+    ldr x24,[sp],8
+    ldr x23,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
 // ------------------------------------------- PISO --------------------------------------------------------
 
 .globl Dibuja_pasto

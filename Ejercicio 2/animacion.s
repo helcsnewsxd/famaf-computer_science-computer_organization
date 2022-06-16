@@ -53,82 +53,6 @@ Pasar_al_buffer_el_paisaje_delante:
 	ldr x1,[sp],8
     ret
 
-Actualizar_fondo:
-	str x30,[sp,-8]!
-	str x29,[sp,-8]!
-	str x8,[sp,-8]!
-	str x7,[sp,-8]!
-	str x6,[sp,-8]!
-
-	mov x6,x8
-
-	mov x1,0
-	mov x2,0
-	mov x3,700
-	mov x4,250
-	mov x24,0
-	mov x23,0
-	
-	cbz x6,Actualizar_fondo_dia
-		// noche
-		cmp x7,150
-		b.eq Actualizar_fondo_noche_noche
-		cmp x7,100
-		b.eq Actualizar_fondo_noche_tirando_a_madrugada
-		cmp x7,-50
-		b.eq Actualizar_fondo_dia_madrugada
-		b Actualizar_fondo_end
-	Actualizar_fondo_dia:
-		// dia
-		cmp x7,150
-		b.eq Actualizar_fondo_dia_madrugada
-		cmp x7,100
-		b.eq Actualizar_fondo_dia_amanecer
-		cmp x7,-50
-		b.eq Actualizar_fondo_dia_tarde
-		b Actualizar_fondo_end
-
-
-
-	Actualizar_fondo_dia_madrugada:
-		ldr x0,=0xffffff
-		mov x25,-1
-		bl Pinta_rectangulo
-		b Actualizar_fondo_end
-
-	Actualizar_fondo_dia_amanecer:
-		ldr x0,=0xFF8000
-		mov x25,-1
-		bl Pinta_rectangulo
-		b Actualizar_fondo_end
-	
-	Actualizar_fondo_dia_tarde:
-		ldr x0,=0x808fff
-		mov x25,-1
-		bl Pinta_rectangulo
-		b Actualizar_fondo_end
-
-	Actualizar_fondo_noche_noche:
-		ldr x0,=0x051601
-		mov x25,1
-		bl Pinta_rectangulo
-		b Actualizar_fondo_end
-
-	Actualizar_fondo_noche_tirando_a_madrugada:
-		ldr x0,=0x807000
-		mov x25,1
-		bl Pinta_rectangulo
-		b Actualizar_fondo_end
-
-	Actualizar_fondo_aclarecer:
-	Actualizar_fondo_oscurecer:
-	Actualizar_fondo_end:
-		ldr x6,[sp],8
-		ldr x7,[sp],8
-		ldr x8,[sp],8
-		ldr x29,[sp],8
-		ldr x30,[sp],8
-		ret
 
 Oscuridad_o_claridad_prebuffer:
 	str x30,[sp,-8]!
@@ -272,6 +196,60 @@ Paisaje_capa_delante:
 	ldr x30,[sp],8
 	ret
 
+Paisaje_fondo_de_dia:
+	str x30,[sp,-8]!
+	cmp x7,150	// madrugada
+	b.gt Paisaje_fondo_de_dia_1
+		bl Dibuja_fondo_madrugada
+		b Paisaje_fondo_de_dia_end
+	Paisaje_fondo_de_dia_1:
+	cmp x7,100	// amanecer
+	b.gt Paisaje_fondo_de_dia_2
+		bl Dibuja_fondo_amanecer1
+		b Paisaje_fondo_de_dia_end
+	Paisaje_fondo_de_dia_2:
+	cmp x7,30	// tarde
+	b.gt Paisaje_fondo_de_dia_3
+		bl Dibuja_fondo_tarde
+		b Paisaje_fondo_de_dia_end
+	Paisaje_fondo_de_dia_3:
+	cmp x7,-50	// entra noche
+	b.gt Paisaje_fondo_de_dia_4
+		bl Dibuja_fondo_entra_noche
+		b Paisaje_fondo_de_dia_end
+	Paisaje_fondo_de_dia_4:
+
+	Paisaje_fondo_de_dia_end:
+	ldr x30,[sp],8
+	ret
+
+Paisaje_fondo_de_noche:
+	str x30,[sp,-8]!
+	cmp x7,150	// entra noche
+	b.gt Paisaje_fondo_de_noche_1
+		bl Dibuja_fondo_entra_noche
+		b Paisaje_fondo_de_noche_end
+	Paisaje_fondo_de_noche_1:
+	cmp x7,100	// noche
+	b.gt Paisaje_fondo_de_noche_2
+		bl Dibuja_fondo_noche
+		b Paisaje_fondo_de_noche_end
+	Paisaje_fondo_de_noche_2:
+	cmp x7,30	// noche
+	b.gt Paisaje_fondo_de_noche_3
+		bl Dibuja_fondo_noche
+		b Paisaje_fondo_de_noche_end
+	Paisaje_fondo_de_noche_3:
+	cmp x7,-50	// madrugada
+	b.gt Paisaje_fondo_de_noche_4
+		bl Dibuja_fondo_madrugada
+		b Paisaje_fondo_de_noche_end
+	Paisaje_fondo_de_noche_4:
+
+	Paisaje_fondo_de_noche_end:
+	ldr x30,[sp],8
+	ret
+
 .globl Paisaje_completo
 Paisaje_completo:
 	// x6 --> pos de nube
@@ -289,11 +267,11 @@ Paisaje_completo:
 	mov x7,x2
 
 	cbnz x8,Paisaje_completo_noche_satelite
-		bl Dibuja_fondo_amanecer1
+		bl Paisaje_fondo_de_dia
 		bl Dibuja_sol_amanecer
 		b Paisaje_completo_noche_satelite_end
 	Paisaje_completo_noche_satelite:
-		bl Dibuja_fondo_noche
+		bl Paisaje_fondo_de_noche
 		bl Dibuja_luna
 	Paisaje_completo_noche_satelite_end:
 	
@@ -304,7 +282,6 @@ Paisaje_completo:
 
 	cmp x11,3	// MOV SOL - 1
 	b.ne Paisaje_completo_no_cambiar_tono
-		bl Actualizar_fondo
 		bl Oscuridad_o_claridad_prebuffer
 	Paisaje_completo_no_cambiar_tono:
 
