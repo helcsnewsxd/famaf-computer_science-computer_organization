@@ -41,7 +41,7 @@
 	InfLoop:
 		bl Paisaje_completo
 		bl Pasar_al_buffer
-		add x6,x6,5
+		add x6,x6,1
 		b InfLoop
 
 
