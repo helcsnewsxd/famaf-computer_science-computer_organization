@@ -250,8 +250,6 @@ Montanas:
     bl Pinta_triangulo
 
     ldr x30,[sp],8
-    ldr x8,[sp],8
-    ldr x7,[sp],8
     ldr x6,[sp],8
     ldr x5,[sp],8
     ldr x4,[sp],8
