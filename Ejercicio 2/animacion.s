@@ -144,11 +144,15 @@ Paisaje_completo:
 	Paisaje_completo_noche:
 		bl Dibuja_fondo_noche
 
-		cmp x7,0
+		bl Oscurecer
+		bl Oscurecer
+		bl Oscurecer
+
+		cmp x7,180
 		b.gt Paisaje_completo_end
 		bl Aclarecer
 
-		cmp x7,-20
+		cmp x7,100
 		b.gt Paisaje_completo_end
 		bl Aclarecer
 		

@@ -42,7 +42,7 @@
 .equ MOV_NUBE, 4
 
 	InfLoop:
-		cmp x2,-100
+		cmp x2,-70
 		b.ge InfLoop_mismo_tiempo
 			mov x1,550
 			mov x2,150
