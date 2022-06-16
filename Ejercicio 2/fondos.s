@@ -455,22 +455,20 @@ Dibuja_luna:
         mov x23,0
 
         ldr x0,=0xfddfa0
-		mov x1,500
-		mov x2,100
 		mov x3,50
         mov x25,-1
 		bl Pinta_circulo
 
         ldr x0,=AZUL
-        mov x1,487
-        mov x2,88
+        sub x1,x1,13
+        sub x2,x2,12
         mov x25,0
         bl Pinta_circulo
 
 
         // Arreglo el circulo azul
-        mov x1,430
-        mov x3,550
+        sub x1,x1,57
+        add x3,x1,150
         mov x2,0
         mov x4,200
         mov x25,1

@@ -25,6 +25,7 @@ Pasar_al_buffer:
 	ldr x1,[sp],8
     ret
 
+
 .globl Paisaje_completo
 Paisaje_completo:
 	// x6 --> pos de nube
@@ -39,7 +40,14 @@ Paisaje_completo:
 	mov x7,x2
 
     bl Dibuja_fondo_amanecer1
-	bl Dibuja_sol_amanecer
+
+	cbnz x8,Paisaje_completo_noche_satelite
+		bl Dibuja_sol_amanecer
+		b Paisaje_completo_noche_satelite_end
+	Paisaje_completo_noche_satelite:
+		bl Dibuja_luna
+	Paisaje_completo_noche_satelite_end:
+	
 	bl Dibuja_pasto
 
 	bl Montanas
@@ -112,31 +120,41 @@ Paisaje_completo:
 		add x1,x1,300
 		mov x2,100
 		bl ConjuntoNubes
-
-		mov x1,420
-		mov x2,410
-		mov x3,494
-		mov x4,410
-		mov x5,458
-		mov x6,334
-		//bl Carpa
 	
 	mov x1,0
 	mov x2,0
 	mov x3,x19
 	mov x4,x20
 
-	cmp x7,0
-	b.gt Paisaje_completo_end
-	bl Oscurecer
+	cbnz x8,Paisaje_completo_noche
+		cmp x7,0
+		b.gt Paisaje_completo_end
+		bl Oscurecer
 
-	cmp x7,-20
-	b.gt Paisaje_completo_end
-	bl Oscurecer
+		cmp x7,-20
+		b.gt Paisaje_completo_end
+		bl Oscurecer
+		
+		cmp x7,-50
+		b.gt Paisaje_completo_end
+		bl Oscurecer
+
+		b Paisaje_completo_end
 	
-	cmp x7,-50
-	b.gt Paisaje_completo_end
-	bl Oscurecer
+	Paisaje_completo_noche:
+		bl Dibuja_fondo_noche
+
+		cmp x7,0
+		b.gt Paisaje_completo_end
+		bl Aclarecer
+
+		cmp x7,-20
+		b.gt Paisaje_completo_end
+		bl Aclarecer
+		
+		cmp x7,-50
+		b.gt Paisaje_completo_end
+		bl Aclarecer
 
 
 	Paisaje_completo_end:	

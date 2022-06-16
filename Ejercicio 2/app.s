@@ -38,10 +38,17 @@
 
 // Loop infinito para poder ver el trabajo
 
-.equ MOV_SOL, 5
-.equ MOV_NUBE, 1
+.equ MOV_SOL, 4
+.equ MOV_NUBE, 4
 
 	InfLoop:
+		cmp x2,-100
+		b.ge InfLoop_mismo_tiempo
+			mov x1,550
+			mov x2,150
+			eor x8,x8,1
+		InfLoop_mismo_tiempo:
+
 		sub x7,x7,1
 		bl Paisaje_completo
 		bl Pasar_al_buffer
@@ -61,5 +68,6 @@ main:
 	mov x6,0
 	mov x1,500
 	mov x2,100
+	mov x8,0
 
 	b InfLoop
