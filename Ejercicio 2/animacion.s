@@ -36,6 +36,8 @@ Paisaje_completo:
 	str x2,[sp,-8]!
 	str x1,[sp,-8]!
 
+	mov x7,x2
+
     bl Dibuja_fondo_amanecer1
 	bl Dibuja_sol_amanecer
 	bl Dibuja_pasto
@@ -118,11 +120,30 @@ Paisaje_completo:
 		mov x5,458
 		mov x6,334
 		//bl Carpa
-		
+	
+	mov x1,0
+	mov x2,0
+	mov x3,x19
+	mov x4,x20
 
-	ldr x1,[sp],8
-	ldr x2,[sp],8
-	ldr x7,[sp],8
-    ldr x6,[sp],8
-	ldr x30,[sp],8
-    ret
+	cmp x7,0
+	b.gt Paisaje_completo_end
+	bl Oscurecer
+
+	cmp x7,-20
+	b.gt Paisaje_completo_end
+	bl Oscurecer
+	
+	cmp x7,-50
+	b.gt Paisaje_completo_end
+	bl Oscurecer
+
+
+	Paisaje_completo_end:	
+		ldr x1,[sp],8
+		ldr x2,[sp],8
+		ldr x7,[sp],8
+		ldr x6,[sp],8
+		ldr x30,[sp],8
+		ret
+

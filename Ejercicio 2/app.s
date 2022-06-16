@@ -39,12 +39,13 @@
 // Loop infinito para poder ver el trabajo
 
 .equ MOV_SOL, 5
+.equ MOV_NUBE, 1
 
 	InfLoop:
 		sub x7,x7,1
 		bl Paisaje_completo
 		bl Pasar_al_buffer
-		add x6,x6,1
+		add x6,x6,MOV_NUBE
 		cbnz x7, InfLoop
 		sub x1,x1,1
 		sub x2,x2,1
