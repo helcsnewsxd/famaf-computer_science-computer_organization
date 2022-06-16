@@ -68,7 +68,7 @@ Oscuridad_o_claridad_prebuffer:
 	mov x2,0
 	mov x3,x19
 	mov x4,x20
-
+	
 	cbz x6,Oscuridad_o_claridad_prebuffer_dia
 		// noche
 		cmp x7,180
@@ -93,7 +93,7 @@ Oscuridad_o_claridad_prebuffer:
 		b Oscuridad_o_claridad_prebuffer_end
 	Oscuridad_o_claridad_prebuffer_aclarecer:
 		bl Aclarecer
-
+	
 	Oscuridad_o_claridad_prebuffer_end:
 		ldr x6,[sp],8
 		ldr x7,[sp],8
@@ -206,7 +206,9 @@ Paisaje_completo:
 	str x2,[sp,-8]!
 	str x1,[sp,-8]!
 	str x5,[sp,-8]!
+	str x11,[sp,-8]!
 
+	mov x11,x7
 	mov x7,x2
 
 	cbnz x8,Paisaje_completo_noche_satelite
@@ -223,7 +225,11 @@ Paisaje_completo:
 		bl Paisaje_capa_delante
 	Paisaje_completo_copia_prebuffer:
 
-	bl Oscuridad_o_claridad_prebuffer
+	cmp x11,3	// MOV SOL - 1
+	b.ne Paisaje_completo_no_cambiar_tono
+		bl Oscuridad_o_claridad_prebuffer
+	Paisaje_completo_no_cambiar_tono:
+
 	bl Pasar_al_buffer_el_paisaje_delante
 
 	mov x1,380
@@ -241,6 +247,7 @@ Paisaje_completo:
 	bl ConjuntoNubes
 
 	Paisaje_completo_end:	
+		ldr x11,[sp],8
 		ldr x5,[sp],8
 		ldr x1,[sp],8
 		ldr x2,[sp],8
