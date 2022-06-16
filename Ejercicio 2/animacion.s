@@ -198,26 +198,30 @@ Paisaje_capa_delante:
 
 Paisaje_fondo_de_dia:
 	str x30,[sp,-8]!
-	cmp x7,150	// madrugada
-	b.gt Paisaje_fondo_de_dia_1
-		bl Dibuja_fondo_madrugada
-		b Paisaje_fondo_de_dia_end
-	Paisaje_fondo_de_dia_1:
-	cmp x7,100	// amanecer
-	b.gt Paisaje_fondo_de_dia_2
-		bl Dibuja_fondo_amanecer1
-		b Paisaje_fondo_de_dia_end
-	Paisaje_fondo_de_dia_2:
-	cmp x7,30	// tarde
-	b.gt Paisaje_fondo_de_dia_3
-		bl Dibuja_fondo_tarde
-		b Paisaje_fondo_de_dia_end
-	Paisaje_fondo_de_dia_3:
+
 	cmp x7,-50	// entra noche
 	b.gt Paisaje_fondo_de_dia_4
 		bl Dibuja_fondo_entra_noche
 		b Paisaje_fondo_de_dia_end
 	Paisaje_fondo_de_dia_4:
+
+	cmp x7,30	// tarde
+	b.gt Paisaje_fondo_de_dia_3
+		bl Dibuja_fondo_tarde
+		b Paisaje_fondo_de_dia_end
+	Paisaje_fondo_de_dia_3:
+
+	cmp x7,100	// amanecer
+	b.gt Paisaje_fondo_de_dia_2
+		bl Dibuja_fondo_amanecer1
+		b Paisaje_fondo_de_dia_end
+	Paisaje_fondo_de_dia_2:
+
+	cmp x7,150	// madrugada
+	b.gt Paisaje_fondo_de_dia_1
+		bl Dibuja_fondo_madrugada
+		b Paisaje_fondo_de_dia_end
+	Paisaje_fondo_de_dia_1:
 
 	Paisaje_fondo_de_dia_end:
 	ldr x30,[sp],8
@@ -225,26 +229,30 @@ Paisaje_fondo_de_dia:
 
 Paisaje_fondo_de_noche:
 	str x30,[sp,-8]!
-	cmp x7,150	// entra noche
-	b.gt Paisaje_fondo_de_noche_1
-		bl Dibuja_fondo_entra_noche
-		b Paisaje_fondo_de_noche_end
-	Paisaje_fondo_de_noche_1:
-	cmp x7,100	// noche
-	b.gt Paisaje_fondo_de_noche_2
-		bl Dibuja_fondo_noche
-		b Paisaje_fondo_de_noche_end
-	Paisaje_fondo_de_noche_2:
-	cmp x7,30	// noche
-	b.gt Paisaje_fondo_de_noche_3
-		bl Dibuja_fondo_noche
-		b Paisaje_fondo_de_noche_end
-	Paisaje_fondo_de_noche_3:
+
 	cmp x7,-50	// madrugada
 	b.gt Paisaje_fondo_de_noche_4
 		bl Dibuja_fondo_madrugada
 		b Paisaje_fondo_de_noche_end
 	Paisaje_fondo_de_noche_4:
+
+	cmp x7,30	// noche
+	b.gt Paisaje_fondo_de_noche_3
+		bl Dibuja_fondo_noche
+		b Paisaje_fondo_de_noche_end
+	Paisaje_fondo_de_noche_3:
+
+	cmp x7,100	// noche
+	b.gt Paisaje_fondo_de_noche_2
+		bl Dibuja_fondo_noche
+		b Paisaje_fondo_de_noche_end
+	Paisaje_fondo_de_noche_2:
+	
+	cmp x7,150	// entra noche
+	b.gt Paisaje_fondo_de_noche_1
+		bl Dibuja_fondo_entra_noche
+		b Paisaje_fondo_de_noche_end
+	Paisaje_fondo_de_noche_1:
 
 	Paisaje_fondo_de_noche_end:
 	ldr x30,[sp],8
