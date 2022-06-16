@@ -47,6 +47,8 @@
 			mov x1,550
 			mov x2,150
 			eor x8,x8,1
+
+			mov x5,1
 		InfLoop_mismo_tiempo:
 
 		sub x7,x7,1
@@ -57,6 +59,13 @@
 		sub x1,x1,1
 		sub x2,x2,1
 		ldr x7,=MOV_SOL
+
+		mov x5,0
+
+		mov x0,0xfffff
+		loop:
+			sub x0,x0,1
+			cbnz x0,loop
 		b InfLoop
 
 
@@ -69,5 +78,6 @@ main:
 	mov x1,500
 	mov x2,100
 	mov x8,0
+	mov x5,1
 
 	b InfLoop

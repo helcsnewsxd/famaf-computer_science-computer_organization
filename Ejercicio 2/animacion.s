@@ -25,29 +25,50 @@ Pasar_al_buffer:
 	ldr x1,[sp],8
     ret
 
-
-.globl Paisaje_completo
-Paisaje_completo:
-	// x6 --> pos de nube
-	// (x1,x2) --> pos de sol
-
-	str x30,[sp,-8]!
-	str x6,[sp,-8]!
-	str x7,[sp,-8]!
-	str x2,[sp,-8]!
+Pasar_al_buffer_el_paisaje_delante:
 	str x1,[sp,-8]!
+	str x2,[sp,-8]!
+	str x30,[sp,-8]!
 
-	mov x7,x2
+    mov x1,x29
+	ldr x2,=0x4b280
+    ldr x3,=BUFFER_COMPLETO
+	add x1,x1,x3
+    Pasar_al_buffer_el_paisaje_delante_loop:
+		cbz x2,Pasar_al_buffer_el_paisaje_delante_loop_end
+        add x1,x1,x3
+        ldr w4,[x1]
+        sub x1,x1,x3
+		
+		cbz w4,Pasar_al_buffer_el_paisaje_delante_negro
+        	str w4,[x1]
+		Pasar_al_buffer_el_paisaje_delante_negro:
+        add x1,x1,4
+		sub x2,x2,1
+		b Pasar_al_buffer_el_paisaje_delante_loop
+    Pasar_al_buffer_el_paisaje_delante_loop_end:
 
-    bl Dibuja_fondo_amanecer1
+	ldr x30,[sp],8
+	ldr x2,[sp],8
+	ldr x1,[sp],8
+    ret
 
-	cbnz x8,Paisaje_completo_noche_satelite
-		bl Dibuja_sol_amanecer
-		b Paisaje_completo_noche_satelite_end
-	Paisaje_completo_noche_satelite:
-		bl Dibuja_luna
-	Paisaje_completo_noche_satelite_end:
-	
+.globl Paisaje_capa_delante
+Paisaje_capa_delante:
+	str x30,[sp,-8]!
+	str x29,[sp,-8]!
+	str x8,[sp,-8]!
+
+	ldr x8,=0x12ca00
+	add x29,x29,x8
+
+	mov x0,0
+	mov x1,0
+	mov x2,0
+	mov x3,x19
+	mov x4,x20
+	bl Pinta_rectangulo
+
 	bl Dibuja_pasto
 
 	bl Montanas
@@ -112,15 +133,50 @@ Paisaje_completo:
 		mov x3,410
 		mov x4,400
 		bl Fogata
-
-		mov x1,x6
-		mov x2,50
-		bl ConjuntoNubes
-
-		add x1,x1,300
-		mov x2,100
-		bl ConjuntoNubes
 	
+	ldr x8,[sp],8
+	ldr x29,[sp],8
+	ldr x30,[sp],8
+	ret
+
+.globl Paisaje_completo
+Paisaje_completo:
+	// x6 --> pos de nube
+	// (x1,x2) --> pos de sol
+
+	str x30,[sp,-8]!
+	str x6,[sp,-8]!
+	str x7,[sp,-8]!
+	str x2,[sp,-8]!
+	str x1,[sp,-8]!
+	str x5,[sp,-8]!
+
+	mov x7,x2
+
+    bl Dibuja_fondo_amanecer1
+
+	cbnz x8,Paisaje_completo_noche_satelite
+		bl Dibuja_sol_amanecer
+		b Paisaje_completo_noche_satelite_end
+	Paisaje_completo_noche_satelite:
+		bl Dibuja_luna
+	Paisaje_completo_noche_satelite_end:
+	
+	// copio el prebuffer
+	cbz x5, Paisaje_completo_copia_prebuffer
+		bl Paisaje_capa_delante
+	Paisaje_completo_copia_prebuffer:
+	bl Pasar_al_buffer_el_paisaje_delante
+
+	mov x1,x6
+	mov x2,50
+	bl ConjuntoNubes
+
+	add x1,x1,300
+	mov x2,100
+	bl ConjuntoNubes
+	
+
 	mov x1,0
 	mov x2,0
 	mov x3,x19
@@ -162,6 +218,7 @@ Paisaje_completo:
 
 
 	Paisaje_completo_end:	
+		ldr x5,[sp],8
 		ldr x1,[sp],8
 		ldr x2,[sp],8
 		ldr x7,[sp],8
