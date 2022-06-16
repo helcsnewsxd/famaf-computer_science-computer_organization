@@ -100,7 +100,7 @@ Paisaje_completo:
 		bl ConjuntoNubes
 
 		add x1,x1,300
-		mov x2,50
+		mov x2,100
 		bl ConjuntoNubes
 
 		mov x1,420
