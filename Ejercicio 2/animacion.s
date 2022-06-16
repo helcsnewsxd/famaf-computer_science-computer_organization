@@ -153,12 +153,12 @@ Paisaje_completo:
 
 	mov x7,x2
 
-    bl Dibuja_fondo_amanecer1
-
 	cbnz x8,Paisaje_completo_noche_satelite
+		bl Dibuja_fondo_amanecer1
 		bl Dibuja_sol_amanecer
 		b Paisaje_completo_noche_satelite_end
 	Paisaje_completo_noche_satelite:
+		bl Dibuja_fondo_noche
 		bl Dibuja_luna
 	Paisaje_completo_noche_satelite_end:
 	
@@ -182,6 +182,7 @@ Paisaje_completo:
 	mov x3,x19
 	mov x4,x20
 
+	/**
 	cbnz x8,Paisaje_completo_noche
 		cmp x7,0
 		b.gt Paisaje_completo_end
@@ -198,8 +199,6 @@ Paisaje_completo:
 		b Paisaje_completo_end
 	
 	Paisaje_completo_noche:
-		bl Dibuja_fondo_noche
-
 		bl Oscurecer
 		bl Oscurecer
 		bl Oscurecer
@@ -215,6 +214,7 @@ Paisaje_completo:
 		cmp x7,-50
 		b.gt Paisaje_completo_end
 		bl Aclarecer
+	*/
 
 
 	Paisaje_completo_end:	

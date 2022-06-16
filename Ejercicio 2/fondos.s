@@ -418,9 +418,6 @@ Dibuja_fondo_noche:
         mov x4,250
         mov x23,0
 
-        ldr x24,=NARANJA
-        mov x22,-1
-
         mov x25,1
         bl Pinta_rectangulo
 
@@ -539,6 +536,7 @@ Dibuja_pasto:
     
     // ------------------------------------------- NUBES ------------------------------------------
     
+   
     .globl Nube1
 Nube1:
 // Argumentos: 1 punto (x1,x2)
@@ -733,7 +731,3 @@ ConjuntoNubes:
     ldr x2,[sp],8
     ldr x1,[sp],8
     ret
-
-
-
-
