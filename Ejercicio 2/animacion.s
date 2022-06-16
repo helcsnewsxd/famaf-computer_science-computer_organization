@@ -2,6 +2,8 @@
 
 .globl Pasar_al_buffer
 Pasar_al_buffer:
+	str x1,[sp,-8]!
+	str x2,[sp,-8]!
 	str x30,[sp,-8]!
 
     mov x1,x29
@@ -19,14 +21,20 @@ Pasar_al_buffer:
     Pasar_al_buffer_loop_end:
 
 	ldr x30,[sp],8
+	ldr x2,[sp],8
+	ldr x1,[sp],8
     ret
 
 .globl Paisaje_completo
 Paisaje_completo:
 	// x6 --> pos de nube
+	// (x1,x2) --> pos de sol
 
 	str x30,[sp,-8]!
 	str x6,[sp,-8]!
+	str x7,[sp,-8]!
+	str x2,[sp,-8]!
+	str x1,[sp,-8]!
 
     bl Dibuja_fondo_amanecer1
 	bl Dibuja_sol_amanecer
@@ -112,6 +120,9 @@ Paisaje_completo:
 		//bl Carpa
 		
 
+	ldr x1,[sp],8
+	ldr x2,[sp],8
+	ldr x7,[sp],8
     ldr x6,[sp],8
 	ldr x30,[sp],8
     ret

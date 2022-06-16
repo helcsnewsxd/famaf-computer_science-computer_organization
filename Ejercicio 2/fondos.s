@@ -349,18 +349,19 @@ Dibuja_sol_amanecer:
     str x23,[sp,-8]!
     str x24,[sp,-8]!
     str x25,[sp,-8]!
+    str x21,[sp,-8]!
     str x30,[sp,-8]!
 
         ldr x0,=AMARILLO
-		mov x1,500
-		mov x2,100
 		mov x3,50
 		mov x25,-3
         mov x24,0
         mov x23,0
+        mov x21,0
 		bl Pinta_circulo
 
     ldr x30,[sp],8
+    ldr x21,[sp],8
     ldr x25,[sp],8
     ldr x24,[sp],8
     ldr x23,[sp],8
