@@ -53,6 +53,53 @@ Pasar_al_buffer_el_paisaje_delante:
 	ldr x1,[sp],8
     ret
 
+Oscuridad_o_claridad_prebuffer:
+	str x30,[sp,-8]!
+	str x29,[sp,-8]!
+	str x8,[sp,-8]!
+	str x7,[sp,-8]!
+
+	mov x7,x8
+
+	ldr x8,=0x12ca00
+	add x29,x29,x8
+	mov x1,0
+	mov x2,0
+	mov x3,x19
+	mov x4,x20
+
+	cbz x7,Oscuridad_o_claridad_prebuffer_dia
+		// noche
+		cmp x6,180
+		b.eq Oscuridad_o_claridad_prebuffer_aclarecer
+		cmp x6,100
+		b.eq Oscuridad_o_claridad_prebuffer_aclarecer
+		cmp x6,-50
+		b.eq Oscuridad_o_claridad_prebuffer_aclarecer
+		b Oscuridad_o_claridad_prebuffer_end
+	Oscuridad_o_claridad_prebuffer_dia:
+		// dia
+		cmp x6,0
+		b.eq Oscuridad_o_claridad_prebuffer_oscurecer
+		cmp x6,-20
+		b.eq Oscuridad_o_claridad_prebuffer_oscurecer
+		cmp x6,-50
+		b.eq Oscuridad_o_claridad_prebuffer_oscurecer
+		b Oscuridad_o_claridad_prebuffer_end
+
+	Oscuridad_o_claridad_prebuffer_oscurecer:
+		bl Oscurecer
+		b Oscuridad_o_claridad_prebuffer_end
+	Oscuridad_o_claridad_prebuffer_aclarecer:
+		bl Aclarecer
+
+	Oscuridad_o_claridad_prebuffer_end:
+		ldr x7,[sp],8
+		ldr x8,[sp],8
+		ldr x29,[sp],8
+		ldr x30,[sp],8
+		ret
+
 .globl Paisaje_capa_delante
 Paisaje_capa_delante:
 	str x30,[sp,-8]!
@@ -137,13 +184,8 @@ Paisaje_capa_delante:
 			mov x3,x19
 			mov x4,x20
 			bl Oscurecer
+			bl Oscurecer
 		Paisaje_capa_delante_dia:
-
-		mov x1,380
-		mov x2,400
-		mov x3,410
-		mov x4,400
-		bl Fogata
 
 	ldr x7,[sp],8
 	ldr x8,[sp],8
@@ -178,7 +220,15 @@ Paisaje_completo:
 	cbz x5, Paisaje_completo_copia_prebuffer
 		bl Paisaje_capa_delante
 	Paisaje_completo_copia_prebuffer:
+
+	bl Oscuridad_o_claridad_prebuffer
 	bl Pasar_al_buffer_el_paisaje_delante
+
+	mov x1,380
+	mov x2,400
+	mov x3,410
+	mov x4,400
+	bl Fogata
 
 	mov x1,x6
 	mov x2,50
@@ -187,47 +237,6 @@ Paisaje_completo:
 	add x1,x1,300
 	mov x2,100
 	bl ConjuntoNubes
-	
-
-	mov x1,0
-	mov x2,0
-	mov x3,x19
-	mov x4,x20
-
-	/**
-	cbnz x8,Paisaje_completo_noche
-		cmp x7,0
-		b.gt Paisaje_completo_end
-		bl Oscurecer
-
-		cmp x7,-20
-		b.gt Paisaje_completo_end
-		bl Oscurecer
-		
-		cmp x7,-50
-		b.gt Paisaje_completo_end
-		bl Oscurecer
-
-		b Paisaje_completo_end
-	
-	Paisaje_completo_noche:
-		bl Oscurecer
-		bl Oscurecer
-		bl Oscurecer
-
-		cmp x7,180
-		b.gt Paisaje_completo_end
-		bl Aclarecer
-
-		cmp x7,100
-		b.gt Paisaje_completo_end
-		bl Aclarecer
-		
-		cmp x7,-50
-		b.gt Paisaje_completo_end
-		bl Aclarecer
-	*/
-
 
 	Paisaje_completo_end:	
 		ldr x5,[sp],8
