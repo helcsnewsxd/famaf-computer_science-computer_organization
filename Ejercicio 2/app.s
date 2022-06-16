@@ -62,7 +62,7 @@
 
 		mov x5,0
 
-		mov x0,1
+		mov x0,0xffffff
 		loop:
 			sub x0,x0,1
 			cbnz x0,loop
