@@ -58,8 +58,9 @@ Oscuridad_o_claridad_prebuffer:
 	str x29,[sp,-8]!
 	str x8,[sp,-8]!
 	str x7,[sp,-8]!
+	str x6,[sp,-8]!
 
-	mov x7,x8
+	mov x6,x8
 
 	ldr x8,=0x12ca00
 	add x29,x29,x8
@@ -68,22 +69,22 @@ Oscuridad_o_claridad_prebuffer:
 	mov x3,x19
 	mov x4,x20
 
-	cbz x7,Oscuridad_o_claridad_prebuffer_dia
+	cbz x6,Oscuridad_o_claridad_prebuffer_dia
 		// noche
-		cmp x6,180
+		cmp x7,180
 		b.eq Oscuridad_o_claridad_prebuffer_aclarecer
-		cmp x6,100
+		cmp x7,100
 		b.eq Oscuridad_o_claridad_prebuffer_aclarecer
-		cmp x6,-50
+		cmp x7,-50
 		b.eq Oscuridad_o_claridad_prebuffer_aclarecer
 		b Oscuridad_o_claridad_prebuffer_end
 	Oscuridad_o_claridad_prebuffer_dia:
 		// dia
-		cmp x6,0
+		cmp x7,0
 		b.eq Oscuridad_o_claridad_prebuffer_oscurecer
-		cmp x6,-20
+		cmp x7,-20
 		b.eq Oscuridad_o_claridad_prebuffer_oscurecer
-		cmp x6,-50
+		cmp x7,-50
 		b.eq Oscuridad_o_claridad_prebuffer_oscurecer
 		b Oscuridad_o_claridad_prebuffer_end
 
@@ -94,6 +95,7 @@ Oscuridad_o_claridad_prebuffer:
 		bl Aclarecer
 
 	Oscuridad_o_claridad_prebuffer_end:
+		ldr x6,[sp],8
 		ldr x7,[sp],8
 		ldr x8,[sp],8
 		ldr x29,[sp],8
