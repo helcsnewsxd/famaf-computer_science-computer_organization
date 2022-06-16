@@ -58,6 +58,9 @@ Paisaje_capa_delante:
 	str x30,[sp,-8]!
 	str x29,[sp,-8]!
 	str x8,[sp,-8]!
+	str x7,[sp,-8]!
+
+	mov x7,x8
 
 	ldr x8,=0x12ca00
 	add x29,x29,x8
@@ -128,12 +131,21 @@ Paisaje_capa_delante:
 		mov x2,246
 		bl Pino3
 
+		cbz x7,Paisaje_capa_delante_dia
+			mov x1,0
+			mov x2,0
+			mov x3,x19
+			mov x4,x20
+			bl Oscurecer
+		Paisaje_capa_delante_dia:
+
 		mov x1,380
 		mov x2,400
 		mov x3,410
 		mov x4,400
 		bl Fogata
-	
+
+	ldr x7,[sp],8
 	ldr x8,[sp],8
 	ldr x29,[sp],8
 	ldr x30,[sp],8
