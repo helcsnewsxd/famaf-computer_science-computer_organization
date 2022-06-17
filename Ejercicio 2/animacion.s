@@ -85,8 +85,6 @@ Oscuridad_o_claridad_prebuffer:
 		b.eq Oscuridad_o_claridad_prebuffer_oscurecer
 		cmp x7,-20
 		b.eq Oscuridad_o_claridad_prebuffer_oscurecer
-		cmp x7,-50
-		b.eq Oscuridad_o_claridad_prebuffer_oscurecer
 		b Oscuridad_o_claridad_prebuffer_end
 
 	Oscuridad_o_claridad_prebuffer_oscurecer:
