@@ -124,7 +124,7 @@ Paisaje_capa_delante:
 
 	bl Montanas
 
-		// ARBOL
+				// ARBOL
 		mov x1,300
 		mov x2,400
 		bl Pino1
@@ -178,6 +178,46 @@ Paisaje_capa_delante:
 		mov x1,405
 		mov x2,246
 		bl Pino3
+
+		mov x1,120
+		mov x2,50
+		bl ConjuntoNubes
+
+		mov x1,420
+		mov x2,50
+		bl ConjuntoNubes
+
+		mov x1,496
+		mov x2,385
+		bl Edificio1
+
+		mov x1,460
+		mov x2,310
+		bl Ventanas
+
+		mov x1,473
+		mov x2,352
+		bl Ventanas
+
+		mov x1,421
+		mov x2,391
+		bl Macetas
+
+		mov x1,411
+		mov x2,372
+		mov x3,429
+		mov x4,381
+		bl Arbusto1
+
+		mov x1,500
+		mov x2,391
+		bl Macetas
+
+		mov x1,490
+		mov x2,372
+		mov x3,508
+		mov x4,381
+		bl Arbusto1
 
 		cbz x7,Paisaje_capa_delante_dia
 			mov x1,0
