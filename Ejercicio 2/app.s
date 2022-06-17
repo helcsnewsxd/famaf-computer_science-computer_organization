@@ -75,9 +75,9 @@ main:
 
 	ldr x7,=MOV_SOL
 	mov x6,0
-	mov x1,500
-	mov x2,100
-	mov x8,0
+	mov x1,550
+	mov x2,150
+	mov x8,1
 	mov x5,1
 
 	b InfLoop

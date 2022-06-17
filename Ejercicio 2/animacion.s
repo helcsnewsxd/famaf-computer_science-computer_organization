@@ -196,67 +196,6 @@ Paisaje_capa_delante:
 	ldr x30,[sp],8
 	ret
 
-Paisaje_fondo_de_dia:
-	str x30,[sp,-8]!
-
-	cmp x7,-50	// entra noche
-	b.gt Paisaje_fondo_de_dia_4
-		bl Dibuja_fondo_entra_noche
-		b Paisaje_fondo_de_dia_end
-	Paisaje_fondo_de_dia_4:
-
-	cmp x7,30	// tarde
-	b.gt Paisaje_fondo_de_dia_3
-		bl Dibuja_fondo_tarde
-		b Paisaje_fondo_de_dia_end
-	Paisaje_fondo_de_dia_3:
-
-	cmp x7,100	// amanecer
-	b.gt Paisaje_fondo_de_dia_2
-		bl Dibuja_fondo_amanecer1
-		b Paisaje_fondo_de_dia_end
-	Paisaje_fondo_de_dia_2:
-
-	cmp x7,150	// madrugada
-	b.gt Paisaje_fondo_de_dia_1
-		bl Dibuja_fondo_madrugada
-		b Paisaje_fondo_de_dia_end
-	Paisaje_fondo_de_dia_1:
-
-	Paisaje_fondo_de_dia_end:
-	ldr x30,[sp],8
-	ret
-
-Paisaje_fondo_de_noche:
-	str x30,[sp,-8]!
-
-	cmp x7,-50	// madrugada
-	b.gt Paisaje_fondo_de_noche_4
-		bl Dibuja_fondo_madrugada
-		b Paisaje_fondo_de_noche_end
-	Paisaje_fondo_de_noche_4:
-
-	cmp x7,30	// noche
-	b.gt Paisaje_fondo_de_noche_3
-		bl Dibuja_fondo_noche
-		b Paisaje_fondo_de_noche_end
-	Paisaje_fondo_de_noche_3:
-
-	cmp x7,100	// noche
-	b.gt Paisaje_fondo_de_noche_2
-		bl Dibuja_fondo_noche
-		b Paisaje_fondo_de_noche_end
-	Paisaje_fondo_de_noche_2:
-	
-	cmp x7,150	// entra noche
-	b.gt Paisaje_fondo_de_noche_1
-		bl Dibuja_fondo_entra_noche
-		b Paisaje_fondo_de_noche_end
-	Paisaje_fondo_de_noche_1:
-
-	Paisaje_fondo_de_noche_end:
-	ldr x30,[sp],8
-	ret
 
 .globl Paisaje_completo
 Paisaje_completo:
@@ -275,11 +214,11 @@ Paisaje_completo:
 	mov x7,x2
 
 	cbnz x8,Paisaje_completo_noche_satelite
-		bl Paisaje_fondo_de_dia
+		bl Dibuja_fondo_amanecer1
 		bl Dibuja_sol_amanecer
 		b Paisaje_completo_noche_satelite_end
 	Paisaje_completo_noche_satelite:
-		bl Paisaje_fondo_de_noche
+		bl Dibuja_fondo_noche
 		bl Dibuja_luna
 	Paisaje_completo_noche_satelite_end:
 	

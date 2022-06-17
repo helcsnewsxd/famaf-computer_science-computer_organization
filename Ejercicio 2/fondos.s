@@ -421,6 +421,24 @@ Dibuja_fondo_noche:
         mov x25,1
         bl Pinta_rectangulo
 
+        mov x25,0
+        ldr x0,=BLANCO
+        mov x1,300
+        mov x2,50
+        mov x3,302
+        mov x4,52
+        bl Pinta_rectangulo
+        add x1,x1,20
+        add x3,x3,20
+        add x2,x2,10
+        add x4,x4,10 
+        bl Pinta_rectangulo
+        add x1,x1,20
+        add x3,x3,20
+        add x2,x2,10
+        add x4,x4,10 
+        bl Pinta_rectangulo
+
     ldr x30,[sp],8
     ldr x25,[sp],8
     ldr x24,[sp],8
