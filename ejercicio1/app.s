@@ -408,6 +408,10 @@ main:
 				mov x3,540
 				mov x4,461
 				bl Arbusto1
+				
+				mov x1,60
+				mov x2,400
+				bl Tronco1
 
 		// Fin de vegetacion
 
