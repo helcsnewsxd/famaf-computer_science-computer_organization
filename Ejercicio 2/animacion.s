@@ -76,7 +76,7 @@ Oscuridad_o_claridad_prebuffer:
 		b.eq Oscuridad_o_claridad_prebuffer_aclarecer
 		cmp x7,100
 		b.eq Oscuridad_o_claridad_prebuffer_aclarecer
-		cmp x7,-50
+		cmp x7,-60
 		b.eq Oscuridad_o_claridad_prebuffer_aclarecer
 		b Oscuridad_o_claridad_prebuffer_end
 	Oscuridad_o_claridad_prebuffer_dia:
@@ -333,6 +333,50 @@ Paisaje_capa_delante:
 
 				mov x1,592
 				mov x2,420
+				bl Pino2
+
+			// Espacio vacio
+
+				mov x1,20
+				mov x2,280
+				bl Pino3
+
+				mov x1,50
+				mov x2,290
+				bl Pino3
+
+				mov x1,120
+				mov x2,300
+				bl Pino3
+
+				mov x1,185
+				mov x2,310
+				bl Pino2
+
+				mov x1,245
+				mov x2,290
+				bl Pino2
+
+				mov x1,280
+				mov x2,310
+				bl Pino2
+
+				mov x1,300
+				mov x2,260
+				bl Pino3
+
+				mov x1,350
+				mov x2,250
+				bl Pino3
+
+				mov x1,290
+				mov x2,218
+				mov x3,308
+				mov x4,226
+				bl Arbusto1
+
+				mov x1,380
+				mov x2,280
 				bl Pino2
 
 		// Fin vegetacion
