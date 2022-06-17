@@ -39,6 +39,23 @@ Montanas:
 
 // Siluetas de fondo
     ldr x0,=0xA35F49
+    
+    mov x1,319
+    mov x2,224
+    mov x3,364
+    mov x4,180
+    mov x5,415
+    mov x6,224
+    bl Pinta_triangulo
+
+    mov x1,260
+    mov x2,224
+    mov x3,307
+    mov x4,160
+    mov x5,354
+    mov x6,224
+    bl Pinta_triangulo
+    
     mov x1,30
     mov x2,175
     mov x3,180
