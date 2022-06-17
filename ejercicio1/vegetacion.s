@@ -1213,3 +1213,129 @@ Arbusto1:
     ldr x0,[sp],8
 
     ret
+
+// ---------------------------------- PASTO ----------------------------------
+
+.globl Pasto_individual
+Pasto_individual:
+    // (x1,x2) --> posicion
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x5,[sp,-8]!
+    str x6,[sp,-8]!
+    str x30,[sp,-8]!
+
+    ldr x0,=0x009345
+		
+    mov x5,x1
+    mov x6,x2
+
+    mov x1,x5
+    mov x2,x6
+    mov x3,x5
+    sub x4,x6,4
+    bl Pinta_linea
+
+    mov x1,x5
+    mov x2,x6
+    add x3,x5,2
+    sub x4,x6,4
+    bl Pinta_linea
+
+    mov x1,x5
+    mov x2,x6
+    sub x3,x5,2
+    sub x4,x6,4
+    bl Pinta_linea
+
+    add x5,x5,3
+
+    mov x1,x5
+    mov x2,x6
+    mov x3,x5
+    sub x4,x6,4
+    bl Pinta_linea
+
+    mov x1,x5
+    mov x2,x6
+    add x3,x5,2
+    sub x4,x6,4
+    bl Pinta_linea
+
+    mov x1,x5
+    mov x2,x6
+    sub x3,x5,2
+    sub x4,x6,4
+    bl Pinta_linea
+
+    sub x5,x5,2
+    sub x6,x6,3
+
+    mov x1,x5
+    mov x2,x6
+    mov x3,x5
+    sub x4,x6,4
+    bl Pinta_linea
+
+    mov x1,x5
+    mov x2,x6
+    add x3,x5,2
+    sub x4,x6,4
+    bl Pinta_linea
+
+    mov x1,x5
+    mov x2,x6
+    sub x3,x5,2
+    sub x4,x6,4
+    bl Pinta_linea
+
+    ldr x30,[sp],8
+    ldr x6,[sp],8
+    ldr x5,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+    ret
+
+
+.globl Pasto_grupal
+Pasto_grupal:
+    // (x1,x2) --> posicion
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x30,[sp,-8]!
+
+    mov x3,x1
+    mov x4,x2
+
+        bl Pasto_individual
+        add x1,x1,4
+        bl Pasto_individual
+        sub x1,x1,2
+        sub x2,x2,4
+        bl Pasto_individual
+
+    mov x1,x3
+    add x1,x1,4
+    mov x2,x4
+
+        bl Pasto_individual
+        add x1,x1,4
+        bl Pasto_individual
+        sub x1,x1,2
+        sub x2,x2,4
+        bl Pasto_individual
+
+    ldr x30,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ret

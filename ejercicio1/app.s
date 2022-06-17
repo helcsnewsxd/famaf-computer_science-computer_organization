@@ -410,6 +410,6 @@ main:
 				bl Arbusto1
 
 		// Fin de vegetacion
-	
+
 	b InfLoop
 
