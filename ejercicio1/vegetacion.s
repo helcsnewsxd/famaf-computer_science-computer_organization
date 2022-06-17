@@ -1,5 +1,124 @@
 .section .text
 
+.globl Tronco2
+Tronco2:
+
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x30,[sp,-8]!
+
+    ldr x0,=0x4E2D12
+    mov x3,x1
+    mov x4,x2
+
+    add x3,x3,3
+    sub x1,x1,3
+    sub x4,x4,15
+    add x2,x2,1
+    bl Pinta_rectangulo
+
+    sub x2,x2,1
+    add x4,x4,1
+    sub x1,x1,3
+    add x3,x3,3
+    bl Pinta_rectangulo
+
+    add x4,x4,1
+    sub x2,x2,1
+    sub x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+
+    mov x1,x3
+    ldr x0,=0x643A19
+    sub x2,x2,4
+    bl Pinta_rectangulo
+
+    add x4,x4,10
+    add x2,x2,4
+    bl Pinta_rectangulo
+
+    sub x1,x1,4
+    sub x3,x3,4
+    add x2,x2,2
+    sub x4,x4,4
+    bl Pinta_rectangulo
+
+    ldr x0,=0x73431D
+    sub x4,x4,4
+    mov x2,x4
+    sub x2,x2,4
+    bl Pinta_rectangulo
+
+    ldr x0,=0x643A19
+    sub x1,x1,4
+    sub x3,x3,4
+    sub x4,x4,2
+    add x2,x2,10
+    bl Pinta_rectangulo
+
+    add x2,x2,4
+    mov x4,x2
+    add x4,x4,2
+    bl Pinta_rectangulo
+
+    ldr x0,=0x73431D
+    sub x1,x1,4
+    sub x3,x3,4
+
+    mov x4,x2
+    sub x2,x2,10
+    bl Pinta_rectangulo
+
+    ldr x0,=0x643A19
+    sub x1,x1,4
+    sub x3,x3,4
+    sub x4,x4,4
+    bl Pinta_rectangulo
+
+    ldr x0,=0x874321
+    add x1,x1,8
+    add x3,x3,8
+    sub x2,x2,2
+    mov x4,x2
+    add x4,x4,1
+    sub x1,x1,4
+    add x3,x3,4
+
+    bl Pinta_rectangulo
+
+    ldr x0,=0x9D5529
+    add x2,x2,2
+    add x4,x4,2
+    bl Pinta_rectangulo
+
+    sub x2,x2,4
+    sub x4,x4,4
+    bl Pinta_rectangulo
+
+    add x2,x2,2
+    add x4,x4,2
+    sub x1,x1,2
+    mov x3,x1
+    add x3,x3,2
+    bl Pinta_rectangulo
+
+    add x1,x1,10
+    add x3,x3,10
+    bl Pinta_rectangulo
+
+    ldr x30,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
 .globl Tronco1
 Tronco1:
     str x0,[sp,-8]!
