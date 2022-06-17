@@ -445,6 +445,7 @@ Dibuja_estrellas_en_fondo:
     str x3,[sp,-8]!
     str x4,[sp,-8]!
     str x5,[sp,-8]!
+    str x6,[sp,-8]!
 
     mov x11,238
     ldr x0,=BLANCO
@@ -453,6 +454,7 @@ Dibuja_estrellas_en_fondo:
     mov x3,11
     mov x4,21
     mov x5,50
+    mov x6,40
     mov x25,0
     
     Dibuja_estrellas_en_fondo_loop:
@@ -466,13 +468,16 @@ Dibuja_estrellas_en_fondo:
         b.lt Dibuja_estrellas_en_fondo_loop_misma_linea
             add x2,x2,15
             add x4,x4,15
-            mov x1,10
-            mov x3,11
+            mov x1,x5
+            add x3,x1,1
+            add x5,x5,x6
+            add x6,x6,2
         Dibuja_estrellas_en_fondo_loop_misma_linea:
 
         sub x11,x11,1
         cbnz x11,Dibuja_estrellas_en_fondo_loop
     
+    ldr x6,[sp],8
     ldr x5,[sp],8
     ldr x4,[sp],8
     ldr x3,[sp],8
