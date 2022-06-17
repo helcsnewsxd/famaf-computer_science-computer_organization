@@ -412,6 +412,14 @@ main:
 				mov x1,60
 				mov x2,400
 				bl Tronco1
+				
+				mov x1,137
+				mov x2,417
+				bl Tronco2
+
+				mov x1,42
+				mov x2,417
+				bl Tronco2
 
 		// Fin de vegetacion
 
