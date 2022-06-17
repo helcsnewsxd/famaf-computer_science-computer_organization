@@ -124,100 +124,306 @@ Paisaje_capa_delante:
 
 	bl Montanas
 
-				// ARBOL
-		mov x1,300
-		mov x2,400
-		bl Pino1
+		// Vegetacion
 
-		mov x1,200
-		mov x2,400
-		bl Pino2
+			// Chiquitos del fondo
 
-		mov x1,24
-		mov x2,241
-		bl Pino3
+				// izquierda
+				mov x1,272
+				mov x2,221
+				mov x3,290
+				mov x4,230
+				bl Arbusto1
 
-		mov x1,62
-		mov x2,251
-		mov x3,80
-		mov x4,260
-		bl Arbusto1
+				mov x1,242
+				mov x2,231
+				mov x3,260
+				mov x4,240
+				bl Arbusto1
 
-		mov x1,105
-		mov x2,269
-		bl Pino2
+				mov x1,270
+				mov x2,250
+				bl Pino3
 
-		mov x1,158
-		mov x2,253
-		mov x3,181
-		mov x4,271
-		bl Arbusto1
-	
-		mov x1,147
-		mov x2,259
-		mov x3,162
-		mov x4,270
-		bl Arbusto1
+				mov x1,230
+				mov x2,260
+				bl Pino3
 
-		mov x1,201
-		mov x2,264
-		bl Pino3
+				mov x1,105
+				mov x2,265
+				bl Pino2
 
-		mov x1,273
-		mov x2,245
-		bl Pino3
+				mov x1,120
+				mov x2,261
+				mov x3,138
+				mov x4,270
+				bl Arbusto1
 
-		mov x1,574
-		mov x2,250
-		bl Pino2
+				mov x1,158
+				mov x2,253
+				mov x3,181
+				mov x4,271
+				bl Arbusto1
+			
+				mov x1,147
+				mov x2,259
+				mov x3,162
+				mov x4,270
+				bl Arbusto1
 
-		mov x1,471
-		mov x2,265
-		bl Pino3
+				mov x1,80
+				mov x2,265
+				bl Pino3
 
-		mov x1,405
-		mov x2,246
-		bl Pino3
+				mov x1,90
+				mov x2,285
+				bl Pino2
 
-		mov x1,120
-		mov x2,50
-		bl ConjuntoNubes
+				mov x1,40
+				mov x2,243
+				bl Pino3
 
-		mov x1,420
-		mov x2,50
-		bl ConjuntoNubes
+				mov x1,55
+				mov x2,241
+				mov x3,73
+				mov x4,250
+				bl Arbusto1
+
+				mov x1,0
+				mov x2,255
+				bl Pino2
+
+				// derecha
+				mov x1,380
+				mov x2,240
+				bl Pino3
+
+				mov x1,400
+				mov x2,250
+				bl Pino3
+
+				mov x1,423
+				mov x2,240
+				mov x3,437
+				mov x4,248
+				bl Arbusto1
+
+				mov x1,500
+				mov x2,265
+				bl Pino3
+
+				mov x1,460
+				mov x2,280
+				bl Pino2
+
+				mov x1,555
+				mov x2,240
+				mov x3,570
+				mov x4,248
+				bl Arbusto1
+
+				mov x1,540
+				mov x2,250
+				bl Pino3
+
+				mov x1,565
+				mov x2,246
+				mov x3,580
+				mov x4,254
+				bl Arbusto1
+
+				mov x1,527
+				mov x2,248
+				mov x3,545
+				mov x4,257
+				bl Arbusto1
+
+				mov x1,610
+				mov x2,235
+				mov x3,628
+				mov x4,244
+				bl Arbusto1
+
+				mov x1,600
+				mov x2,240
+				mov x3,618
+				mov x4,249
+				bl Arbusto1
+
+				mov x1,632
+				mov x2,250
+				bl Pino3
+
+			// Medianos del medio
+
+				mov x1,600
+				mov x2,298
+				bl Pino2
+
+				mov x1,565
+				mov x2,305
+				bl Pino2
+
+				mov x1,590
+				mov x2,330
+				bl Pino2
+
+				mov x1,505
+				mov x2,260
+				mov x3,523
+				mov x4,269
+				bl Arbusto1
+
+				mov x1,520
+				mov x2,320
+				bl Pino2
+
+				mov x1,540
+				mov x2,300
+				mov x3,558
+				mov x4,309
+				bl Arbusto1
+
+				mov x1,620
+				mov x2,300
+				mov x3,638
+				mov x4,309
+				bl Arbusto1
+
+				mov x1,630
+				mov x2,310
+				mov x3,648
+				mov x4,319
+				bl Arbusto1
+
+			// Grandes del frente
+
+				// detras de la casa
+				mov x1,480
+				mov x2,305
+				bl Pino3
+
+				mov x1,430
+				mov x2,305
+				bl Pino2
+
+				mov x1,447
+				mov x2,320
+				bl Pino2
+
+				mov x1,550
+				mov x2,370
+				bl Pino1
+
+				mov x1,380
+				mov x2,400
+				bl Pino1
+				
+				mov x1,500
+				mov x2,380
+				bl Pino1
+
+				mov x1,530
+				mov x2,380
+				bl Pino1
+
+				mov x1,615
+				mov x2,415
+				bl Pino2
+
+				mov x1,592
+				mov x2,420
+				bl Pino2
+
+		// Fin vegetacion
+
+		// Casa
+
+		mov x5,50	// Para decidir a qué altura poner la casa
+		mov x6,-50	// Para decidir a qué ancho poner la casa
 
 		mov x1,496
 		mov x2,385
+		add x1,x1,x6
+		add x2,x2,x5
 		bl Edificio1
 
 		mov x1,460
 		mov x2,310
+		add x1,x1,x6
+		add x2,x2,x5
 		bl Ventanas
 
 		mov x1,473
 		mov x2,352
+		add x1,x1,x6
+		add x2,x2,x5
 		bl Ventanas
 
 		mov x1,421
 		mov x2,391
+		add x1,x1,x6
+		add x2,x2,x5
 		bl Macetas
 
 		mov x1,411
 		mov x2,372
+		add x1,x1,x6
+		add x2,x2,x5
 		mov x3,429
 		mov x4,381
+		add x3,x3,x6
+		add x4,x4,x5
 		bl Arbusto1
 
 		mov x1,500
 		mov x2,391
+		add x1,x1,x6
+		add x2,x2,x5
 		bl Macetas
 
 		mov x1,490
 		mov x2,372
+		add x1,x1,x6
+		add x2,x2,x5
 		mov x3,508
 		mov x4,381
+		add x3,x3,x6
+		add x4,x4,x5
 		bl Arbusto1
+
+		// Fin casa
+
+		// Continua vegetacion
+
+			// delante de la casa
+				mov x1,543
+				mov x2,450
+				bl Pino1
+
+				mov x1,630
+				mov x2,480
+				bl Pino1
+
+				mov x1,506
+				mov x2,440
+				mov x3,529
+				mov x4,458
+				bl Arbusto1
+
+				mov x1,495
+				mov x2,446
+				mov x3,510
+				mov x4,457
+				bl Arbusto1
+
+				mov x1,525
+				mov x2,450
+				mov x3,540
+				mov x4,461
+				bl Arbusto1
+
+		// Fin de vegetacion
 
 		cbz x7,Paisaje_capa_delante_dia
 			mov x1,0
@@ -272,10 +478,10 @@ Paisaje_completo:
 
 	bl Pasar_al_buffer_el_paisaje_delante
 
-	mov x1,380
-	mov x2,400
-	mov x3,410
-	mov x4,400
+	mov x1,80
+	mov x2,430
+	mov x3,110
+	mov x4,430
 	bl Fogata
 
 	ldr x5,=0xF5F5F3

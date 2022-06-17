@@ -1,5 +1,831 @@
 .section .text
 
+// Edificio
+
+.globl Edificio1
+Edificio1:
+
+    // Base
+    
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x5,[sp,-8]!
+    str x6,[sp,-8]!
+    str x7,[sp,-8]!
+    str x8,[sp,-8]!
+    str x9,[sp,-8]!
+    str x10,[sp,-8]!
+    str x11,[sp,-8]!
+    str x12,[sp,-8]!
+    str x13,[sp,-8]!
+    str x14,[sp,-8]!
+    str x15,[sp,-8]!
+    str x16,[sp,-8]!
+    str x30,[sp,-8]!
+
+    ldr x0, =0xFFFFFF
+    mov x3,x1
+    mov x4,x2
+
+    sub x3,x3,66
+    sub x4,x4,55
+
+    bl Pinta_rectangulo
+
+    ldr x0, =0x5A5683
+    mov x3,x1
+    add x3,x3,80
+    bl Pinta_rectangulo
+
+    mov x3,x1
+    mov x4,x2
+    mov x11,x1
+    mov x12,x2
+    ldr x0,=0x8F98B5
+    sub x3,x3,66
+    sub x4,x4,7
+    sub x2,x2,7
+    bl Pinta_rectangulo
+
+    sub x4,x4,7
+    sub x2,x2,7
+    bl Pinta_rectangulo
+
+    sub x4,x4,7
+    sub x2,x2,7
+    bl Pinta_rectangulo
+
+    sub x4,x4,7
+    sub x2,x2,7
+    bl Pinta_rectangulo
+
+    sub x4,x4,7
+    sub x2,x2,7
+    bl Pinta_rectangulo
+
+    sub x4,x4,7
+    sub x2,x2,7
+    bl Pinta_rectangulo
+
+    sub x4,x4,7
+    sub x2,x2,7
+    bl Pinta_rectangulo
+
+    ldr x0,=0x3C3459
+    mov x3,x1
+    add x3,x3,80
+    bl Pinta_rectangulo
+
+    add x4,x4,7
+    add x2,x2,7
+    bl Pinta_rectangulo
+
+    add x4,x4,7
+    add x2,x2,7
+    bl Pinta_rectangulo
+
+    add x4,x4,7
+    add x2,x2,7
+    bl Pinta_rectangulo
+
+    add x4,x4,7
+    add x2,x2,7
+    bl Pinta_rectangulo
+
+    add x4,x4,7
+    add x2,x2,7
+    bl Pinta_rectangulo
+
+    add x4,x4,7
+    add x2,x2,7
+    bl Pinta_rectangulo
+
+    mov x1,x3
+    add x2,x2,7
+    mov x4,x2
+    sub x4,x4,6
+
+    sub x1,x1,12
+    sub x3,x3,12
+
+    bl Pinta_rectangulo
+
+    sub x1,x1,50
+    sub x3,x3,50
+
+    bl Pinta_rectangulo
+
+    ldr x0,=0x9D9EBB
+    sub x1,x1,40
+    sub x3,x3,40
+
+    bl Pinta_rectangulo
+
+    sub x2,x2,7
+    sub x4,x4,7
+    sub x1,x1,30
+    sub x3,x3,30
+
+    bl Pinta_rectangulo
+
+    sub x2,x2,14
+    sub x4,x4,14
+    add x1,x1,15
+    add x3,x3,15
+
+    bl Pinta_rectangulo
+
+    sub x2,x2,7
+    sub x4,x4,7
+    add x1,x1,25
+    add x3,x3,25
+
+    bl Pinta_rectangulo
+
+    sub x1,x1,45
+    sub x3,x3,45
+
+    bl Pinta_rectangulo
+
+    sub x2,x2,14
+    sub x4,x4,14
+    add x1,x1,15
+    add x3,x3,15
+
+    bl Pinta_rectangulo
+
+    sub x2,x2,7
+    sub x4,x4,7
+    add x1,x1,30
+    add x3,x3,30
+
+    bl Pinta_rectangulo
+
+    ldr x0,=0x3C3459
+    add x1,x1,75
+    add x3,x3,75
+
+    bl Pinta_rectangulo
+
+    add x2,x2,14
+    add x4,x4,14
+    sub x1,x1,45
+    sub x3,x3,45
+
+    bl Pinta_rectangulo
+
+    add x2,x2,7
+    add x4,x4,7
+    add x1,x1,35
+    add x3,x3,35
+
+    bl Pinta_rectangulo
+
+    add x2,x2,7
+    add x4,x4,7
+    add x1,x1,20
+    add x3,x3,20
+
+    bl Pinta_rectangulo
+
+    sub x1,x1,65
+    sub x3,x3,65
+
+    bl Pinta_rectangulo
+
+    add x2,x2,7
+    add x4,x4,7
+    add x1,x1,30
+    add x3,x3,30
+
+    bl Pinta_rectangulo
+
+    // Pilares en esquinas
+
+    ldr x0,=0x552349
+    mov x1,x11
+    mov x2,x12
+    mov x3,x1
+    mov x4,x2
+    add x3,x3,3
+    sub x4,x4,55
+    bl Pinta_rectangulo
+
+
+
+    ldr x0,=0x94576C
+    sub x1,x1,4
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    add x1,x1,85
+    add x3,x3,85
+    ldr x0,=0x552349
+    bl Pinta_rectangulo
+    ldr x0,=0x94576C
+    sub x1,x1,4
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    sub x1,x1,15
+    sub x3,x3,15
+    add x4,x4,20
+    ldr x0,=0x552349
+    bl Pinta_rectangulo
+    ldr x0,=0x94576C
+    sub x1,x1,4
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    sub x1,x1,20
+    sub x3,x3,20
+    ldr x0,=0x552349
+    bl Pinta_rectangulo
+    ldr x0,=0x94576C
+    sub x1,x1,4
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    sub x4,x4,20
+    sub x1,x1,98
+    sub x3,x3,98
+    ldr x0,=0x552349
+    bl Pinta_rectangulo
+    ldr x0,=0x94576C
+    sub x1,x1,4
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    add x1,x1,25
+    add x3,x3,25
+
+    ldr x0,=0x552349
+    bl Pinta_rectangulo
+    ldr x0,=0x94576C
+    sub x1,x1,4
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    add x1,x1,85
+    add x3,x3,85
+    sub x2,x2,35
+
+    add x4,x4,15
+
+    ldr x0,=0x552349
+    bl Pinta_rectangulo
+    ldr x0,=0x94576C
+    sub x1,x1,4
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    mov x11,x1
+    mov x12,x2
+    mov x13,x3
+    mov x14,x4
+
+    ldr x0,=0x552349
+    mov x1,x3
+    add x1,x1,1
+    add x3,x3,28
+    bl Pinta_rectangulo
+
+    // Oscuridad puerta
+
+    ldr x0,=0x0D032E
+    mov x1,x11
+    mov x2,x12
+    mov x3,x13
+    mov x4,x14
+    add x3,x3,14
+    add x1,x1,8
+    add x2,x2,35
+    add x4,x4,4
+    bl Pinta_rectangulo
+
+    ldr x0,=0x9193BA
+
+    mov x1,x3
+    add x1,x1,1
+
+    add x3,x3,10
+    bl Pinta_rectangulo
+
+    ldr x0,=0x502953
+    add x4,x4,20
+    sub x2,x2,12
+    bl Pinta_rectangulo
+
+    // Techo
+
+    ldr x0,=0x855F6A
+    mov x1,x11
+    mov x2,x12
+    mov x3,x13
+    mov x4,x14
+    add x1,x1,2
+
+    sub x1,x1,104
+    sub x3,x3,34
+    sub x4,x4,20
+    sub x2,x2,20
+    bl Pinta_rectangulo
+
+    ldr x0,=0x4E284F
+    add x2,x2,6
+    add x4,x4,6
+    add x1,x1,68
+    add x3,x3,88
+    bl Pinta_rectangulo
+
+    sub x1,x1,2
+    sub x3,x3,2
+    sub x2,x2,6
+    sub x4,x4,6
+    bl Pinta_rectangulo
+
+    sub x1,x1,2
+    sub x3,x3,2
+    sub x2,x2,6
+    sub x4,x4,6
+    bl Pinta_rectangulo
+
+    sub x1,x1,2
+    sub x3,x3,2
+    sub x2,x2,6
+    sub x4,x4,6
+    bl Pinta_rectangulo
+
+    sub x1,x1,2
+    sub x3,x3,2
+    sub x2,x2,6
+    sub x4,x4,6
+    bl Pinta_rectangulo
+
+    sub x1,x1,2
+    sub x3,x3,2
+    sub x2,x2,6
+    sub x4,x4,6
+    bl Pinta_rectangulo
+
+    sub x1,x1,2
+    sub x3,x3,2
+    sub x2,x2,6
+    sub x4,x4,6
+    bl Pinta_rectangulo
+
+    sub x1,x1,2
+    sub x3,x3,2
+    sub x2,x2,6
+    sub x4,x4,6
+    bl Pinta_rectangulo
+
+
+    ldr x0,=0xD2978A
+    mov x3,x1
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    mov x11,x1
+    mov x12,x2
+    mov x13,x3
+    mov x14,x4
+
+    add x1,x1,2
+    add x3,x3,2
+    add x2,x2,6
+    add x4,x4,6
+    bl Pinta_rectangulo
+
+    add x1,x1,2
+    add x3,x3,2
+    add x2,x2,6
+    add x4,x4,6
+    bl Pinta_rectangulo
+
+    add x1,x1,2
+    add x3,x3,2
+    add x2,x2,6
+    add x4,x4,6
+    bl Pinta_rectangulo
+
+    add x1,x1,2
+    add x3,x3,2
+    add x2,x2,6
+    add x4,x4,6
+    bl Pinta_rectangulo
+
+    add x1,x1,2
+    add x3,x3,2
+    add x2,x2,6
+    add x4,x4,6
+    bl Pinta_rectangulo
+
+    add x1,x1,2
+    add x3,x3,2
+    add x2,x2,6
+    add x4,x4,6
+    bl Pinta_rectangulo
+
+    add x1,x1,2
+    add x3,x3,2
+    add x2,x2,6
+    add x4,x4,6
+    bl Pinta_rectangulo
+
+    mov x1,x11
+    mov x2,x12
+    mov x3,x13
+    mov x4,x14
+
+    add x3,x3,10
+    sub x1,x1,55
+    sub x2,x2,2
+    bl Pinta_rectangulo
+    add x2,x2,2
+    add x1,x1,15
+
+    mov x3,x1
+    add x3,x3,4
+
+    mov x11,x1
+    mov x12,x2
+    mov x13,x3
+    mov x14,x4
+
+    sub x1,x1,5
+    sub x3,x3,5
+
+    ldr x0,=0x4E284F
+
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    ldr x0,=0xD2978A
+    sub x1,x1,4
+    sub x3,x3,4
+    bl Pinta_rectangulo
+
+    sub x2,x2,6
+    sub x4,x4,6
+    add x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+
+    sub x2,x2,6
+    sub x4,x4,6
+    add x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+
+    sub x2,x2,6
+    sub x4,x4,6
+    add x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+
+    sub x2,x2,6
+    sub x4,x4,6
+    add x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+
+    sub x2,x2,6
+    sub x4,x4,6
+    add x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+
+    sub x2,x2,6
+    sub x4,x4,6
+    add x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+    
+    mov x1,x11
+    mov x2,x12
+    mov x3,x13
+    mov x4,x14
+    sub x1,x1,10
+    bl Pinta_rectangulo
+
+    ldr x0,=0xFDFFFF
+    add x1,x1,8
+    add x3,x3,33
+    add x2,x2,6
+    add x4,x4,6
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,2
+    add x3,x3,2
+    bl Pinta_rectangulo
+
+    ldr x0,=0x9493B5
+    sub x2,x2,5
+    bl Pinta_rectangulo
+
+    sub x2,x2,6
+    sub x4,x4,6
+    add x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    sub x2,x2,6
+    sub x4,x4,6
+    add x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    sub x2,x2,6
+    sub x4,x4,6
+    add x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    sub x2,x2,6
+    sub x4,x4,6
+    add x1,x1,2
+    sub x3,x3,2
+    bl Pinta_rectangulo
+
+    // Rectas verticales de los ladrillos
+
+    add x1,x1,10
+    mov x3,x1
+    add x4,x4,6
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    add x1,x1,20
+    add x3,x3,20
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    sub x1,x1,27
+    sub x3,x3,27
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    add x1,x1,15
+    add x3,x3,15
+    bl Pinta_rectangulo
+
+    add x2,x2,6
+    add x4,x4,6
+    add x1,x1,20
+    add x3,x3,20
+    bl Pinta_rectangulo
+
+    sub x1,x1,40
+    sub x3,x3,40
+    bl Pinta_rectangulo
+
+    ldr x0,=0x080028
+    mov x1,x11
+    mov x2,x12
+    mov x3,x13
+    mov x4,x14
+    add x4,x4,4
+    sub x1,x1,10
+    add x3,x3,127
+    bl Pinta_rectangulo
+
+    ldr x0,=0xF6F9F9
+    add x1,x1,67
+    sub x3,x3,55
+    sub x4,x4,4
+
+    sub x4,x4,6
+    sub x2,x2,6
+    bl Pinta_rectangulo
+
+    ldr x0,=0x554E78
+    add x1,x1,10
+    bl Pinta_rectangulo
+
+    sub x4,x4,4
+    sub x2,x2,4
+    bl Pinta_rectangulo
+    sub x3,x3,8
+    sub x1,x1,10
+    ldr x0,=0xF6F9F9
+    bl Pinta_rectangulo
+
+    // Ventanas
+
+
+
+    
+
+
+    ldr x30,[sp],8
+    ldr x16,[sp],8
+    ldr x15,[sp],8
+    ldr x14,[sp],8
+    ldr x13,[sp],8
+    ldr x12,[sp],8
+    ldr x11,[sp],8
+    ldr x10,[sp],8
+    ldr x9,[sp],8
+    ldr x8,[sp],8
+    ldr x7,[sp],8
+    ldr x6,[sp],8
+    ldr x5,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
+// Ventanas simples
+
+.globl Ventanas
+Ventanas:
+
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x30,[sp,-8]!
+
+    ldr x0,=0xDDA190
+    mov x3,x1
+    mov x4,x2
+    sub x1,x1,10
+    add x3,x3,10
+    sub x4,x4,10
+    add x2,x2,10
+    bl Pinta_rectangulo
+
+    ldr x0,=0x0A0433
+    add x1,x1,2
+    sub x3,x3,2
+    add x4,x4,2
+    sub x2,x2,2
+    bl Pinta_rectangulo
+
+    ldr x0,=0x5B557D
+    sub x3,x3,12
+    bl Pinta_rectangulo
+
+    ldr x0,=0xDDA190
+    add x3,x3,12
+    add x4,x4,9
+    mov x2,x4
+    add x2,x2,1
+    bl Pinta_rectangulo
+
+    mov x3,x1
+    add x3,x3,1
+    add x2,x2,6
+
+    add x1,x1,4
+    add x3,x3,4
+    bl Pinta_rectangulo
+
+    add x1,x1,7
+    add x3,x3,7
+    bl Pinta_rectangulo
+
+    ldr x30,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
+// Macetas
+
+.globl Macetas
+Macetas:
+
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x11,[sp,-8]!
+    str x12,[sp,-8]!
+    str x13,[sp,-8]!
+    str x14,[sp,-8]!
+    str x30,[sp,-8]!
+
+    mov x3,x1
+    mov x4,x2
+
+    ldr x0,=0x915B6B
+    sub x1,x1,12
+    add x3,x3,12
+    sub x4,x4,4
+    bl Pinta_rectangulo
+
+    ldr x0,=0x2B1327
+    sub x4,x4,2
+    sub x2,x2,4
+    bl Pinta_rectangulo
+
+    ldr x0,=0x915B6B
+    sub x2,x2,2
+    sub x4,x4,4
+    add x3,x3,2
+    sub x1,x1,2
+    bl Pinta_rectangulo
+
+    mov x11,x1
+    mov x12,x2
+    mov x13,x3
+    mov x14,x4
+
+    ldr x0,=0x54244B
+    add x1,x1,22
+    bl Pinta_rectangulo
+
+    sub x1,x1,2
+    sub x3,x3,2
+    add x2,x2,6
+    add x4,x4,7
+    bl Pinta_rectangulo
+
+    ldr x30,[sp],8
+    ldr x14,[sp],8
+    ldr x13,[sp],8
+    ldr x12,[sp],8
+    ldr x11,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+
+    ret
+
 // ------------------------------------------- Carpa ------------------------------------------ 
 
 .globl Carpa
