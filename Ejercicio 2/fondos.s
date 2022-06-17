@@ -421,23 +421,7 @@ Dibuja_fondo_noche:
         mov x25,1
         bl Pinta_rectangulo
 
-        mov x25,0
-        ldr x0,=BLANCO
-        mov x1,300
-        mov x2,50
-        mov x3,302
-        mov x4,52
-        bl Pinta_rectangulo
-        add x1,x1,20
-        add x3,x3,20
-        add x2,x2,10
-        add x4,x4,10 
-        bl Pinta_rectangulo
-        add x1,x1,20
-        add x3,x3,20
-        add x2,x2,10
-        add x4,x4,10 
-        bl Pinta_rectangulo
+        bl Dibuja_estrellas_en_fondo
 
     ldr x30,[sp],8
     ldr x25,[sp],8
@@ -452,6 +436,52 @@ Dibuja_fondo_noche:
 
     ret
 
+Dibuja_estrellas_en_fondo:
+    str x30,[sp,-8]!
+    str x11,[sp,-8]!
+    str x0,[sp,-8]!
+    str x1,[sp,-8]!
+    str x2,[sp,-8]!
+    str x3,[sp,-8]!
+    str x4,[sp,-8]!
+    str x5,[sp,-8]!
+
+    mov x11,238
+    ldr x0,=BLANCO
+    mov x1,10
+    mov x2,20
+    mov x3,11
+    mov x4,21
+    mov x5,50
+    mov x25,0
+    
+    Dibuja_estrellas_en_fondo_loop:
+        bl Pinta_rectangulo
+
+        add x1,x1,x5
+        add x3,x3,x5
+        add x5,x5,1
+
+        cmp x1,650
+        b.lt Dibuja_estrellas_en_fondo_loop_misma_linea
+            add x2,x2,15
+            add x4,x4,15
+            mov x1,10
+            mov x3,11
+        Dibuja_estrellas_en_fondo_loop_misma_linea:
+
+        sub x11,x11,1
+        cbnz x11,Dibuja_estrellas_en_fondo_loop
+    
+    ldr x5,[sp],8
+    ldr x4,[sp],8
+    ldr x3,[sp],8
+    ldr x2,[sp],8
+    ldr x1,[sp],8
+    ldr x0,[sp],8
+    ldr x11,[sp],8
+    ldr x30,[sp],8
+    ret
 
 // LUNA
 
