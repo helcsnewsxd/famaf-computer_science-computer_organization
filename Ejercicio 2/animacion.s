@@ -238,6 +238,11 @@ Paisaje_completo:
 	mov x4,400
 	bl Fogata
 
+	ldr x5,=0xF5F5F3
+	cbz x8,Paisaje_completo_dia_color_nube
+		ldr x5,=0x808080
+	Paisaje_completo_dia_color_nube:
+
 	mov x1,x6
 	mov x2,50
 	bl ConjuntoNubes

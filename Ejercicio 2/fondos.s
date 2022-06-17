@@ -20,6 +20,7 @@
 .equ VIOLETA, 0xB300C0
 .equ NUBE_BLANCO, 0xF5F5F3
 .equ NUBE_GRIS, 0xB9D9E8
+.equ NUBE_RESTA, 0x3c1c0b
 
 .section .text
 
@@ -454,7 +455,7 @@ Dibuja_estrellas_en_fondo:
     mov x3,11
     mov x4,21
     mov x5,50
-    mov x6,40
+    mov x6,50
     mov x25,0
     
     Dibuja_estrellas_en_fondo_loop:
@@ -471,7 +472,7 @@ Dibuja_estrellas_en_fondo:
             mov x1,x5
             add x3,x1,1
             add x5,x5,x6
-            add x6,x6,2
+            lsl x6,x6,1
         Dibuja_estrellas_en_fondo_loop_misma_linea:
 
         sub x11,x11,1
@@ -714,11 +715,12 @@ Nube1:
     mov x11,centrox
     mov x12,centroy
 
-    ldr x0,=NUBE_BLANCO
+    mov x0,x5
     mov radio,8
     bl Pinta_circulo
 
-    ldr x0,=NUBE_GRIS
+    ldr x0,=NUBE_RESTA
+    sub x0,x5,x0
     mov radio,13
     add centroy,centroy,15
     sub centrox,centrox,15
@@ -733,7 +735,7 @@ Nube1:
         cmp x4,0
         b.ne Nube_circulos_grises
 
-    ldr x0,=NUBE_BLANCO
+    mov x0,x5
     mov radio,8
     add centrox,centrox,5
     bl Pinta_circulo
@@ -747,7 +749,7 @@ Nube1:
     add centroy,centroy,5
 
     mov radio,10
-    ldr x0,=NUBE_BLANCO
+    mov x0,x5
 
     mov centroy,x12
     add centroy,centroy,5
@@ -805,13 +807,14 @@ Nube2:
     mov x11,centrox
     mov x12,centroy
 
-    ldr x0,=NUBE_BLANCO
+    mov x0,x5
     mov radio,6
     add centroy,centroy,4
     bl Pinta_circulo
     sub centroy,centroy,4
 
-    ldr x0,=NUBE_GRIS
+    ldr x0,=NUBE_RESTA
+    sub x0,x5,x0
     mov radio,11
     add centroy,centroy,13
     sub centrox,centrox,13
@@ -826,7 +829,7 @@ Nube2:
         cmp x4,0
         b.ne Nube_circulos_grises_2
 
-    ldr x0,=NUBE_BLANCO
+    mov x0,x5
     mov radio,6
     add centrox,centrox,6
     bl Pinta_circulo
@@ -874,6 +877,7 @@ ConjuntoNubes:
     str x2,[sp,-8]!
     str x21,[sp,-8]!
     str x30,[sp,-8]!
+    str x5,[sp,-8]!
 
     mov x21,1 //para que me lo deje dentro del framebuffer
 
@@ -883,6 +887,7 @@ ConjuntoNubes:
     add x1,x1,80
     bl Nube2
 
+    ldr x5,[sp],8
     ldr x30,[sp],8
     ldr x21,[sp],8
     ldr x2,[sp],8
