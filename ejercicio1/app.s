@@ -328,6 +328,18 @@ main:
 		mov x5,50	// Para decidir a qué altura poner la casa
 		mov x6,-50	// Para decidir a qué ancho poner la casa
 
+		mov x1,346
+		mov x2,420
+		bl Tronco1
+
+		mov x1,354
+		mov x2,410
+		bl Tronco1
+
+		mov x1,361
+		mov x2,420
+		bl Tronco1
+
 		mov x1,496
 		mov x2,385
 		add x1,x1,x6
