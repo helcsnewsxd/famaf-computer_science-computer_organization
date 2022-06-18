@@ -835,9 +835,9 @@ Humo_chimenea_dia:
     str x6,[sp,-8]!
     str x7,[sp,-8]!
 
-    lsl x6,x6,62
-    lsr x6,x6,62
-    mov x7,x6
+    lsl x12,x12,62
+    lsr x12,x12,62
+    mov x7,x12
 
     ldr x5,=0x353535
     ldr x6,=0xA0A0A0
@@ -855,9 +855,9 @@ Humo_chimenea_noche:
     str x6,[sp,-8]!
     str x7,[sp,-8]!
 
-    lsl x6,x6,62
-    lsr x6,x6,62
-    mov x7,x6
+    lsl x12,x12,62
+    lsr x12,x12,62
+    mov x7,x12
 
     ldr x5,=0x1a1a1a
     ldr x6,=0x505050
@@ -878,7 +878,7 @@ Dibuja_humo_chimenea:
     str x30,[sp,-8]!
 
     cmp x7,0
-    b.le Dibuja_humo_chimenea_paso1
+    b.le Dibuja_humo_chimenea_end
     // ABAJO
         mov x0,x5 // negro
         mov x1,450
@@ -908,10 +908,8 @@ Dibuja_humo_chimenea:
         mov x4,317
         bl Pinta_rectangulo
 
-    Dibuja_humo_chimenea_paso1:
-
     cmp x7,1
-    b.le Dibuja_humo_chimenea_paso2
+    b.le Dibuja_humo_chimenea_end
 
     // MEDIO
         mov x0,x5 // negro
@@ -942,10 +940,8 @@ Dibuja_humo_chimenea:
         mov x4,305
         bl Pinta_rectangulo
 
-    Dibuja_humo_chimenea_paso2:
-
     cmp x7,2
-    b.le Dibuja_humo_chimenea_paso3
+    b.le Dibuja_humo_chimenea_end
 
     // ARRIBA
         mov x0,x5 //negro
@@ -976,7 +972,7 @@ Dibuja_humo_chimenea:
         mov x4,294
         bl Pinta_rectangulo
     
-    Dibuja_humo_chimenea_paso3:
+    Dibuja_humo_chimenea_end:
 
     ldr x30,[sp],8
     ldr x4,[sp],8

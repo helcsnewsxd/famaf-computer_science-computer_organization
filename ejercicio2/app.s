@@ -54,6 +54,7 @@
 		sub x7,x7,1
 		bl Paisaje_completo
 		bl Pasar_al_buffer
+		add x12,x12,1
 		add x6,x6,MOV_NUBE
 		cbnz x7, InfLoop
 		sub x1,x1,1
@@ -79,5 +80,6 @@ main:
 	mov x2,150
 	mov x8,0
 	mov x5,1
+	mov x12,0
 
 	b InfLoop
