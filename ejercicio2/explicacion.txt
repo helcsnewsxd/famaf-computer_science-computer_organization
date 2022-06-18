@@ -2,3 +2,5 @@ INTEGRANTES:
     BRATTI, JUAN                44274011
     HERRADOR, EMANUEL NICOLÁS   44898601
 
+EXPLICACIÓN:
+   Usando el mismo paisaje del ejercicio 1, el código genera el desarrollo del día del paisaje de forma cíclica, tal que se presentan a la noche y el día con sus detalles correspondientes.
