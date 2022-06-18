@@ -346,61 +346,54 @@ main:
 		add x2,x2,x5
 		bl Edificio1
 		
-						// ILUMINACIÓN DE VENTANAS 
+		// ILUMINACIÓN DE VENTANAS 
 
-				// GRANDES
-				ldr x0,=0xA0A13A
-				mov x1,407
-				mov x2,360
-				mov x3,418
-				mov x4,352
-				bl Pinta_rectangulo
+		// GRANDES
+		ldr x0,=0xA0A13A
+		mov x1,407
+		mov x2,360
+		mov x3,418
+		mov x4,352
+		bl Pinta_rectangulo
 
-				ldr x0,=0xA0A13A
-				mov x1,420
-				mov x2,402
-				mov x3,431
-				mov x4,394
-				bl Pinta_rectangulo
+		ldr x0,=0xA0A13A
+		mov x1,420
+		mov x2,402
+		mov x3,431
+		mov x4,394
+		bl Pinta_rectangulo
 
-				// PEQUEÑAS
+		// PEQUEÑAS
 
-				// Las de la ventana de abajo
-				ldr x0,=0xA0A13A
-				mov x1,428
-				mov x2,410
-				mov x3,431
-				mov x4,405
-				bl Pinta_rectangulo
+		// Las de la ventana de abajo
+		ldr x0,=0xA0A13A
+		mov x1,428
+		mov x2,410
+		mov x3,431
+		mov x4,405
+		bl Pinta_rectangulo
 
-				ldr x0,=0xA0A13A
-				mov x1,421
-				mov x2,410
-				mov x3,425
-				mov x4,405
-				bl Pinta_rectangulo
+		ldr x0,=0xA0A13A
+		mov x1,421
+		mov x2,410
+		mov x3,425
+		mov x4,405
+		bl Pinta_rectangulo
 
-				// Las de la ventana de arriba
-				ldr x0,=0xA0A13A
-				mov x1,415
-				mov x2,368
-				mov x3,418
-				mov x4,363
-				bl Pinta_rectangulo
+		// Las de la ventana de arriba
+		ldr x0,=0xA0A13A
+		mov x1,415
+		mov x2,368
+		mov x3,418
+		mov x4,363
+		bl Pinta_rectangulo
 
-				ldr x0,=0xA0A13A
-				mov x1,408
-				mov x2,368
-				mov x3,412
-				mov x4,363
-				bl Pinta_rectangulo
-
-				ldr x0,=0xA0A13A
-				mov x1,488
-				mov x2,435
-				mov x3,497
-				mov x4,399
-				bl Pinta_rectangulo
+		ldr x0,=0xA0A13A
+		mov x1,408
+		mov x2,368
+		mov x3,412
+		mov x4,363
+		bl Pinta_rectangulo
 
 		mov x1,460
 		mov x2,310
