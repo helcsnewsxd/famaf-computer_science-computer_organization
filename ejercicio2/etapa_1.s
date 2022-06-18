@@ -834,7 +834,9 @@ Humo_chimenea_dia:
     str x5,[sp,-8]!
     str x6,[sp,-8]!
     str x7,[sp,-8]!
+    str x12,[sp,-8]!
 
+    lsr x12,x12,4
     lsl x12,x12,62
     lsr x12,x12,62
     mov x7,x12
@@ -842,6 +844,7 @@ Humo_chimenea_dia:
     ldr x5,=0x353535
     ldr x6,=0xA0A0A0
     bl Dibuja_humo_chimenea
+    ldr x12,[sp],8
     ldr x7,[sp],8
     ldr x6,[sp],8
     ldr x5,[sp],8
@@ -854,7 +857,9 @@ Humo_chimenea_noche:
     str x5,[sp,-8]!
     str x6,[sp,-8]!
     str x7,[sp,-8]!
+    str x12,[sp,-8]!
 
+    lsr x12,x12,4
     lsl x12,x12,62
     lsr x12,x12,62
     mov x7,x12
@@ -862,6 +867,7 @@ Humo_chimenea_noche:
     ldr x5,=0x1a1a1a
     ldr x6,=0x505050
     bl Dibuja_humo_chimenea
+    ldr x12,[sp],8
     ldr x7,[sp],8
     ldr x6,[sp],8
     ldr x5,[sp],8
