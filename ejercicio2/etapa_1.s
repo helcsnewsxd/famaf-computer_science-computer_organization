@@ -855,7 +855,7 @@ Humo_chimenea:
     mov x2,323
     mov x3,455
     mov x4,316
-    bl Pinta_rectangulo
+    //bl Pinta_rectangulo
 
     mov x0,x5 // negro
     mov x1,460
