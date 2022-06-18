@@ -828,108 +828,157 @@ Macetas:
 
 
 
-.globl Humo_chimenea
-Humo_chimenea:
+.globl Humo_chimenea_dia
+Humo_chimenea_dia:
+    str x30,[sp,-8]!
+    str x5,[sp,-8]!
+    str x6,[sp,-8]!
+    str x7,[sp,-8]!
+
+    lsl x6,x6,62
+    lsr x6,x6,62
+    mov x7,x6
+
+    ldr x5,=0x353535
+    ldr x6,=0xA0A0A0
+    bl Dibuja_humo_chimenea
+    ldr x7,[sp],8
+    ldr x6,[sp],8
+    ldr x5,[sp],8
+    ldr x30,[sp],8
+    ret
+
+.globl Humo_chimenea_noche
+Humo_chimenea_noche:
+    str x30,[sp,-8]!
+    str x5,[sp,-8]!
+    str x6,[sp,-8]!
+    str x7,[sp,-8]!
+
+    lsl x6,x6,62
+    lsr x6,x6,62
+    mov x7,x6
+
+    ldr x5,=0x1a1a1a
+    ldr x6,=0x505050
+    bl Dibuja_humo_chimenea
+    ldr x7,[sp],8
+    ldr x6,[sp],8
+    ldr x5,[sp],8
+    ldr x30,[sp],8
+    ret
+
+Dibuja_humo_chimenea:
 // Humo de la chimenea
     str x0,[sp,-8]!
     str x1,[sp,-8]!
     str x2,[sp,-8]!
     str x3,[sp,-8]!
     str x4,[sp,-8]!
-    str x5,[sp,-8]!
-    str x6,[sp,-8]!
     str x30,[sp,-8]!
 
-    ldr x5,=0x353535
-    ldr x6,=0xA0A0A0
+    cmp x7,0
+    b.le Dibuja_humo_chimenea_paso1
+    // ABAJO
+        mov x0,x5 // negro
+        mov x1,450
+        mov x2,326
+        mov x3,458
+        mov x4,319
+        bl Pinta_rectangulo
 
-    mov x0,x5 // negro
-    mov x1,450
-    mov x2,326
-    mov x3,458
-    mov x4,319
-    bl Pinta_rectangulo
+        mov x0,x6 //gris
+        mov x1,447
+        mov x2,323
+        mov x3,455
+        mov x4,316
+        bl Pinta_rectangulo
 
-    mov x0,x6 //gris
-    mov x1,447
-    mov x2,323
-    mov x3,455
-    mov x4,316
-    //bl Pinta_rectangulo
+        mov x0,x5 //negro
+        mov x1,463
+        mov x2,323
+        mov x3,467
+        mov x4,319
+        bl Pinta_rectangulo
 
-    mov x0,x5 // negro
-    mov x1,460
-    mov x2,316
-    mov x3,471
-    mov x4,306
-    bl Pinta_rectangulo
+        mov x0,x6 // Gris
+        mov x1,461
+        mov x2,321
+        mov x3,465
+        mov x4,317
+        bl Pinta_rectangulo
 
-    mov x0,x6 // gris
-    mov x1,457
-    mov x2,313
-    mov x3,468
-    mov x4,303
-    bl Pinta_rectangulo
+    Dibuja_humo_chimenea_paso1:
 
-    mov x0,x5 //negro
-    mov x1,475
-    mov x2,302
-    mov x3,488
-    mov x4,289
-    bl Pinta_rectangulo
+    cmp x7,1
+    b.le Dibuja_humo_chimenea_paso2
 
-    mov x0,x6 // gris
-    mov x1,472
-    mov x2,299
-    mov x3,485
-    mov x4,286
-    bl Pinta_rectangulo
+    // MEDIO
+        mov x0,x5 // negro
+        mov x1,460
+        mov x2,316
+        mov x3,471
+        mov x4,306
+        bl Pinta_rectangulo
 
-    mov x0,x5 //negro
-    mov x1,463
-    mov x2,323
-    mov x3,467
-    mov x4,319
-    bl Pinta_rectangulo
+        mov x0,x6 // gris
+        mov x1,457
+        mov x2,313
+        mov x3,468
+        mov x4,303
+        bl Pinta_rectangulo
 
-    mov x0,x6 // Gris
-    mov x1,461
-    mov x2,321
-    mov x3,465
-    mov x4,317
-    bl Pinta_rectangulo
+        mov x0,x5 //negro
+        mov x1,476
+        mov x2,312
+        mov x3,480
+        mov x4,308
+        bl Pinta_rectangulo
 
-    mov x0,x5 //negro
-    mov x1,463
-    mov x2,300
-    mov x3,467
-    mov x4,296
-    bl Pinta_rectangulo
+        mov x0,x6 // gris
+        mov x1,473
+        mov x2,309
+        mov x3,477
+        mov x4,305
+        bl Pinta_rectangulo
 
-    mov x0,x6 // Gris
-    mov x1,461
-    mov x2,298
-    mov x3,465
-    mov x4,294
-    bl Pinta_rectangulo
+    Dibuja_humo_chimenea_paso2:
 
-    mov x0,x5 //negro
-    mov x1,476
-    mov x2,312
-    mov x3,480
-    mov x4,308
-    bl Pinta_rectangulo
+    cmp x7,2
+    b.le Dibuja_humo_chimenea_paso3
 
-    mov x0,x6 // gris
-    mov x1,473
-    mov x2,309
-    mov x3,477
-    mov x4,305
-    bl Pinta_rectangulo
+    // ARRIBA
+        mov x0,x5 //negro
+        mov x1,475
+        mov x2,302
+        mov x3,488
+        mov x4,289
+        bl Pinta_rectangulo
+
+        mov x0,x6 // gris
+        mov x1,472
+        mov x2,299
+        mov x3,485
+        mov x4,286
+        bl Pinta_rectangulo
+
+        mov x0,x5 //negro
+        mov x1,463
+        mov x2,300
+        mov x3,467
+        mov x4,296
+        bl Pinta_rectangulo
+
+        mov x0,x6 // Gris
+        mov x1,461
+        mov x2,298
+        mov x3,465
+        mov x4,294
+        bl Pinta_rectangulo
+    
+    Dibuja_humo_chimenea_paso3:
 
     ldr x30,[sp],8
-    ldr x6,[sp],8
-    ldr x5,[sp],8
     ldr x4,[sp],8
     ldr x3,[sp],8
     ldr x2,[sp],8

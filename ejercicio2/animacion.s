@@ -636,8 +636,12 @@ Paisaje_completo:
 			mov x3,412
 			mov x4,363
 			bl Pinta_rectangulo
+		
+		bl Humo_chimenea_noche
+		b Paisaje_completo_seguir
 	Paisaje_completo_dia_color_nube:
-
+		bl Humo_chimenea_dia
+	Paisaje_completo_seguir:
 	mov x1,x6
 	mov x2,50
 	bl ConjuntoNubes
@@ -645,8 +649,6 @@ Paisaje_completo:
 	add x1,x1,300
 	mov x2,100
 	bl ConjuntoNubes
-
-	bl Humo_chimenea
 
 	Paisaje_completo_end:	
 		ldr x11,[sp],8
