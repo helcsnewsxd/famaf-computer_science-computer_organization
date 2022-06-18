@@ -52,21 +52,58 @@ main:
 
 	bl Montanas
 
-		mov x1,80
-		mov x2,430
-		mov x3,110
-		mov x4,430
-		bl Fogata
+		// Seccion fogata
 
-		mov x1,120
-		mov x2,50
-		bl ConjuntoNubes
+			mov x1,55
+			mov x2,455
+			bl Pasto_grupal_izq
 
-		mov x1,420
-		mov x2,50
-		bl ConjuntoNubes
+			mov x1,70
+			mov x2,450
+			bl Tronco1
 
-		// Vegetacion
+			mov x1,127
+			mov x2,457
+			bl Pasto_grupal_der
+			bl Pasto_grupal_izq
+
+			mov x1,150
+			mov x2,420
+			bl Tronco2
+
+			mov x1,150
+			mov x2,445
+			bl Tronco2
+
+			mov x1,160
+			mov x2,427
+			bl Tronco2
+
+			mov x1,85
+			mov x2,420
+			bl Tronco2
+
+			mov x1,70
+			mov x2,430
+			bl Tronco2
+
+			mov x1,110
+			mov x2,420
+			mov x3,135
+			mov x4,420
+			bl Fogata
+
+		// Nubes
+
+			mov x1,120
+			mov x2,50
+			bl ConjuntoNubes
+
+			mov x1,420
+			mov x2,50
+			bl ConjuntoNubes
+
+		// Resto de vegetacion
 
 			// Chiquitos del fondo
 
@@ -324,6 +361,26 @@ main:
 		// Fin vegetacion
 
 		// Casa
+
+		mov x1,346
+		mov x2,430
+		bl Tronco1
+
+		mov x1,354
+		mov x2,420
+		bl Tronco1
+
+		mov x1,361
+		mov x2,430
+		bl Tronco1
+
+		mov x1,362
+		mov x2,410
+		bl Tronco1
+
+		mov x1,369
+		mov x2,420
+		bl Tronco1
 
 		mov x5,50	// Para decidir a qué altura poner la casa
 		mov x6,-50	// Para decidir a qué ancho poner la casa

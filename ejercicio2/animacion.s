@@ -124,7 +124,7 @@ Paisaje_capa_delante:
 
 	bl Montanas
 
-		// Vegetacion
+	// Resto de vegetacion
 
 			// Chiquitos del fondo
 
@@ -383,6 +383,26 @@ Paisaje_capa_delante:
 
 		// Casa
 
+		mov x1,346
+		mov x2,430
+		bl Tronco1
+
+		mov x1,354
+		mov x2,420
+		bl Tronco1
+
+		mov x1,361
+		mov x2,430
+		bl Tronco1
+
+		mov x1,362
+		mov x2,410
+		bl Tronco1
+
+		mov x1,369
+		mov x2,420
+		bl Tronco1
+
 		mov x5,50	// Para decidir a qué altura poner la casa
 		mov x6,-50	// Para decidir a qué ancho poner la casa
 
@@ -522,15 +542,100 @@ Paisaje_completo:
 
 	bl Pasar_al_buffer_el_paisaje_delante
 
-	mov x1,80
-	mov x2,430
-	mov x3,110
-	mov x4,430
-	bl Fogata
+	// Seccion fogata
+
+		mov x1,55
+		mov x2,455
+		bl Pasto_grupal_izq
+
+		mov x1,70
+		mov x2,450
+		bl Tronco1
+
+		mov x1,127
+		mov x2,457
+		bl Pasto_grupal_der
+		bl Pasto_grupal_izq
+
+		mov x1,150
+		mov x2,420
+		bl Tronco2
+
+		mov x1,150
+		mov x2,445
+		bl Tronco2
+
+		mov x1,160
+		mov x2,427
+		bl Tronco2
+
+		mov x1,85
+		mov x2,420
+		bl Tronco2
+
+		mov x1,70
+		mov x2,430
+		bl Tronco2
+
+		mov x1,110
+		mov x2,420
+		mov x3,135
+		mov x4,420
+		bl Fogata
 
 	ldr x5,=0xF5F5F3
 	cbz x8,Paisaje_completo_dia_color_nube
+		// color de nube
 		ldr x5,=0x808080
+
+		// ILUMINACIÓN DE VENTANAS DE NOCHE
+
+			// GRANDES
+			ldr x0,=0xA0A13A
+			mov x1,407
+			mov x2,360
+			mov x3,418
+			mov x4,352
+			bl Pinta_rectangulo
+
+			ldr x0,=0xA0A13A
+			mov x1,420
+			mov x2,402
+			mov x3,431
+			mov x4,394
+			bl Pinta_rectangulo
+
+			// PEQUEÑAS
+
+			// Las de la ventana de abajo
+			ldr x0,=0xA0A13A
+			mov x1,428
+			mov x2,410
+			mov x3,431
+			mov x4,405
+			bl Pinta_rectangulo
+
+			ldr x0,=0xA0A13A
+			mov x1,421
+			mov x2,410
+			mov x3,425
+			mov x4,405
+			bl Pinta_rectangulo
+
+			// Las de la ventana de arriba
+			ldr x0,=0xA0A13A
+			mov x1,415
+			mov x2,368
+			mov x3,418
+			mov x4,363
+			bl Pinta_rectangulo
+
+			ldr x0,=0xA0A13A
+			mov x1,408
+			mov x2,368
+			mov x3,412
+			mov x4,363
+			bl Pinta_rectangulo
 	Paisaje_completo_dia_color_nube:
 
 	mov x1,x6
@@ -540,6 +645,8 @@ Paisaje_completo:
 	add x1,x1,300
 	mov x2,100
 	bl ConjuntoNubes
+
+	bl Humo_chimenea
 
 	Paisaje_completo_end:	
 		ldr x11,[sp],8
