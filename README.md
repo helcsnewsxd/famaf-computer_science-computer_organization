@@ -1,4 +1,4 @@
-# Explicación detallada del código realizado
+# Explicación detallada del código realizado :)
 
 ## Defines o *variables globales*
 
