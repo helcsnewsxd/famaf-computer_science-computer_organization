@@ -1,4 +1,7 @@
 INTEGRANTES:
     BRATTI, JUAN                44274011
     HERRADOR, EMANUEL NICOLÁS   44898601
+    
+   EXPOSICIÓN:
+   El código genera una imagen estática que contiene un paisaje elaborado por un fondo con montañas y un descampado compuesto por árboles, yuyos, troncos
 
