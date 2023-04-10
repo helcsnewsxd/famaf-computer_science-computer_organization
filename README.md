@@ -3,7 +3,7 @@
 https://www.youtube.com/watch?v=4b9ZXc61V48
 ```
 
-# Explicación detallada del código realizado :)
+# Explicación detallada del código realizado :) --> (Dejado a medias)
 
 ## Defines o *variables globales*
 
