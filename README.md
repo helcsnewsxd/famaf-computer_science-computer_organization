@@ -1,22 +1,30 @@
-# Video terminado
-```
-https://www.youtube.com/watch?v=4b9ZXc61V48
-```
+# Organización del Computador - Proyecto 2022
 
-# Explicación detallada del código realizado :) --> (Dejado a medias)
+## Integrantes
 
-## Defines o *variables globales*
+- [Bratti, Juan](https://github.com/juanbratti)
+- [Herrador, Emanuel Nicolás](https://github.com/helcsnewsxd)
 
-### Tamaño del FrameBuffer
+## ¿De qué se trata?
+
+El proyecto se trata acerca de la realización de una animación en assembler ARMv8 usando el simulador **QEMU** (la idea es que sea "dentro" de una Raspberry Pi). El enunciado del proyecto puede encontrarse [aquí](./enunciado.pdf) y nuestra solución está en este [TAR](./TPQUEMU_Bratti_Herrador.tar.gz).
+
+La animación realizada es un paisaje elaborado por un fondo con montañas y un descampado compuesto por árboles, yuyos, troncos y una casa estilo campestre. Además, se incluyen efectos de día y noche, y un amanecer.
+
+El video terminado se puede encontrar en el siguiente [link](https://www.youtube.com/watch?v=4b9ZXc61V48).
+
+## Documentación a tener en cuenta para el desarrollo (no completa)
+
+### Defines o *variables globales*
+
+#### Tamaño del FrameBuffer
 ```
 LARGO_FRAMEBUFFER = 480
 ANCHO_FRAMEBUFFER = 640
 BITS_PER_PIXEL = 32
 ```
 
-
-
-### Algunos colores
+#### Algunos colores
 ```
 AMARILLO = 0xFFF000
 AZUL = 0xFF
@@ -39,9 +47,7 @@ VERDE_OSCURO = 0x006600
 VIOLETA = 0xB300C0
 ```
 
-
-
-## Uso de los Registros
+### Uso de los Registros
 
 * `x0` → **Color**
 * `x19` → **ANCHO_FRAMEBUFFER**
@@ -56,10 +62,9 @@ VIOLETA = 0xB300C0
 * `x29` → **FP -> Frame Pointer. Se pone la dirección base del framebuffer**
 * `x30` → **Direcciones para los return de las funciones**
 
+### Datos piolas a tener en cuenta
 
-## Datos piolas a tener en cuenta
-
-### **- ¿Cómo guardo las variables si no quiero perder el valor pero debo modificarlas en la función?**
+#### **- ¿Cómo guardo las variables si no quiero perder el valor pero debo modificarlas en la función?**
 
 Sencillo, usando el stack. Para ello, sean x1,x2,x3 los registros que queremos guardar, debemos poner
 ```
@@ -97,7 +102,7 @@ ldr x2,[sp],8
 ldr x1,[sp],8
 ```
 
-### **- Me da vagancia y me pierdo escribiendo los nombres de los registros, ¿no se pueden crear variables?**
+#### **- Me da vagancia y me pierdo escribiendo los nombres de los registros, ¿no se pueden crear variables?**
 
 No, no se pueden crear variables pero si se pueden usar *apodos* para los registros. Para ello, se debe tener en cuenta que para "habilitar" un apodo dentro de una función, debe utilizarse la siguiente instrucción:
 ```
@@ -120,8 +125,7 @@ Ejemplo ->
     .unreq ypixel
 ```
 
-
-# **Funciones para creación de figuras**
+### **Funciones para creación de figuras**
 
 Estas funciones están implementadas en **`formas_geometricas.s`**
 
@@ -137,21 +141,21 @@ Una cosa **importantísima** para destacar en este caso es el uso de algunos reg
 
 * `x25` → Degradado. Es lo que se suma o se resta en las iteraciones para darle un efecto de cambio de color a la figura.
 
-### **- Dibujar pixel**
+#### **- Dibujar pixel**
 
-#### *Argumentos*
+##### *Argumentos*
 
 * `x0` → color
 * `(x9,x10)` → punto en el plano cartesiano con (0,0) arriba a la izquierda (nos queda mejor para el PixelArt)
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 Si el punto pertenece al Frame Buffer, se pinta el pixel correspondiente a la dirección de memoria
 ```
 x12 = x29 + 4 * (x10 * ANCHO_FRAMBUFFER + x9)
 ```
 
-#### *Llamada*
+##### *Llamada*
 
 Se llama simplemente escribiendo
 ```
@@ -160,17 +164,17 @@ bl Pinta_punto
 **Notar que es una función nativa.**
 
 
-### **- Itera línea**
+#### **- Itera línea**
 
-#### *Argumentos*
+##### *Argumentos*
 
 * `(x1,x2) y (x3,x4)` extremos de la línea
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 Usando el **algoritmo de bresenham**, esta función devuelve todos los puntos que cumplen pertenecer a este segmento.
 
-#### *Llamada*
+##### *Llamada*
 
 Es un poco más rara la llamada debido a que se corta la función a mitad del proceso y luego se retoma. Hay que tener mucho cuidado con el guardado de los registros para no modificar algo que no queremos.
 
@@ -207,18 +211,18 @@ Un ejemplo de llamada es:
 **Notar que es una función global.**
 
 
-### **- Dibujar una línea**
+#### **- Dibujar una línea**
 
-#### *Argumentos*
+##### *Argumentos*
 
 * `x0` → color
 * `(x1,x2)` y `(x3,x4)` → extremos de la línea
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 Pinta la línea de extremos (x1,x2) y (x3,x4) del color x0. Se realiza utilizando el **Algoritmo de Bresenham para líneas**. Para ello, se llama directamente a la función de itera línea.
 
-#### *Llamada*
+##### *Llamada*
 
 Se llama simplemente escribiendo
 ```
@@ -228,19 +232,19 @@ bl Pinta_linea
 **Notar que es una función global.**
 
 
-### **- Pinta triángulo**
+#### **- Pinta triángulo**
 
-#### *Argumentos*
+##### *Argumentos*
 
 * `x0` → color
 * `(x1,x2)`, `(x3,x4)` y `(x5,x6)` → extremos
 * `x25` → lo que se le va sumando al color
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 Utilizando la función de itera línea, la idea es iterar por todos los puntos del segmento de extremos (x1,x2) y (x3,x4), y dado (x,y) perteneciente a este, se pinta la línea de extremos (x,y) y (x5,x6). Se va sumando x25 en cada pinta_linea al color.
 
-#### *Llamada*
+##### *Llamada*
 
 Se llama simplemente poniendo
 ```
@@ -250,19 +254,19 @@ bl Pinta_triangulo
 **Notar que es una función global.**
 
 
-### **- Pinta rectángulo básico**
+#### **- Pinta rectángulo básico**
 
-#### *Argumentos*
+##### *Argumentos*
 
 * `x0` → color
 * `(x1,x2) y (x3,x4)` → extremos opuestos
 * `x25` → lo que se le suma al color
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 Se itera por todos los puntos del rectángulo y se los pinta. La idea es usar fuertemente que los puntos que se dan son extremos opuestos y que el rectángulo es de lados *paralelos a los bordes*. Se le va sumando x25 al color en cada iteración del eje y.
 
-#### *Llamada*
+##### *Llamada*
 
 Se llama simplemente poniendo
 ```
@@ -272,19 +276,19 @@ bl Pinta_rectangulo
 **Notar que es una función global.**
 
 
-### **- Pinta cuadrilátero**
+#### **- Pinta cuadrilátero**
 
-#### *Argumentos*
+##### *Argumentos*
 
 * `x0` → color
 * `(x1,x2)`, `(x3,x4)`, `(x5,x6)` y `(x7,x8)` → extremos del cuadrilátero
 * `x25` → lo que se le suma al color
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 Pinta el cuadrilátero formado por esos cuatro puntos distintos. Se utiliza la función de Pinta triángulo teniendo en cuenta que hay que pintar tres para asegurarnos cubrir toda la zona. Por ende, también afecta x25 al color.
 
-#### *Llamada*
+##### *Llamada*
 
 Se llama simplemente escribiendo:
 ```
@@ -294,19 +298,19 @@ bl Pinta_cuadrilatero
 **Notar que es una función global.**
 
 
-### **- Dibuja círculo**
+#### **- Dibuja círculo**
 
-#### *Argumentos*
+##### *Argumentos*
 
 * `x0` → color
 * `(x1,x2)` → centro
 * `x3` → radio
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 Utilizando el algoritmo de bresenham para circunferencias, esta función dibuja la circunferencia (sin relleno) de centro (x1,x2) y radio x3.
 
-#### *Llamada*
+##### *Llamada*
 
 ```
 bl Dibuja_circulo
@@ -315,20 +319,20 @@ bl Dibuja_circulo
 **Es una función global.**
 
 
-### **- Pinta círculo texturado**
+#### **- Pinta círculo texturado**
 
-#### *Argumentos*
+##### *Argumentos*
 
 * `x0` → color
 * `(x1,x2)` → centro
 * `x3` → radio
 * `x25` → lo que se le va sumando al color
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 La idea es que quede un círculo con "textura" al que le falten algunos píxeles. Para ello, se usa la función Dibuja círculo (que usa bresenham) para hacer todos los círculos de radio entero menor o igual a `x3`. Entre el dibujo de cada circunferencia, se suma x25 al color.
 
-#### *Llamada*
+##### *Llamada*
 
 ```
 bl Pinta_circulo_texturado
@@ -337,20 +341,20 @@ bl Pinta_circulo_texturado
 **Notar que es una función global.**
 
 
-### **- Pinta circulo**
+#### **- Pinta circulo**
 
-#### *Argumentos*
+##### *Argumentos*
 
 * `x0` → color
 * `(x1,x2)` → centro
 * `x3` → radio
 * `x25` → lo que se le va sumando al color
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 La idea es tener un círculo de color sólido sin "texturas". Es decir que todos los píxeles estén pintados. Para ello, se itera por todos los puntos pertenecientes al cuadrado que tiene el círculo inscripto a él y a los que cumplan que ``r^2 >= x^2 + y^2`` se los pinta. Por cada punto pintado se suma x25 al color.
 
-#### *Llamada*
+##### *Llamada*
 
 ```
 bl Pinta_circulo
@@ -359,15 +363,16 @@ bl Pinta_circulo
 **Notar que es una función global.**
 
 
-# **Fondos**
+### **Fondos**
 
 Estas funciones están implementadas en **`fondos.s`**
 
-### **- Nube** ☁️
-#### *Funcionamiento*
+#### **- Nube** ☁️
+
+##### *Funcionamiento*
 Genera una nube alrededor de un punto. En el caso de ```ConjuntoNubes```, se generan desde el punto que se da para la derecha →.
 
-#### *Llamada*
+##### *Llamada*
 Nube grande ↓
 ``` 
 bl Nube1
@@ -383,13 +388,13 @@ bl ConjuntoNubes
 
 **Notar que es una función global.**
 
-### **- Fondo de montañas** ⛰️
+#### **- Fondo de montañas** ⛰️
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 Coloca al medio del framebuffer montañas.
 
 
-#### *Llamada*
+##### *Llamada*
 ```
 bl Montanas
 ```
@@ -397,12 +402,12 @@ bl Montanas
 **Notar que es una función global.**
 
 
-### **- Fondo de amanecer** 🌅 
+#### **- Fondo de amanecer** 🌅 
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 Coloca en la mitad superior del framebuffer un fondo de amanecer copado.
 
-#### *Llamada*
+##### *Llamada*
 * Para el primer llamado cuando el framebuffer está totalmente en negro:
 ```
 bl Dibuja_fondo_amanecer1
@@ -417,12 +422,12 @@ bl Dibuja_fondo_amanecer2
 **Notar que son funciones globales.**
 
 
-### **- Sol de amanecer** ☀️ 
+#### **- Sol de amanecer** ☀️ 
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 Coloca en la mitad superior derecha del framebuffer un sol de amanecer copado.
 
-#### *Llamada*
+##### *Llamada*
 ```
 bl Dibuja_sol_amanecer
 ```
@@ -430,12 +435,12 @@ bl Dibuja_sol_amanecer
 **Notar que es una función global.**
 
 
-### **- Fondo de noche**
+#### **- Fondo de noche**
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 Coloca en la mitad superior del framebuffer un fondo de noche copado, reemplazando el del día pero sin modificar nada más que el fondo.
 
-#### *Llamada*
+##### *Llamada*
 ```
 bl Dibuja_fondo_noche
 ```
@@ -443,12 +448,12 @@ bl Dibuja_fondo_noche
 **Notar que es una función global.**
 
 
-### **- Luna** 🌙
+#### **- Luna** 🌙
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 Coloca en la mitad superior derecha del framebuffer una luna copada.
 
-#### *Llamada*
+##### *Llamada*
 ```
 bl Dibuja_luna
 ```
@@ -456,12 +461,12 @@ bl Dibuja_luna
 **Notar que es una función global.**
 
 
-### **- Pasto**  🌱
+#### **- Pasto**  🌱
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 Coloca en la mitad inferior del framebuffer el pasto verde sólido y liso.
 
-#### *Llamada*
+##### *Llamada*
 ```
 bl Dibuja_pasto
 ```
@@ -469,20 +474,20 @@ bl Dibuja_pasto
 **Notar que es una función global.**
 
 
-# **Vegetación**
+### **Vegetación**
 
 Estas funciones están implementadas en **`vegetacion.s`**
 
-### **- Pino** 🌲 
+#### **- Pino** 🌲 
 
-#### *Argumentos*
+##### *Argumentos*
 * `(x1,x2)` → Origen del tronco. El pino se genera desde este punto hacia arriba.
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 A partir de un punto, se genera un pino de tamaño fijo con dos posibles variaciones (grande y mediano).
 
-#### *Llamada*
+##### *Llamada*
 
 Pino grande ↓
 ```
@@ -501,39 +506,39 @@ Existe como utilidad auxiliar la función ```hojas``` la cual genera el árbol m
 
 **Notar que es una función global.**
 
-### **- Arbusto** 🥬 
+#### **- Arbusto** 🥬 
 
-#### *Argumentos*
+##### *Argumentos*
 * `(x1,x2)` → Extremo superior izquierdo
 * `(x3,x4)` → Extremo inferior derecho
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 A partir de dos puntos extremos, se genera un arbusto de tamaño variable. Es importante que se respete que (x1,x2) es el extremo superior izquierdo y (x3,x4) el extremo inferior derecho.
 
-#### *Llamada*
+##### *Llamada*
 ```
 bl Arbusto1
 ```
 
 **Notar que es una función global.**
 
-# **Etapa 1**
+### **Etapa 1**
 
 Estas funciones están implementadas en **`etapa_1.s`**
 
-### **- Carpa** ⛺
+#### **- Carpa** ⛺
 
-#### *Argumentos*
+##### *Argumentos*
 * `(x1,x2)` → Extremo izquierdo
 * `(x3,x4)` → Extremo derecho
 * `(x5,x6)` → Altura de la carpa
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 A partir de 3 puntos, genera una carpa.
 
-#### *Llamada*
+##### *Llamada*
 Carpa con cola hacia la derecha ↓
 ```
 bl CarpaDer
@@ -544,43 +549,21 @@ bl CarpaIzq
 ```
 **Notar que es una función global.**
 
-### **- Fogata** 🔥
+#### **- Fogata** 🔥
 
-#### *Argumentos*
+##### *Argumentos*
 * `(x1,x2)` → Extremo izquierdo
 * `(x3,x4)` → Extremo derecho
 * DISCLAIMER: Ambos extremos deben estar sobre el mismo eje Y.
 
-#### *Funcionamiento*
+##### *Funcionamiento*
 
 A partir de dos puntos extremos, se genera para arriba una fogata de tamaño variable. Para funcionamiento óptimo, elegir valores para x1 y x3 tal que la diferencia entre los dos sea no menor a ~ 20 píxeles
 
-#### *Llamada*
+##### *Llamada*
 ```
 bl Fogata
 ```
 
 **Notar que es una función global.**
 
-
-# **COSAS A CAMBIAR**
-
-Estas funciones están implementadas en **`borrador.s`**
-
-### **- Crea Edificios** 🏢 
-
-#### *Argumentos*
-* `(x1,x2)` → Extremo superior izquierdo
-* `(x3,x4)` → Extremo inferior derecho
-
-#### *Funcionamiento*
-
-A partir de dos puntos extremos, la función genera un edificio de tamaño variable constituído por un rectángulo frontal y dos paralelogramos adyacentes, uno en la parte superior y otro en el lateral derecho. Además de generar los respectivos cuadriláteros, también genera un conjunto de ventanas de tamaño fijo que se distribuyen a lo largo del rectángulo frontal siempre y cuando haya espacio necesario para una nueva columna y/o fila de ventanas. Por último, genera una puerta en el medio del edificio para darle más detalle. La generación de los paralelogramos y ventanas se hace partiendo de los dos puntos recibidos como argumentos, modificándolos a través de operaciones aritméticas siempre relativas a los límites del rectángulo frontal.
-
-#### *Llamada*
-
-```
-bl Crea_edificio
-```
-
-**Notar que es una función global.**
